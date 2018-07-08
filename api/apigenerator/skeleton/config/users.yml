@@ -1,0 +1,5 @@
+testuser:
+  password: 1234
+  role: test
+  attributes:
+    os: 0

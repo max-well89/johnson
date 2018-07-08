@@ -1,0 +1,15 @@
+prod:
+  ini_set:
+    error_reporting: 0
+    display_errors: 0
+debug:
+  ini_set:
+    error_reporting: 32767
+    display_errors: 1
+all:
+  project_name: Unnamed
+  db:
+    dsn: 'oci:dbname=DBACT2;charset=UTF8'
+    user: 'dbuser'
+    passw: 'dbpass'
+  log_prefix: unnamed

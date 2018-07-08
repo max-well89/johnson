@@ -1,0 +1,5 @@
+prod: []
+debug: []
+all:
+  project_name: Генератор API
+  log_prefix: apigenerator

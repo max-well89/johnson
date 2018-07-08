@@ -1,0 +1,5 @@
+/api/apigenerator/config/*
+/api/config/*
+/apps/admin/config/*
+/config/*
+/log/
