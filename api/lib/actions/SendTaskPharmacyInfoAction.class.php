@@ -106,7 +106,9 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                     member_area_name, 
                     value,
                     rest_cnt,
-                    illiquid_cnt
+                    illiquid_cnt,
+                    is_action,
+                    comment
                 )
                 values (
                     :id_task::bigint, 
@@ -145,7 +147,9 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                     (select name from t_area where id_area = (select id_area from t_member where id_member = :id_member limit 1) limit 1),
                     :value,
                     :rest_cnt,
-                    :illiquid_cnt
+                    :illiquid_cnt,
+                    :is_action,
+                    :comment
                 )
         ');
 
@@ -188,7 +192,9 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                     member_area_name = (select name from t_area where id_area = (select id_area from t_member where id_member = :id_member limit 1) limit 1),
                     value = :value,
                     rest_cnt = :rest_cnt,
-                    illiquid_cnt = :illiquid_cnt
+                    illiquid_cnt = :illiquid_cnt,
+                    is_action = :is_action,
+                    comment = :comment
                 where id_task_data = :id_task_data
         ');
 
@@ -279,6 +285,8 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                             'value' => $sku['my_value'],
                             'rest_cnt' => @$sku['rest_cnt'],
                             'illiquid_cnt' => @$sku['illiquid_cnt'],
+                            'is_action' => @$sku['is_action'],
+                            'comment' => @$sku['comment'],
                             'id_task_data' => $id_task_data
                         ));
                     } else {
@@ -289,7 +297,9 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                             'id_sku' => $sku['id_sku'],
                             'value' => $sku['my_value'],
                             'rest_cnt' => @$sku['rest_cnt'],
-                            'illiquid_cnt' => @$sku['illiquid_cnt']
+                            'illiquid_cnt' => @$sku['illiquid_cnt'],
+                            'is_action' => @$sku['is_action'],
+                            'comment' => @$sku['comment'],
                         ));
                     }
                 }
