@@ -101,6 +101,25 @@ class SkuStatFilterForm extends nomvcAbstractFilterForm{
             "key" => "id_area"
         )));
 
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Акция', 'id_action_status', array(
+            'helper' => $this->context->getDbHelper(),
+            'table' => 'v_action_status',
+            "key" => "id_status",
+            'order' => 'name',
+            'required' => false,
+            'multiple' => true
+        )));
+
+        $this->addValidator('id_action_status', new nomvcValueInDbMultipleValidator(array(
+            'required' => false,
+            "helper" => $this->context->getDbHelper(),
+            "table" => "v_action_status",
+            "key" => "id_status"
+        )));
+
+        $this->addWidget(new nomvcInputTextWidget("Комментарий", "comment"));
+        $this->addValidator('comment', new nomvcStringValidator(array('required' => false)));
+
 //        $this->addWidget(new nomvcInputTextWidget("Цена", "my_value"));
 //        $this->addValidator('my_value', new nomvcNumberValidator(array('required' => false)));
 

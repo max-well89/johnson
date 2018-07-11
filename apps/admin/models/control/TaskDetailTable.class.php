@@ -53,8 +53,8 @@ EOF
         $this->addColumn('city', 'Город', 'string');
         $this->addColumn('area', 'Район', 'string');
         $this->addColumn('fio', 'Мерчендайзер', 'string');
-        $this->addColumn('action_status', 'Идет акция?', 'string');
-        $this->addColumn('comment', 'Комментарий к аптеке', 'string');
+        //$this->addColumn('action_status', 'Идет акция?', 'string');
+        //$this->addColumn('comment', 'Комментарий к аптеке', 'string');
         $this->addColumn('detail', 'Детально', 'string', array(), array('class' => 'rowlink-skip'));
         $this->addColumn('dt', 'Дата создания', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
         $this->addColumn('dt_status', 'Дата статуса', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));

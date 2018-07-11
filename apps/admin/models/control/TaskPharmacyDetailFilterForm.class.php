@@ -17,7 +17,6 @@ class TaskPharmacyDetailFilterForm extends nomvcAbstractFilterForm{
         $this->addWidget(new nomvcInputHiddenWidget('id_member', 'id_member'));
         $this->addValidator('id_member', new nomvcIntegerValidator(array('required' => true)));
 
-
 //        $this->addWidget(new nomvcInputTextWidget("Аптека", "pharmacy"));
 //        $this->addValidator('pharmacy', new nomvcStringValidator(array('required' => false,'min' => 2, 'max' => 200)));
 //
@@ -136,6 +135,25 @@ class TaskPharmacyDetailFilterForm extends nomvcAbstractFilterForm{
             'table' => 't_sku_producer',
             'key' => 'id_sku_producer'
         )));
+
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Акция', 'id_action_status', array(
+            'helper' => $this->context->getDbHelper(),
+            'table' => 'v_action_status',
+            "key" => "id_status",
+            'order' => 'name',
+            'required' => false,
+            'multiple' => true
+        )));
+
+        $this->addValidator('id_action_status', new nomvcValueInDbMultipleValidator(array(
+            'required' => false,
+            "helper" => $this->context->getDbHelper(),
+            "table" => "v_action_status",
+            "key" => "id_status"
+        )));
+
+        $this->addWidget(new nomvcInputTextWidget("Комментарий", "comment"));
+        $this->addValidator('comment', new nomvcStringValidator(array('required' => false)));
 
 //        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Статус', 'id_status', array(
 //            'helper' => $this->context->getDbHelper(),

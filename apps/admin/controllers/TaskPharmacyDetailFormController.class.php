@@ -115,7 +115,9 @@ class TaskPharmacyDetailFormController extends AbstractFormController{
 					set 
 					    value = :value,
 					    rest_cnt = :rest_cnt,
-					    illiquid_cnt = :illiquid_cnt
+					    illiquid_cnt = :illiquid_cnt,
+					    is_action = :is_action,
+					    comment = :comment
 					where id_task_data = :id_task_data");
                 $this->dbHelper->execute(get_class($this) . '/update-object', $values_base);
                 $this->id_object = $values["id_task_data"];

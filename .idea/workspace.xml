@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="6a8e2929-b917-4b2e-90ec-9ccf5ce2d6bd" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/apigenerator/lib/agAbstractController.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/apigenerator/lib/agAbstractController.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/lib/actions/SendTaskPharmacyInfoAction.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/lib/actions/SendTaskPharmacyInfoAction.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin/controllers/TaskPharmacyDetailFormController.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/apps/admin/controllers/TaskPharmacyDetailFormController.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin/models/control/SkuStatFilterForm.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/apps/admin/models/control/SkuStatFilterForm.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin/models/control/SkuStatTable.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/apps/admin/models/control/SkuStatTable.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin/models/control/TaskDetailTable.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/apps/admin/models/control/TaskDetailTable.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailFilterForm.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailFilterForm.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailForm.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailForm.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailTable.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailTable.class.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,11 +20,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SendTaskPharmacyInfoAction.class.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/api/lib/actions/SendTaskPharmacyInfoAction.class.php">
+      <file leaf-file-name="TaskPharmacyDetailForm.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailForm.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="58" column="46" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
+            <state relative-caret-position="335">
+              <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TaskPharmacyDetailFormController.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apps/admin/controllers/TaskPharmacyDetailFormController.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -38,10 +52,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/web/api/json.php" />
         <option value="$PROJECT_DIR$/api/apigenerator/lib/agAbstractController.class.php" />
         <option value="$PROJECT_DIR$/api/lib/actions/SendTaskPharmacyInfoAction.class.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/apps/admin/models/control/TaskDetailTable.class.php" />
+        <option value="$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailTable.class.php" />
+        <option value="$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailFilterForm.class.php" />
+        <option value="$PROJECT_DIR$/apps/admin/models/control/SkuStatTable.class.php" />
+        <option value="$PROJECT_DIR$/apps/admin/models/control/SkuStatFilterForm.class.php" />
+        <option value="$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailForm.class.php" />
+        <option value="$PROJECT_DIR$/apps/admin/controllers/TaskPharmacyDetailFormController.class.php" />
       </list>
     </option>
   </component>
@@ -55,10 +76,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="235" />
-    <option name="y" value="180" />
-    <option name="width" value="1413" />
-    <option name="height" value="840" />
+    <option name="x" value="352" />
+    <option name="y" value="171" />
+    <option name="width" value="1547" />
+    <option name="height" value="831" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -66,7 +87,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -77,24 +97,41 @@
             <path>
               <item name="johnson" type="b2602c69:ProjectViewProjectNode" />
               <item name="johnson" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="johnson" type="b2602c69:ProjectViewProjectNode" />
               <item name="johnson" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="apigenerator" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="johnson" type="b2602c69:ProjectViewProjectNode" />
               <item name="johnson" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="johnson" type="b2602c69:ProjectViewProjectNode" />
+              <item name="johnson" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="johnson" type="b2602c69:ProjectViewProjectNode" />
+              <item name="johnson" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="control" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -131,24 +168,26 @@
       <workItem from="1531252720295" duration="3808000" />
       <workItem from="1531340550499" duration="13000" />
       <workItem from="1531340599204" duration="1000" />
+      <workItem from="1531340852404" duration="2889000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6344000" />
+    <option name="totallyTimeSpent" value="9233000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="235" y="180" width="1413" height="840" extended-state="0" />
+    <frame x="352" y="171" width="1547" height="831" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="File Transfer" weight="0.32991803" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32786885" />
       <window_info anchor="right" id="Remote Host" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24982308" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22818358" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -170,6 +209,13 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/api/lib/actions/SendTaskPharmacyInfoAction.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1624">
+          <caret line="58" column="46" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/lib/actions/SendTaskPharmacyInfoAction.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1624">
@@ -219,13 +265,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="6" column="8" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/api/json.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -264,10 +303,93 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetail.class.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/admin/models/control/MemberFilterForm.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="22" column="8" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="35" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/core/widgets/nomvcSelectFromDbWidget.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/core/widgets/nomvcSelectFromMultipleDbWidget.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="2" column="61" selection-start-line="2" selection-start-column="61" selection-end-line="2" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/admin/models/control/SkuStat.class.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/admin/models/control/SkuStatFilterForm.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="111" lean-forward="true" selection-start-line="111" selection-end-line="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/admin/models/control/SkuStatTable.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="40" column="61" selection-start-line="40" selection-start-column="61" selection-end-line="40" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailTable.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="41" column="61" lean-forward="true" selection-start-line="40" selection-start-column="8" selection-end-line="41" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/admin/models/control/TaskDetailTable.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="55" column="40" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/lib/actions/SendTaskPharmacyInfoAction.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
+        <state relative-caret-position="482">
           <caret line="58" column="46" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailFilterForm.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="155" column="93" lean-forward="true" selection-start-line="138" selection-start-column="7" selection-end-line="155" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/admin/models/control/TaskPharmacyDetailForm.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/admin/controllers/TaskPharmacyDetailFormController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
         </state>
       </provider>
     </entry>

@@ -38,6 +38,8 @@ EOF
         $this->addColumn('my_value', 'Цена', 'string');
         $this->addColumn('rest_cnt', 'Остаток (шт.)', 'string');
         $this->addColumn('illiquid_cnt', 'Неликвид (шт.)', 'string');
+        $this->addColumn('action_status', 'Акция', 'string');
+        $this->addColumn('comment', 'Комментарий', 'string');
         $this->addColumn('dt', 'Дата создания', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
 
         $this->setFilterForm(new TaskPharmacyDetailFilterForm($this->context));
