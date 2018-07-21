@@ -1,0 +1,7 @@
+{
+  "require": {
+    "symfony/translation": "4.1",
+    "symfony/config": "4.1",
+    "phpoffice/phpexcel": "^1.8"
+  }
+}
