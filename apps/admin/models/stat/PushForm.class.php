@@ -16,7 +16,6 @@ class PushForm extends nomvcAbstractForm {
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('Статус', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'V_PUSH_STATUS',
-            'order' => 'name',
             'required' => true,
             'order' => 'id_status'
         ), array()));

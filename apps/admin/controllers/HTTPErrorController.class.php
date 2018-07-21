@@ -20,7 +20,6 @@ class HTTPErrorController extends nomvcBaseController {
 		// 3xx: Redirection (перенаправление):
 		300	=> 'Multiple Choices',
 		301	=> 'Moved Permanently',
-		302	=> 'Moved Temporarily',
 		302	=> 'Found',
 		303	=> 'See Other',
 		304	=> 'Not Modified',

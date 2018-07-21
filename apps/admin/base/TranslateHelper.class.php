@@ -22,17 +22,18 @@ class TranslateHelper
         $this->catalogue = $loader->load($translate, $this->getLocale());
     }
 
-    public function translate($source)
-    {
-        return $this->catalogue->get($source);
-    }
-
-    protected function getLocale(){
-        return $this->context->getUser()->getAttribute('lang');
-    }
-
     public function setLocale($locale)
     {
         $this->context->getUser()->setAttribute('lang', $locale);
+    }
+
+    protected function getLocale()
+    {
+        return $this->context->getUser()->getAttribute('lang');
+    }
+
+    public function translate($source)
+    {
+        return $this->catalogue->get($source);
     }
 }
