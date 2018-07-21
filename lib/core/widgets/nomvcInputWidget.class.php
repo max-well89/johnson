@@ -8,7 +8,7 @@ abstract class nomvcInputWidget extends nomvcBaseWidget {
         $this->addOption('informer', false, false);
         $this->addOption('hidden', false, "");
         $this->setAttribute('class', 'form-control');
-        $this->setAttribute('placeholder', $this->getLabel());
+        $this->setAttribute('placeholder', Context::getInstance()->translate($this->getLabel()));
     }
     
     public function renderForForm($formName, $value = null) {
@@ -104,7 +104,8 @@ abstract class nomvcInputWidget extends nomvcBaseWidget {
         $attributes = array('for'	=> $id);
         if ($with_class) $attributes['class'] = $this->genColumnClass($this->getOption('label-width')).' control-label';
         $attributesCompiled = $this->compileAttribute($attributes);
-        return sprintf('<label %s>%s%s</label>', implode(' ', $attributesCompiled), $this->getLabel(), $this->renderInformer());
+
+        return sprintf('<label %s>%s%s</label>', implode(' ', $attributesCompiled), Context::getInstance()->translate($this->getLabel()), $this->renderInformer());
     }
     
     protected function renderInformer() {

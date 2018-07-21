@@ -486,3 +486,7 @@ a{
     background: white;
     z-index: 100;
 }
+
+.inline-block {
+    display: inline-block;
+}

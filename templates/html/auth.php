@@ -21,11 +21,19 @@
     <div class="<?php echo $panelClass ?> panel panel-danger">
         <div class="panel-heading" style="text-align: center;">
             <img style="max-width: 150px;" src="/img/logo.png"/>
-            <form>
-                <a href="/admin/set_locale?lang=ru" >RU</a>
-                |
-                <a href="/admin/set_locale?lang=en" >EN</a>
+            <div class="row">
+            <form method="POST" action="/admin" class="inline-block">
+                <input type="hidden" name="action" value="set_language" />
+                <input type="hidden" name="lang" value="ru" />
+                <button class="form-inline" type="submit">RU</button>
             </form>
+            |
+            <form method="POST" action="/admin" class="inline-block">
+                <input type="hidden" name="action" value="set_language" />
+                <input type="hidden" name="lang" value="en" />
+                <button class="form-inline"  type="submit">EN</button>
+            </form>
+            </div>
         </div>
         <div class="panel-body"><?php echo $content; ?></div>
     </div>

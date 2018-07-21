@@ -91,7 +91,7 @@ abstract class nomvcBaseWidget {
 	/** Возвращает имя контрола */
 	public function getName()		{ return $this->name; }
 	/** Возвращает лэйбл */
-	public function getLabel()		{ return $this->label; }
+	public function getLabel()		{ return Context::getInstance()->translate($this->label); }
 	/** Возвращает опции */
 	public function getOptions()		{ return $this->options; }
 	/** Возвращает автрибуты */

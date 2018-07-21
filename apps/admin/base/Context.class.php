@@ -2,7 +2,6 @@
 
 class Context extends nomvcContext
 {
-
     protected $user = null;
     protected $request = null;
     protected $rootController = null;

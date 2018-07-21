@@ -14,6 +14,34 @@
                 <source>log_in</source>
                 <target>Войти</target>
             </trans-unit>
+            <trans-unit id="4">
+                <source>log_out</source>
+                <target>Выйти</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>dt</source>
+                <target>Дата создания</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>id_status</source>
+                <target>Статус</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>add_task</source>
+                <target> Добавить задание</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>export</source>
+                <target> Выгрузить</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>reset</source>
+                <target> Сброс</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>search</source>
+                <target> Поиск</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

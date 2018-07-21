@@ -60,6 +60,8 @@ abstract class nomvcContext {
     public function __construct($env = self::ENV_PROD) {
         $this->configureDirs();
         $this->configureContext($env);
+
+        self::$instance = $this;
     }
     
     /** конфигурация директорий **/

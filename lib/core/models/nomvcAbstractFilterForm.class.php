@@ -15,10 +15,10 @@ abstract class nomvcAbstractFilterForm extends nomvcAbstractForm  {
 	public function addButton($button) {
 		switch($button) {
 		case 'search':
-			$this->addWidget(new nomvcButtonWidget(' Поиск', 'search', array('type' => 'submit', 'icon' => 'search')));
+			$this->addWidget(new nomvcButtonWidget('search', 'search', array('type' => 'submit', 'icon' => 'search')));
 			break;
 		case 'reset':
-			$this->addWidget(new nomvcButtonWidget(' Сброс', 'reset', array(
+			$this->addWidget(new nomvcButtonWidget('reset', 'reset', array(
 				'type'	=> 'button',
 				'icon'	=> 'refresh',
 			), array(
@@ -26,7 +26,7 @@ abstract class nomvcAbstractFilterForm extends nomvcAbstractForm  {
 			)));
 			break;
 		case 'export':
-			$this->addWidget(new nomvcButtonWidget(' Выгрузить', 'export', array(
+			$this->addWidget(new nomvcButtonWidget('export', 'export', array(
 				'type'	=> 'button',
 				'icon'	=> 'download',
 			), array(

@@ -1,5 +1,4 @@
 <?php
-    //var_dump('yes'); exit;
     session_name('admin-panel');
 
     /** @const Название проекта */

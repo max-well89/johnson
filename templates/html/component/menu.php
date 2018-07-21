@@ -24,7 +24,7 @@
 			<?php endforeach; ?>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li><a class="navbar-right" href="/logout"><span class="glyphicon glyphicon-log-out"></span> Выйти</a></li>
+			<li><a class="navbar-right" href="/logout"><span class="glyphicon glyphicon-log-out"></span> <?php echo Context::getInstance()->translate('log_out'); ?></a></li>
 		</ul>
 	</div>
 </div>

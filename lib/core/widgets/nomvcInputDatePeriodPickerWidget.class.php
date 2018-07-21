@@ -39,7 +39,7 @@ class nomvcInputDatePeriodPickerWidget extends nomvcInputWidget {
         $attributes = array('for'	=> $id);
         if ($with_class) $attributes['class'] = $this->genColumnClass(3).' control-label';
         $attributesCompiled = $this->compileAttribute($attributes);
-        return sprintf('<label %s>%s</label>', implode(' ', $attributesCompiled), $this->getLabel());
+        return sprintf('<label %s>%s</label>', implode(' ', $attributesCompiled), Context::getInstance()->translate($this->getLabel()));
     }
     
         

@@ -9,7 +9,7 @@ class nomvcButtonWidget extends nomvcBaseWidget {
 		$this->addOption('delete-confirm-form-id', FALSE, FALSE);
 
 		$this->setAttribute('class', 'btn btn-primary');
-		$this->setAttribute('placeholder', $this->getLabel());
+		$this->setAttribute('placeholder', Context::getInstance()->translate($this->getLabel()));
 	}
 
 	public function renderForForm($formName, $value = null) {
@@ -45,7 +45,7 @@ class nomvcButtonWidget extends nomvcBaseWidget {
 		if ($value) $attributes['value'] = $value;
 		$attributesCompiled = $this->compileAttribute($attributes);
 
-		return sprintf('<button %s>%s</button>', implode(' ', $attributesCompiled), $this->getLabel());
+		return sprintf('<button %s>%s</button>', implode(' ', $attributesCompiled), Context::getInstance()->translate($this->getLabel()));
 	}
 
 	public function getLabel() {

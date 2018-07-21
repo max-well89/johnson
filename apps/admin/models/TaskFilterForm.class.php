@@ -5,7 +5,7 @@ class TaskFilterForm extends nomvcAbstractFilterForm{
         parent::init();
 
         //Период
-        $this->addWidget(new nomvcInputDatePeriodPickerWidget("Дата создания", "dt"));
+        $this->addWidget(new nomvcInputDatePeriodPickerWidget("dt", "dt"));
         $this->addValidator("dt", new nomvcDatePeriodValidator());
 
 //        $this->addWidget(new nomvcInputTextWidget("Название", "name"));
@@ -39,7 +39,7 @@ class TaskFilterForm extends nomvcAbstractFilterForm{
 //            'key' => 'id_sku_producer'
 //        )));
 //
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Статус', 'id_status', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('id_status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_task_status',
             'order' => 'name',
@@ -57,7 +57,7 @@ class TaskFilterForm extends nomvcAbstractFilterForm{
         $this->addButton('reset');
         $this->addButton('export');
 
-        $this->addWidget(new nomvcButtonWidget(' Добавить задание', 'create', array(
+        $this->addWidget(new nomvcButtonWidget('add_task', 'create', array(
             'type' => 'button',
             'icon' => 'file'
         ), array(

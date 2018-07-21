@@ -33,7 +33,11 @@ class MenuController extends nomvcBaseControllerTwo {
 	private function getMenuPoint() {
 		$menu = array();
 		$this->dbHelper->addQuery(get_class($this) . '/get-menu', '
-			select mdl.id_module, mdl.name, mdl.module, mdl.path
+			select 
+			mdl.id_module, 
+			mdl.name_'.Context::getInstance()->getUser()->getAttribute("lang").' as name, 
+			mdl.module, 
+			mdl.path
 			from t_module mdl
 			inner join t_module_role mdlr on mdlr.id_module = mdl.id_module
 			inner join t_member_role mbrl on mdlr.id_role = mbrl.id_role

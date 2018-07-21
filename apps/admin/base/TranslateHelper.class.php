@@ -12,10 +12,7 @@ class TranslateHelper
     public function __construct($context, $locale = null)
     {
         $this->context = $context;
-
-        if ($locale && in_array($locale, $this->available_locales))
-            $this->setLocale($locale);
-
+        $this->setLocale($locale);
         $baseLangDir = NOMVC_BASEDIR . '/apps/admin/i18n/';
         $translate = realpath($baseLangDir . $this->getLocale() . '/' . 'messages.xml');
         $loader = new Symfony\Component\Translation\Loader\XliffFileLoader();
@@ -24,7 +21,8 @@ class TranslateHelper
 
     public function setLocale($locale)
     {
-        $this->context->getUser()->setAttribute('lang', $locale);
+        if ($locale && in_array($locale, $this->available_locales))
+            $this->context->getUser()->setAttribute('lang', $locale);
     }
 
     protected function getLocale()

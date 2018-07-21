@@ -31,8 +31,13 @@ class RootController extends nomvcBaseControllerTwo {
         $user = $this->context->getUser();
         $module = $this->getCurrentUriPart();
 
-        if (is_integer(strpos($module, 'set_locale'))){
-            $this->context->getTranslateHelper()->setLocale($_GET['lang']);
+        //set language
+        if (isset($_POST['action']) &&
+            isset($_POST['action']) == 'set_language' &&
+            isset($_POST['lang'])
+        ){
+            Context::getInstance()->getTranslateHelper()->setLocale($_POST['lang']);
+            $this->redirect($this->baseUrl);
         }
 
         if (!$user->hasAuth()) {
