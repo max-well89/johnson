@@ -98,7 +98,7 @@ class PharmacyFormController extends AbstractFormController{
         $form = new PharmacyForm($this->context, array('id' => $this->formId));
         $form->bind($this->object);
 
-        $formTitle = "Аптека";
+        $formTitle = Context::getInstance()->translate($this->formId);
 
         $buttons = array();
         $buttons[] = $this->getButton('save');

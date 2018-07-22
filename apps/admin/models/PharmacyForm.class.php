@@ -9,16 +9,16 @@ class PharmacyForm extends nomvcAbstractForm {
         $this->addWidget(new nomvcInputHiddenWidget('id_pharmacy', 'id_pharmacy'));
         $this->addValidator('id_pharmacy', new nomvcIntegerValidator(array('required' => false)));
 
-        $this->addWidget(new nomvcInputTextWidget('ID CRM', 'id_crm'));
+        $this->addWidget(new nomvcInputTextWidget('id_crm', 'id_crm'));
         $this->addValidator('id_crm', new nomvcStringValidator(array('required' => false)));
 
-        $this->addWidget(new nomvcInputTextWidget('Название', 'name'));
+        $this->addWidget(new nomvcInputTextWidget('name', 'name'));
         $this->addValidator('name', new nomvcStringValidator(array('required' => true,'min' => 2, 'max' => 100)));
 
-        $this->addWidget(new nomvcInputTextWidget('Адрес', 'address'));
+        $this->addWidget(new nomvcInputTextWidget('address', 'address'));
         $this->addValidator('address', new nomvcStringValidator(array('required' => true,'min' => 2, 'max' => 100)));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Категория', 'id_category', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('category', 'id_category', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 't_category',
             'order' => 'name',
@@ -32,7 +32,7 @@ class PharmacyForm extends nomvcAbstractForm {
             'key' => 'id_category'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Регион', 'id_region', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('region', 'id_region', array(
             'required' => false,
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_region',
@@ -46,7 +46,7 @@ class PharmacyForm extends nomvcAbstractForm {
             'key' => 'id_region'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Город', 'id_city', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('city', 'id_city', array(
             'required' => false,
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_city',
@@ -60,7 +60,7 @@ class PharmacyForm extends nomvcAbstractForm {
             'key' => 'id_city'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Район', 'id_area', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('area', 'id_area', array(
             'required' => false,
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_area',
@@ -74,7 +74,7 @@ class PharmacyForm extends nomvcAbstractForm {
             'key' => 'id_area'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Мерчендайзер', 'id_member', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('merchandiser', 'id_member', array(
             'required' => false,
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_merch_list',
@@ -89,7 +89,7 @@ class PharmacyForm extends nomvcAbstractForm {
             'key' => 'id_member'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Статус', 'id_status', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_pharmacy_status',
             'order' => 'name',

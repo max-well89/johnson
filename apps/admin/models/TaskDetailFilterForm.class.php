@@ -5,20 +5,19 @@ class TaskDetailFilterForm extends nomvcAbstractFilterForm{
         parent::init();
 
         //Период
-        $this->addWidget(new nomvcInputDatePeriodPickerWidget("Дата создания", "dt"));
+        $this->addWidget(new nomvcInputDatePeriodPickerWidget("dt", "dt"));
         $this->addValidator("dt", new nomvcDatePeriodValidator());
 
         $this->addWidget(new nomvcInputHiddenWidget('id_task', 'id_task'));
         $this->addValidator('id_task', new nomvcIntegerValidator(array('required' => true)));
 
-
-        $this->addWidget(new nomvcInputTextWidget("Аптека", "pharmacy"));
+        $this->addWidget(new nomvcInputTextWidget("pharmacy", "pharmacy"));
         $this->addValidator('pharmacy', new nomvcStringValidator(array('required' => false,'min' => 2, 'max' => 200)));
 
-        $this->addWidget(new nomvcInputTextWidget("Адрес", "address"));
+        $this->addWidget(new nomvcInputTextWidget("address", "address"));
         $this->addValidator('address', new nomvcStringValidator(array('required' => false,'min' => 2, 'max' => 200)));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Категория', 'id_category', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('category', 'id_category', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 't_category',
             'order' => 'name',
@@ -32,7 +31,7 @@ class TaskDetailFilterForm extends nomvcAbstractFilterForm{
             'key' => 'id_category'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Регион', 'id_region', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('region', 'id_region', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_region',
             'order' => 'name',
@@ -46,7 +45,7 @@ class TaskDetailFilterForm extends nomvcAbstractFilterForm{
             'key' => 'id_region'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Город', 'id_city', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('city', 'id_city', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_city',
             'order' => 'name',
@@ -60,7 +59,7 @@ class TaskDetailFilterForm extends nomvcAbstractFilterForm{
             'key' => 'id_city'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Район', 'id_area', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('area', 'id_area', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_area',
             'order' => 'name',
@@ -74,7 +73,7 @@ class TaskDetailFilterForm extends nomvcAbstractFilterForm{
             'key' => 'id_area'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Мерчендайзер', 'id_member', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('merchandiser', 'id_member', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_merch_list',
             'order' => 'fio',
@@ -89,7 +88,7 @@ class TaskDetailFilterForm extends nomvcAbstractFilterForm{
             'key' => 'id_member'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Статус', 'id_status', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_tmp_status',
             'order' => 'name',

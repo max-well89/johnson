@@ -20,27 +20,27 @@ EOF
 
         $this->setRowModelClass('TaskPharmacyDetail');
 
-        $this->addColumn('id_task_data', 'ID', 'string');
+        $this->addColumn('id_task_data', 'id', 'string');
         //$this->addColumn('id_task', 'ID задания', 'string');
         //$this->addColumn('name', 'Название', 'string');
  //       $this->addColumn('id_pharmacy', 'ID аптеки', 'string');
   //      $this->addColumn('category', 'Категория', 'string');
-        $this->addColumn('pharmacy', 'Название аптеки', 'string');
+        $this->addColumn('pharmacy', 'pharmacy_name', 'string');
       //  $this->addColumn('address', 'Адрес аптеки', 'string');
         //$this->addColumn('region', 'Регион', 'string');
        // $this->addColumn('city', 'Город', 'string');
         //$this->addColumn('area', 'Район', 'string');
-        $this->addColumn('fio', 'Мерчендайзер', 'string');
-        $this->addColumn('id_sku', 'ID SKU', 'string');
-        $this->addColumn('name', 'SKU', 'string');
-        $this->addColumn('sku_type', 'Тип', 'string');
-        $this->addColumn('sku_producer', 'Производитель', 'string');
-        $this->addColumn('my_value', 'Цена', 'string');
-        $this->addColumn('rest_cnt', 'Остаток (шт.)', 'string');
-        $this->addColumn('illiquid_cnt', 'Неликвид (шт.)', 'string');
-        $this->addColumn('action_status', 'Акция', 'string');
-        $this->addColumn('comment', 'Комментарий', 'string');
-        $this->addColumn('dt', 'Дата создания', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
+        $this->addColumn('fio', 'merchandiser', 'string');
+        $this->addColumn('id_sku', 'id_sku', 'string');
+        $this->addColumn('name', 'sku', 'string');
+        $this->addColumn('sku_type', 'sku_type', 'string');
+        $this->addColumn('sku_producer', 'sku_producer', 'string');
+        $this->addColumn('my_value', 'my_value', 'string');
+        $this->addColumn('rest_cnt', 'rest_cnt', 'string');
+        $this->addColumn('illiquid_cnt', 'illiquid_cnt', 'string');
+        $this->addColumn('action_status', 'action_status', 'string');
+        $this->addColumn('comment', 'comment', 'string');
+        $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
 
         $this->setFilterForm(new TaskPharmacyDetailFilterForm($this->context));
 

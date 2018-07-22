@@ -39,7 +39,7 @@ class TaskPharmacyDetailFormController extends AbstractFormController{
         $form = new TaskPharmacyDetailForm($this->context, array('id' => $this->formId));
         $form->bind($this->object);
 
-        $formTitle = "Изменить цену";
+        $formTitle = Context::getInstance()->translate($this->formId);
 
         $buttons = array();
         $buttons[] = $this->getButton('save');

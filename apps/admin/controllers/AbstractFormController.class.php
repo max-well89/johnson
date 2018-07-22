@@ -152,17 +152,17 @@ abstract class AbstractFormController extends nomvcBaseController {
     protected function getButton($button, $id = null) {
         switch ($button) {
             case 'save':
-                $buttonObj = new nomvcButtonWidget(' Сохранить', 'save', array('type' => 'button', 'icon' => 'ok'), array('onclick' => "TableFormActions.postForm('{$this->formId}');"));
+                $buttonObj = new nomvcButtonWidget(Context::getInstance()->translate('save'), 'save', array('type' => 'button', 'icon' => 'ok'), array('onclick' => "TableFormActions.postForm('{$this->formId}');"));
                 break;
-            case 'cancel': $buttonObj = new nomvcButtonWidget('Отменить', 'cancel', array('type' => 'button', 'icon' => 'cancel'), array('onclick' => "TableFormActions.closeForm('{$this->formId}');", 'class' => 'btn btn-warning'));
+            case 'cancel': $buttonObj = new nomvcButtonWidget(Context::getInstance()->translate('cancel'), 'cancel', array('type' => 'button', 'icon' => 'cancel'), array('onclick' => "TableFormActions.closeForm('{$this->formId}');", 'class' => 'btn btn-warning'));
                 break;
             //подтверждение удаления
             case 'delete-confirm':
-                $buttonObj = new nomvcButtonWidget(' Удалить', 'delete', array('type' => 'button', 'icon' => 'trash'), array('data-toggle' => 'modal', 'onclick' => "TableFormActions.deleteConfirmObject('{$this->formId}', {$id});", 'class' => 'btn btn-danger'));
+                $buttonObj = new nomvcButtonWidget(Context::getInstance()->translate('delete'), 'delete', array('type' => 'button', 'icon' => 'trash'), array('data-toggle' => 'modal', 'onclick' => "TableFormActions.deleteConfirmObject('{$this->formId}', {$id});", 'class' => 'btn btn-danger'));
                 break;
             //удаление
             case 'delete':
-                $buttonObj = new nomvcButtonWidget(' Удалить', 'delete', array('type' => 'button', 'icon' => 'trash'), array('data-toggle' => 'modal', 'onclick' => "TableFormActions.deleteObject('{$this->formId}');", 'class' => 'btn btn-danger'));
+                $buttonObj = new nomvcButtonWidget(Context::getInstance()->translate('delete'), 'delete', array('type' => 'button', 'icon' => 'trash'), array('data-toggle' => 'modal', 'onclick' => "TableFormActions.deleteObject('{$this->formId}');", 'class' => 'btn btn-danger'));
                 break;
         }
 

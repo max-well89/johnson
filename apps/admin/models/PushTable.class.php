@@ -1,4 +1,4 @@
-<?
+<?php
 
 class PushTable extends AbstractMapObjectTable {
     public function init($options = array()) {
@@ -18,13 +18,13 @@ EOF
 
         $this->setRowModelClass('Push');
 
-        $this->addColumn('id_push', 'ID', 'integer');
-        $this->addColumn('message', 'Текст сообщения', 'string');
-        $this->addColumn('dt', 'Дата создания', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('dt_start', 'Время начала отправки', 'date',  array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('cnt_member', 'Количество участников', 'string');
-        $this->addColumn('cnt_device', 'Количество устройств', 'string');
-        $this->addColumn('status', 'Статус', 'string');
+        $this->addColumn('id_push', 'id', 'integer');
+        $this->addColumn('message', 'message_text', 'string');
+        $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
+        $this->addColumn('dt_start', 'dt_start_send', 'date',  array('format' => DateHelper::HTMLDTS_FORMAT));
+        $this->addColumn('cnt_member', 'cnt_member', 'string');
+        $this->addColumn('cnt_device', 'cnt_device', 'string');
+        $this->addColumn('status', 'status', 'string');
 
         $this->setFilterForm(new PushFilterForm($this->context));
     }

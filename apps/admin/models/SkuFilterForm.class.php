@@ -5,13 +5,13 @@ class SkuFilterForm extends nomvcAbstractFilterForm{
         parent::init();
 
         //Период
-        $this->addWidget(new nomvcInputDatePeriodPickerWidget("Дата создания", "dt"));
+        $this->addWidget(new nomvcInputDatePeriodPickerWidget("dt", "dt"));
         $this->addValidator("dt", new nomvcDatePeriodValidator());
 
-        $this->addWidget(new nomvcInputTextWidget("Название", "name"));
+        $this->addWidget(new nomvcInputTextWidget("name", "name"));
         $this->addValidator('name', new nomvcStringValidator(array('required' => false,'min' => 2, 'max' => 200)));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Тип', 'id_sku_type', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_type', 'id_sku_type', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 't_sku_type',
             'order' => 'name',
@@ -25,7 +25,7 @@ class SkuFilterForm extends nomvcAbstractFilterForm{
             'key' => 'id_sku_type'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Производитель', 'id_sku_producer', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_producer', 'id_sku_producer', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 't_sku_producer',
             'order' => 'name',
@@ -39,7 +39,7 @@ class SkuFilterForm extends nomvcAbstractFilterForm{
             'key' => 'id_sku_producer'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Приоритет', 'id_priority', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('priority', 'id_priority', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 't_priority',
             'order' => 'name',
@@ -54,7 +54,7 @@ class SkuFilterForm extends nomvcAbstractFilterForm{
         )));
 
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Статус', 'id_status', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_sku_status',
             'order' => 'name',
@@ -72,7 +72,7 @@ class SkuFilterForm extends nomvcAbstractFilterForm{
         $this->addButton('reset');
         $this->addButton('export');
 
-        $this->addWidget(new nomvcButtonWidget(' Добавить SKU', 'create', array(
+        $this->addWidget(new nomvcButtonWidget('add_sku', 'create', array(
             'type' => 'button',
             'icon' => 'file'
         ), array(

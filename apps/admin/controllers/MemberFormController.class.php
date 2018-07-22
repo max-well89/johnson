@@ -30,7 +30,7 @@ class MemberFormController extends AbstractFormController {
         $form = new MemberForm($this->context, array('id' => $this->formId));
         
         $form->bind($this->member);
-        $formTitle = 'Пользователь';
+        $formTitle = Context::getInstance()->translate($this->formId);
 
         return json_encode(array(
             'title' => $formTitle,
@@ -112,6 +112,7 @@ class MemberFormController extends AbstractFormController {
                         login, 
                         passwd, 
                         id_role,
+                        id_language,
                         id_status
                     )
                     values (                 
@@ -123,6 +124,7 @@ class MemberFormController extends AbstractFormController {
                         :login, 
                         :passwd,
                         2,
+                        :id_language,
                         :id_status
                     )
                     returning id_member");
@@ -152,6 +154,7 @@ class MemberFormController extends AbstractFormController {
                     id_area =:id_area,
                     login = :login,
                     $pass_str
+                    id_language = :id_language,
                     id_status = :id_status
                     where id_member = :id_member";
 

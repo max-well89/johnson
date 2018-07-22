@@ -27,7 +27,7 @@ class PushFormController extends AbstractFormController{
         $form = new PushForm($this->context, array('id' => $this->formId));
         $form->bind($this->object);
 
-        $formTitle = "Пуш";
+        $formTitle = Context::getInstance()->translate($this->formId);
 
         $buttons = array();
         $buttons[] = $this->getButton('save');

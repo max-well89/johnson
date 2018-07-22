@@ -24,7 +24,7 @@ class Task {
     }
 
     private function getDetail(){
-        return "<a target='_blank' href='/admin/stat/task-detail/?id_task={$this->id_task}'>просмотр</a>";
+        return "<a target='_blank' href='/admin/stat/task-detail/?id_task={$this->id_task}'>".Context::getInstance()->translate('view')."</a>";
     }
 
     public function get($name) {

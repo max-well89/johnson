@@ -455,7 +455,7 @@ abstract class nomvcAbstractTable {
     protected function getSortLink($column) {
         $column_conf = $this->columns[$column];
         if (in_array($column_conf['type'], array('custom'))) {		// для кастомных полей не делаем сортлинк
-            return $column_conf['label'];
+            return Context::getInstance()->translate($column_conf['label']);
         } else {
             $sortby = $this->getSortBy();
             $sortorder = $this->getSortOrder();
@@ -471,7 +471,7 @@ abstract class nomvcAbstractTable {
             return sprintf('<a href="%s/sort/%s/%s">%s%s</a>',
                 $this->controller->makeUrl(),
                 $column, ($column == $sortby && $sortorder == 'asc' ? 'desc' : 'asc'),
-                $icon, $column_conf['label']);
+                $icon, Context::getInstance()->translate($column_conf['label']));
         }
     }
 

@@ -17,7 +17,7 @@ class TaskDetailBatchActions
     public function init() {
         $this->addButton(
             new nomvcButtonWidget(
-                ' Завершить',
+                Context::getInstance()->translate('finished_task'),
                 'finished',
                 array(
                     'type' => 'button',
@@ -29,7 +29,7 @@ class TaskDetailBatchActions
 
         $this->addButton(
             new nomvcButtonWidget(
-                ' Продолжить выполнение',
+                Context::getInstance()->translate('continue_task'),
                 'continue',
                 array(
                     'type' => 'button',

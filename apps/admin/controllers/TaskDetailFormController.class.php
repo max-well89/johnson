@@ -77,7 +77,7 @@ class TaskDetailFormController extends AbstractFormController{
         $form = new TaskDetailForm($this->context, array('id' => $this->formId));
         $form->bind($this->object);
 
-        $formTitle = "Изменить статус";
+        $formTitle = Context::getInstance()->translate($this->formId);
 
         $buttons = array();
         $buttons[] = $this->getButton('save');

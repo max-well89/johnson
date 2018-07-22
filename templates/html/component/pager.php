@@ -9,12 +9,12 @@
 		<div class="panel-body">
 			<div class="pull-left">
 				<label class="control-label input-sm">
-					Всего строк: <?php echo $rows; ?>, страниц: <?php echo $pages; ?>
+					<?php echo Context::getInstance()->translate('pager_cnt_rows') ?>: <?php echo $rows; ?>, <?php echo Context::getInstance()->translate('pager_cnt_pages') ?>: <?php echo $pages; ?>
 				</label>
 			</div>
 			
 			<div class="pull-right">
-				<label class="col-xs-7 control-label text-right input-sm" for="page_limit">Строк на страницу:</label>
+				<label class="col-xs-7 control-label text-right input-sm" for="page_limit"><?php echo Context::getInstance()->translate('pager_cnt_rows_in_page') ?>:</label>
 				<div class="col-xs-5">
 					<select class="form-control input-sm" id="page_limit" onChange="location.href='<?php echo "{$url}/limit/"; ?>' + this.value;">
 						<?php foreach($limits as $lmt) : ?>

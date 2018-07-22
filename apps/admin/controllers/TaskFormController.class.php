@@ -39,7 +39,7 @@ class TaskFormController extends AbstractFormController{
         $form = new TaskForm($this->context, array('id' => $this->formId));
         $form->bind($this->object);
 
-        $formTitle = "Задание";
+        $formTitle = Context::getInstance()->translate($this->formId);
 
         $buttons = array();
         $buttons[] = $this->getButton('save');
@@ -47,7 +47,7 @@ class TaskFormController extends AbstractFormController{
         $buttons[] = $this->getButton('cancel');
 
         if (!empty($this->id_object))
-            $buttons[] = (new nomvcButtonWidget('Завершить для всех', 'finished', array('type' => 'button'), array('onclick' => "TableFormActions.postForm('{$this->formId}',{'action' : 'finished'});", 'class' => 'btn btn-success')))->renderControl(null);
+            $buttons[] = (new nomvcButtonWidget(Context::getInstance()->translate('finished_for_all'), 'finished', array('type' => 'button'), array('onclick' => "TableFormActions.postForm('{$this->formId}',{'action' : 'finished'});", 'class' => 'btn btn-success')))->renderControl(null);
 
         return json_encode(array(
             'title' => $formTitle,

@@ -20,13 +20,13 @@ EOF
 
         $this->setRowModelClass('Sku');
 
-        $this->addColumn('id_sku', 'ID', 'string');
-        $this->addColumn('sku_type', 'Тип', 'string');
-        $this->addColumn('sku_producer', 'Производитель', 'string');
-        $this->addColumn('name', 'Название', 'string');
-        $this->addColumn('dt', 'Дата создания', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('priority', 'Приоритет', 'string');
-        $this->addColumn('status', 'Статус', 'string');
+        $this->addColumn('id_sku', 'id', 'string');
+        $this->addColumn('sku_type', 'sku_type', 'string');
+        $this->addColumn('sku_producer', 'sku_producer', 'string');
+        $this->addColumn('name', 'name', 'string');
+        $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
+        $this->addColumn('priority', 'priority', 'string');
+        $this->addColumn('status', 'status', 'string');
 
         $this->setFilterForm(new SkuFilterForm($this->context));
     }

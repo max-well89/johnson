@@ -9,10 +9,10 @@ class TaskForm extends nomvcAbstractForm {
         $this->addWidget(new nomvcInputHiddenWidget('id_task', 'id_task'));
         $this->addValidator('id_task', new nomvcIntegerValidator(array('required' => false)));
 
-        $this->addWidget(new nomvcInputTextWidget('Название', 'name'));
+        $this->addWidget(new nomvcInputTextWidget('name', 'name'));
         $this->addValidator('name', new nomvcStringValidator(array('required' => true,'min' => 2, 'max' => 100)));
 
-        $this->addWidget(new nomvcInputDatePickerWidget('Дата задания', 'dt_task', array(), array()));
+        $this->addWidget(new nomvcInputDatePickerWidget('dt_task', 'dt_task', array(), array()));
         $this->addValidator('dt_task', new nomvcDateValidator(array('required' => true, 'in_format' => DateHelper::HTMLD_FORMAT)));
 
 //        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Тип', 'id_sku_type', array(

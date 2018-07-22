@@ -20,18 +20,18 @@ EOF
 
         $this->setRowModelClass('Pharmacy');
 
-        $this->addColumn('id_pharmacy', 'ID', 'string');
-        $this->addColumn('id_crm', 'ID CRM', 'string');
-        $this->addColumn('category', 'Категория', 'string');
-        $this->addColumn('name', 'Название', 'string');
-        $this->addColumn('address', 'Адрес', 'string');
-        $this->addColumn('region', 'Регион', 'string');
-        $this->addColumn('city', 'Город', 'string');
-        $this->addColumn('area', 'Район', 'string');
-        $this->addColumn('fio', 'Мерчендайзер', 'string');
-        $this->addColumn('dt', 'Дата создания', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('dt_updated', 'Дата обновления', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('status', 'Статус', 'string');
+        $this->addColumn('id_pharmacy', 'id', 'string');
+        $this->addColumn('id_crm', 'id_crm', 'string');
+        $this->addColumn('category', 'category', 'string');
+        $this->addColumn('name', 'name', 'string');
+        $this->addColumn('address', 'address', 'string');
+        $this->addColumn('region', 'region', 'string');
+        $this->addColumn('city', 'city', 'string');
+        $this->addColumn('area', 'area', 'string');
+        $this->addColumn('fio', 'merchandiser', 'string');
+        $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
+        $this->addColumn('dt_updated', 'dt_updated', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
+        $this->addColumn('status', 'status', 'string');
 
         $this->setFilterForm(new PharmacyFilterForm($this->context));
     }

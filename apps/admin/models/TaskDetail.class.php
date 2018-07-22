@@ -24,7 +24,7 @@ class TaskDetail {
     }
 
     private function getDetail(){
-        return "<a target='_blank' href='/admin/stat/task-pharmacy-detail/?id_task={$this->id_task}&id_pharmacy={$this->id_pharmacy}&id_member={$this->id_member}'>просмотр</a>";
+        return "<a target='_blank' href='/admin/stat/task-pharmacy-detail/?id_task={$this->id_task}&id_pharmacy={$this->id_pharmacy}&id_member={$this->id_member}'>".Context::getInstance()->translate('view')."</a>";
     }
 
     public function get($name) {

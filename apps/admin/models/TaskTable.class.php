@@ -20,14 +20,14 @@ EOF
 
         $this->setRowModelClass('Task');
 
-        $this->addColumn('id_task', 'ID', 'string');
-        $this->addColumn('dt_task', 'Дата задания', 'date', array('format' => DateHelper::HTMLD_FORMAT));
-        $this->addColumn('name', 'Название', 'string');
-        $this->addColumn('cnt_pharmacy', 'Количество аптек', 'string');
-        $this->addColumn('cnt_member', 'Количество мерчендайзеров', 'string');
-        $this->addColumn('detail', 'Детально', 'string', array(), array('class' => 'rowlink-skip'));
-        $this->addColumn('dt', 'Дата создания', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('status', 'Статус', 'string');
+        $this->addColumn('id_task', 'id', 'string');
+        $this->addColumn('dt_task', 'dt_task', 'date', array('format' => DateHelper::HTMLD_FORMAT));
+        $this->addColumn('name', 'name', 'string');
+        $this->addColumn('cnt_pharmacy', 'cnt_pharmacy', 'string');
+        $this->addColumn('cnt_member', 'cnt_member', 'string');
+        $this->addColumn('detail', 'detail', 'string', array(), array('class' => 'rowlink-skip'));
+        $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
+        $this->addColumn('status', 'status', 'string');
 
         $this->setFilterForm(new TaskFilterForm($this->context));
     }

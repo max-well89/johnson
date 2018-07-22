@@ -5,7 +5,7 @@ class TaskPharmacyDetailFilterForm extends nomvcAbstractFilterForm{
         parent::init();
 
         //Период
-        $this->addWidget(new nomvcInputDatePeriodPickerWidget("Дата создания", "dt"));
+        $this->addWidget(new nomvcInputDatePeriodPickerWidget("dt", "dt"));
         $this->addValidator("dt", new nomvcDatePeriodValidator());
 
         $this->addWidget(new nomvcInputHiddenWidget('id_task', 'id_task'));
@@ -94,7 +94,7 @@ class TaskPharmacyDetailFilterForm extends nomvcAbstractFilterForm{
 //            'key' => 'id_member'
 //        )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('SKU', 'id_sku', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku', 'id_sku', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_sku',
             'order' => 'name',
@@ -108,7 +108,7 @@ class TaskPharmacyDetailFilterForm extends nomvcAbstractFilterForm{
             'key' => 'id_sku'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Тип', 'id_sku_type', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_type', 'id_sku_type', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 't_sku_type',
             'order' => 'name',
@@ -122,7 +122,7 @@ class TaskPharmacyDetailFilterForm extends nomvcAbstractFilterForm{
             'key' => 'id_sku_type'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Производитель', 'id_sku_producer', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_producer', 'id_sku_producer', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 't_sku_producer',
             'order' => 'name',
@@ -136,7 +136,7 @@ class TaskPharmacyDetailFilterForm extends nomvcAbstractFilterForm{
             'key' => 'id_sku_producer'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Акция', 'id_action_status', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('action_status', 'id_action_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_action_status',
             "key" => "id_status",
@@ -152,7 +152,7 @@ class TaskPharmacyDetailFilterForm extends nomvcAbstractFilterForm{
             "key" => "id_status"
         )));
 
-        $this->addWidget(new nomvcInputTextWidget("Комментарий", "comment"));
+        $this->addWidget(new nomvcInputTextWidget("comment", "comment"));
         $this->addValidator('comment', new nomvcStringValidator(array('required' => false)));
 
 //        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Статус', 'id_status', array(

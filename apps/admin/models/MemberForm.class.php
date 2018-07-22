@@ -41,10 +41,10 @@ class MemberForm extends nomvcAbstractForm {
         $this->addWidget(new nomvcInputHiddenWidget('id_member', 'id_member'));
         $this->addValidator('id_member', new nomvcIntegerValidator(array('required' => false)));
 
-        $this->addWidget(new nomvcInputTextWidget('Фамилия', 'surname', array(), array_merge(array(), $attr_ext)));
+        $this->addWidget(new nomvcInputTextWidget('member_surname', 'surname', array(), array_merge(array(), $attr_ext)));
         $this->addValidator('surname', new nomvcStringValidator(array('required' => true,'min' => 2, 'max' => 200)));
 
-        $this->addWidget(new nomvcInputTextWidget('Имя', 'name', array(), array_merge(array(), $attr_ext)));
+        $this->addWidget(new nomvcInputTextWidget('member_name', 'name', array(), array_merge(array(), $attr_ext)));
         $this->addValidator('name', new nomvcStringValidator(array('required' => true,'min' => 2, 'max' => 200)));
 
 //        $this->addWidget(new nomvcInputTextWidget('Отчество', 'patronymic', array(), array_merge(array(), $attr_ext)));
@@ -52,7 +52,7 @@ class MemberForm extends nomvcAbstractForm {
 
 //        $this->addWidget(new nomvcInputTextWidget('Email', 'email', array(), array_merge(array(), $attr_ext)));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Регион', 'id_region', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('region', 'id_region', array(
             'required' => false,
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_region',
@@ -66,7 +66,7 @@ class MemberForm extends nomvcAbstractForm {
             'key' => 'id_region'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Город', 'id_city', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('city', 'id_city', array(
             'required' => false,
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_city',
@@ -80,7 +80,7 @@ class MemberForm extends nomvcAbstractForm {
             'key' => 'id_city'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Район', 'id_area', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('area', 'id_area', array(
             'required' => false,
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_area',
@@ -94,16 +94,29 @@ class MemberForm extends nomvcAbstractForm {
             'key' => 'id_area'
         )));
 
-        $this->addWidget(new nomvcInputTextWidget('Логин', 'login'));
+        $this->addWidget(new nomvcInputTextWidget('login', 'login'));
         $this->addValidator('login', new nomvcStringValidator(array('required' => true,'min' => 5, 'max' => 50)));
         
-        $this->addWidget(new nomvcInputPasswordWidget('Пароль', 'passwd'));
+        $this->addWidget(new nomvcInputPasswordWidget('password', 'passwd'));
         $this->addValidator('passwd', new nomvcStringValidator(array('required' => false, "min" => 6, "max" => 10)));
 
-        $this->addWidget(new nomvcInputPasswordWidget('Подтвердите пароль', 'passwd_confirm'));
+        $this->addWidget(new nomvcInputPasswordWidget('password_confirm', 'passwd_confirm'));
         $this->addValidator('passwd_confirm', new nomvcStringValidator(array('required' => false, "min" => 6, "max" => 10)));
-        
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Статус', 'id_status', array(
+
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('language', 'id_language', array(
+            'helper' => $this->context->getDbHelper(),
+            'table' => 'v_language',
+            'order' => 'name'
+        )));
+
+        $this->addValidator('id_language', new nomvcValueInDbValidator(array(
+            'required' => true,
+            'helper' => $this->context->getDbHelper(),
+            'table' => 'v_language',
+            'key' => 'id_language'
+        )));
+
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_member_status',
             'order' => 'name'

@@ -22,18 +22,19 @@ EOF
 
         $this->setRowModelClass('Member');
 
-        $this->addColumn('id_member', 'ID', 'string');
-        $this->addColumn('name', 'Имя', 'string');
-        $this->addColumn('surname', 'Фамилия', 'string');
-        $this->addColumn('region', 'Регион', 'string');
-        $this->addColumn('city', 'Город', 'string');
-        $this->addColumn('area', 'Район', 'string');
+        $this->addColumn('id_member', 'id', 'string');
+        $this->addColumn('name', 'member_name', 'string');
+        $this->addColumn('surname', 'member_surname', 'string');
+        $this->addColumn('region', 'region', 'string');
+        $this->addColumn('city', 'city', 'string');
+        $this->addColumn('area', 'area', 'string');
 //        $this->addColumn('msisdn', 'Телефон', 'string');
 //        $this->addColumn('email', 'Email', 'string');
-        $this->addColumn('login', 'Логин', 'string');
-        $this->addColumn('passwd', 'Пароль', 'string');
-        $this->addColumn('dt', 'Дата создания', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('status', 'Статус', 'string');
+        $this->addColumn('login', 'login', 'string');
+        $this->addColumn('passwd', 'password', 'string');
+        $this->addColumn('language', 'language', 'string');
+        $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
+        $this->addColumn('status', 'status', 'string');
 
         $this->setFilterForm(new MemberFilterForm($this->context));
     }

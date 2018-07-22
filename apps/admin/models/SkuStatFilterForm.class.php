@@ -5,13 +5,13 @@ class SkuStatFilterForm extends nomvcAbstractFilterForm{
         parent::init();
 
         //Период
-        $this->addWidget(new nomvcInputDatePeriodPickerWidget("Дата создания", "dt"));
+        $this->addWidget(new nomvcInputDatePeriodPickerWidget("dt", "dt"));
         $this->addValidator("dt", new nomvcDatePeriodValidator());
 
-        $this->addWidget(new nomvcInputTextWidget("Название", "name"));
+        $this->addWidget(new nomvcInputTextWidget("name", "name"));
         $this->addValidator('name', new nomvcStringValidator(array('required' => false,'min' => 2, 'max' => 200)));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Тип', 'id_sku_type', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_type', 'id_sku_type', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 't_sku_type',
             'order' => 'name',
@@ -25,7 +25,7 @@ class SkuStatFilterForm extends nomvcAbstractFilterForm{
             'key' => 'id_sku_type'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Производитель', 'id_sku_producer', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_producer', 'id_sku_producer', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 't_sku_producer',
             'order' => 'name',
@@ -39,7 +39,7 @@ class SkuStatFilterForm extends nomvcAbstractFilterForm{
             'key' => 'id_sku_producer'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Мерчендайзер', 'id_member', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('merchandiser', 'id_member', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_merch_list',
             'order' => 'fio',
@@ -55,7 +55,7 @@ class SkuStatFilterForm extends nomvcAbstractFilterForm{
         )));
 
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Регион', 'id_region', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('region', 'id_region', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_region',
             'order' => 'name',
@@ -70,7 +70,7 @@ class SkuStatFilterForm extends nomvcAbstractFilterForm{
             "key" => "id_region"
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Город', 'id_city', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('city', 'id_city', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_city',
             'order' => 'name',
@@ -86,7 +86,7 @@ class SkuStatFilterForm extends nomvcAbstractFilterForm{
         )));
 
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Район', 'id_area', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('area', 'id_area', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_area',
             'order' => 'name',
@@ -101,7 +101,7 @@ class SkuStatFilterForm extends nomvcAbstractFilterForm{
             "key" => "id_area"
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Акция', 'id_action_status', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('action_status', 'id_action_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_action_status',
             "key" => "id_status",
@@ -117,7 +117,7 @@ class SkuStatFilterForm extends nomvcAbstractFilterForm{
             "key" => "id_status"
         )));
 
-        $this->addWidget(new nomvcInputTextWidget("Комментарий", "comment"));
+        $this->addWidget(new nomvcInputTextWidget("comment", "comment"));
         $this->addValidator('comment', new nomvcStringValidator(array('required' => false)));
 
 //        $this->addWidget(new nomvcInputTextWidget("Цена", "my_value"));

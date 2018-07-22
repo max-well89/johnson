@@ -4,16 +4,16 @@ class PushFilterForm extends nomvcAbstractFilterForm{
     public function init() {
         parent::init();
 
-        $this->addWidget(new nomvcInputDatePeriodPickerWidget("Дата создания", "dt"));
+        $this->addWidget(new nomvcInputDatePeriodPickerWidget("dt", "dt"));
 		$this->addValidator("dt", new nomvcDatePeriodValidator());
 
-        $this->addWidget(new nomvcInputDatePeriodPickerWidget("Дата начала отправки", "dt_start"));
+        $this->addWidget(new nomvcInputDatePeriodPickerWidget("dt_start_send", "dt_start"));
         $this->addValidator("dt_start", new nomvcDatePeriodValidator());
 
-        $this->addWidget(new nomvcInputTextWidget("Текст сообщения", "message"));
+        $this->addWidget(new nomvcInputTextWidget("message_text", "message"));
         $this->addValidator("message", new nomvcStringValidator());
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Статус', 'id_status', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'V_PUSH_STATUS',
             'order' => 'name',
@@ -30,7 +30,7 @@ class PushFilterForm extends nomvcAbstractFilterForm{
         $this->addButton('reset');
         $this->addButton('export');
 
-        $this->addWidget(new nomvcButtonWidget(' Создать', 'create', array(
+        $this->addWidget(new nomvcButtonWidget('create', 'create', array(
             'type' => 'button',
             'icon' => 'file'
         ), array(

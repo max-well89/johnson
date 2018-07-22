@@ -9,10 +9,10 @@ class SkuForm extends nomvcAbstractForm {
         $this->addWidget(new nomvcInputHiddenWidget('id_sku', 'id_sku'));
         $this->addValidator('id_sku', new nomvcIntegerValidator(array('required' => false)));
 
-        $this->addWidget(new nomvcInputTextWidget('Название', 'name'));
+        $this->addWidget(new nomvcInputTextWidget('name', 'name'));
         $this->addValidator('name', new nomvcStringValidator(array('required' => true,'min' => 2, 'max' => 100)));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Тип', 'id_sku_type', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_type', 'id_sku_type', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 't_sku_type',
             'order' => 'name',
@@ -28,7 +28,7 @@ class SkuForm extends nomvcAbstractForm {
             'key' => 'id_sku_type'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Производитель', 'id_sku_producer', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_producer', 'id_sku_producer', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 't_sku_producer',
             'order' => 'name',
@@ -44,7 +44,7 @@ class SkuForm extends nomvcAbstractForm {
             'key' => 'id_sku_producer'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Приоритет', 'id_priority', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('priority', 'id_priority', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_priority',
             'order' => 'id_priority',
@@ -60,7 +60,7 @@ class SkuForm extends nomvcAbstractForm {
             'key' => 'id_priority'
         )));
 
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('Статус', 'id_status', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_sku_status',
             'order' => 'name',

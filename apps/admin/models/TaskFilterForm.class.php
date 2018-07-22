@@ -39,7 +39,7 @@ class TaskFilterForm extends nomvcAbstractFilterForm{
 //            'key' => 'id_sku_producer'
 //        )));
 //
-        $this->addWidget(new nomvcSelectFromMultipleDbWidget('id_status', 'id_status', array(
+        $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_task_status',
             'order' => 'name',

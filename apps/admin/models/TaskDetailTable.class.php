@@ -42,23 +42,23 @@ EOF
         $this->setRowModelClass('TaskDetail');
         $this->setFetchByClass(false);
 
-        $this->addColumn('id_task_mp', 'ID', 'string');
-        $this->addColumn('id_task', 'ID задания', 'string');
+        $this->addColumn('id_task_mp', 'id', 'string');
+        $this->addColumn('id_task', 'id_task', 'string');
         //$this->addColumn('name', 'Название', 'string');
-        $this->addColumn('id_pharmacy', 'ID аптеки', 'string');
-        $this->addColumn('category', 'Категория', 'string');
-        $this->addColumn('pharmacy', 'Название аптеки', 'string');
-        $this->addColumn('address', 'Адрес аптеки', 'string');
-        $this->addColumn('region', 'Регион', 'string');
-        $this->addColumn('city', 'Город', 'string');
-        $this->addColumn('area', 'Район', 'string');
-        $this->addColumn('fio', 'Мерчендайзер', 'string');
+        $this->addColumn('id_pharmacy', 'id_pharmacy', 'string');
+        $this->addColumn('category', 'category', 'string');
+        $this->addColumn('pharmacy', 'pharmacy_name', 'string');
+        $this->addColumn('address', 'pharmacy_address', 'string');
+        $this->addColumn('region', 'region', 'string');
+        $this->addColumn('city', 'city', 'string');
+        $this->addColumn('area', 'area', 'string');
+        $this->addColumn('fio', 'merchandiser', 'string');
         //$this->addColumn('action_status', 'Идет акция?', 'string');
         //$this->addColumn('comment', 'Комментарий к аптеке', 'string');
-        $this->addColumn('detail', 'Детально', 'string', array(), array('class' => 'rowlink-skip'));
-        $this->addColumn('dt', 'Дата создания', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('dt_status', 'Дата статуса', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('status', 'Статус', 'string');
+        $this->addColumn('detail', 'detail', 'string', array(), array('class' => 'rowlink-skip'));
+        $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
+        $this->addColumn('dt_status', 'dt_status', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
+        $this->addColumn('status', 'status', 'string');
 
         if ($id_task = $this->context->getRequest()->getParameter('id_task')) {
             $id_task = (int) $id_task;

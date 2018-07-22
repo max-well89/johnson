@@ -42,6 +42,250 @@
                 <source>search</source>
                 <target> Поиск</target>
             </trans-unit>
+            <trans-unit id="11">
+                <source>id</source>
+                <target>ID</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>dt_task</source>
+                <target>Дата задания</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>name</source>
+                <target>Название</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>cnt_pharmacy</source>
+                <target>Количество аптек</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>cnt_member</source>
+                <target>Количество мерчендайзеров</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>detail</source>
+                <target>Детально</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>status</source>
+                <target>Статус</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>pager_cnt_rows</source>
+                <target>Всего строк</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>pager_cnt_pages</source>
+                <target>страниц</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>pager_cnt_rows_in_page</source>
+                <target>Строк на страницу</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>task</source>
+                <target>Задание</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>save</source>
+                <target>Сохранить</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>save</source>
+                <target> Сохранить</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>cancel</source>
+                <target> Отменить</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>delete</source>
+                <target> Удалить</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>finished_for_all</source>
+                <target>Завершить для всех</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>view</source>
+                <target>Просмотр</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>member_name</source>
+                <target>Имя</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>member_surname</source>
+                <target>Фамилия</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>region</source>
+                <target>Регион</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>city</source>
+                <target>Город</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>area</source>
+                <target>Район</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>login</source>
+                <target>Логин</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>password</source>
+                <target>Пароль</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>language</source>
+                <target>Язык</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>add_member</source>
+                <target> Добавить пользователя</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>member</source>
+                <target>Пользователь</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>password_confirm</source>
+                <target>Подтвердите пароль</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>dt_updated</source>
+                <target>Дата обновления</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>id_crm</source>
+                <target>ID CRM</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>address</source>
+                <target>Адрес</target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>category</source>
+                <target>Категория</target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>merchandiser</source>
+                <target>Мерчендайзер</target>
+            </trans-unit>
+            <trans-unit id="44">
+                <source>add_pharmacy</source>
+                <target> Добавить аптеку</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>pharmacy</source>
+                <target>Аптека</target>
+            </trans-unit>
+            <trans-unit id="46">
+                <source>sku_type</source>
+                <target>Тип</target>
+            </trans-unit>
+            <trans-unit id="47">
+                <source>sku_producer</source>
+                <target>Производитель</target>
+            </trans-unit>
+            <trans-unit id="48">
+                <source>priority</source>
+                <target>Приоритет</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>add_sku</source>
+                <target> Добавить SKU</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>sku</source>
+                <target>SKU</target>
+            </trans-unit>
+            <trans-unit id="51">
+                <source>action_status</source>
+                <target>Акция</target>
+            </trans-unit>
+            <trans-unit id="52">
+                <source>comment</source>
+                <target>Комментарий</target>
+            </trans-unit>
+            <trans-unit id="53">
+                <source>id_pharmacy</source>
+                <target>ID аптеки</target>
+            </trans-unit>
+            <trans-unit id="54">
+                <source>pharmacy_name</source>
+                <target>Название аптеки</target>
+            </trans-unit>
+            <trans-unit id="55">
+                <source>pharmacy_address</source>
+                <target>Адрес аптеки</target>
+            </trans-unit>
+            <trans-unit id="56">
+                <source>id_sku</source>
+                <target>ID SKU</target>
+            </trans-unit>
+            <trans-unit id="57">
+                <source>my_value</source>
+                <target>Цена</target>
+            </trans-unit>
+            <trans-unit id="58">
+                <source>rest_cnt</source>
+                <target>Остаток (шт.)</target>
+            </trans-unit>
+            <trans-unit id="59">
+                <source>illiquid_cnt</source>
+                <target>Неликвид (шт.)</target>
+            </trans-unit>
+            <trans-unit id="60">
+                <source>dt_start_send</source>
+                <target>Дата начала отправки</target>
+            </trans-unit>
+            <trans-unit id="61">
+                <source>message_text</source>
+                <target>Текст сообщения</target>
+            </trans-unit>
+            <trans-unit id="62">
+                <source>create</source>
+                <target> Создать</target>
+            </trans-unit>
+            <trans-unit id="63">
+                <source>push</source>
+                <target>Пуш</target>
+            </trans-unit>
+            <trans-unit id="64">
+                <source>cnt_member</source>
+                <target>Количество участников</target>
+            </trans-unit>
+            <trans-unit id="65">
+                <source>cnt_device</source>
+                <target>Количество устройств</target>
+            </trans-unit>
+            <trans-unit id="66">
+                <source>task-detail</source>
+                <target>Изменить статус</target>
+            </trans-unit>
+            <trans-unit id="67">
+                <source>id_task</source>
+                <target>ID задания</target>
+            </trans-unit>
+            <trans-unit id="68">
+                <source>dt_status</source>
+                <target>Дата статуса</target>
+            </trans-unit>
+            <trans-unit id="69">
+                <source>finished_task</source>
+                <target> Завершить</target>
+            </trans-unit>
+            <trans-unit id="70">
+                <source>continue_task</source>
+                <target> Продолжить выполнение</target>
+            </trans-unit>
+            <trans-unit id="71">
+                <source>task-pharmacy-detail</source>
+                <target>Изменить</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
