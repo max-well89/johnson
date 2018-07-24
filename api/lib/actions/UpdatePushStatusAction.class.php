@@ -4,7 +4,7 @@ class UpdatePushStatusAction extends AbstractAction
 {
     public function getTitle()
     {
-        return 'статус устройства для пушей';
+        return 'Установить статус устройства для пушей';
     }
 
     public function init()
