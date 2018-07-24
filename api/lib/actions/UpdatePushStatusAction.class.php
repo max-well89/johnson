@@ -54,11 +54,7 @@ class UpdatePushStatusAction extends AbstractAction
     {
         return json_decode('{
   "response": {
-    "result": 100,
-    "data": {
-      "token": "9ca7e09bee58071a1291c3ef5f3dd29137a918e26e7957463c6206b060bca547457c61a95ebf22154e82d113550a8c413c19d02cb088acbb0e9d64a0924d2754",
-      "token_life_time": 1
-    }
+    "result": 100
   }
 }');
     }

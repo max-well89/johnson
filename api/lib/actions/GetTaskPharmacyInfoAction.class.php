@@ -111,11 +111,6 @@ class GetTaskPharmacyInfoAction extends AbstractAction {
   "response": {
     "result": 100,
     "data": {
-      "info": {
-        "is_action": 1,
-        "comment": "все отлично",
-        "dt": "03-03-2016 00:00:00"
-      },
       "sku_list": [
         {
           "id_sku": 2,
@@ -127,7 +122,11 @@ class GetTaskPharmacyInfoAction extends AbstractAction {
           "sku_producer": null,
           "my_value": null,
           "id_priority": 3,
-          "priority": "высокий"
+          "priority": "высокий",
+          "rest_cnt": null,
+          "illiquid_cnt": null,
+          "is_action": null,
+          "comment": null
         },
         {
           "id_sku": 1,
@@ -139,7 +138,11 @@ class GetTaskPharmacyInfoAction extends AbstractAction {
           "sku_producer": "producer1",
           "my_value": 100,
           "id_priority": 2,
-          "priority": "средний"
+          "priority": "средний",
+          "rest_cnt": 5,
+          "illiquid_cnt": 6,
+          "is_action": 1,
+          "comment": "комментарий2"
         },
         {
           "id_sku": 143,
@@ -151,7 +154,11 @@ class GetTaskPharmacyInfoAction extends AbstractAction {
           "sku_producer": "Аркрей",
           "my_value": 0,
           "id_priority": 1,
-          "priority": "низкий"
+          "priority": "низкий",
+          "rest_cnt": 5,
+          "illiquid_cnt": 6,
+          "is_action": 0,
+          "comment": "комментарий"
         }
       ]
     }
