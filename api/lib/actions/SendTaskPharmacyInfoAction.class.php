@@ -1,11 +1,14 @@
 <?php
 
-class SendTaskPharmacyInfoAction extends AbstractAction {
-    public function getTitle() {
+class SendTaskPharmacyInfoAction extends AbstractAction
+{
+    public function getTitle()
+    {
         return 'Отправить информацию по аптеке/лекарствам для задания пользователя';
     }
 
-    public function init() {
+    public function init()
+    {
         parent::init();
 
         $this->addParameter('token', new agStringValidator(array('required' => true)), 'Token');
@@ -15,7 +18,7 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
 
         $this->addParameter('data', new agArrayValidator(array('required' => true)), 'Массив данных');
 
-        $this->dbHelper->addQuery($this->getAction().'/check_task_member_pharmacy_exist', '
+        $this->dbHelper->addQuery($this->getAction() . '/check_task_member_pharmacy_exist', '
                 select *
                 from t_task tt
                 inner join t_task_member_pharmacy ttmp on tt.id_task = ttmp.id_task
@@ -26,7 +29,7 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                 and tp.id_status = 1
         ');
 
-        $this->dbHelper->addQuery($this->getAction().'/update_status_sended', '
+        $this->dbHelper->addQuery($this->getAction() . '/update_status_sended', '
                 update t_task_member_pharmacy 
                 set
                     id_status = 1,
@@ -36,7 +39,7 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                 and id_pharmacy = :id_pharmacy
         ');
 
-        $this->dbHelper->addQuery($this->getAction().'/check_info_exist', '
+        $this->dbHelper->addQuery($this->getAction() . '/check_info_exist', '
                 select *
                 from t_task_member_pharmacy_comment ttmpc
                 where ttmpc.id_member = :id_member
@@ -44,12 +47,12 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                 and ttmpc.id_pharmacy = :id_pharmacy
         ');
 
-        $this->dbHelper->addQuery($this->getAction().'/insert_info', '
+        $this->dbHelper->addQuery($this->getAction() . '/insert_info', '
                 insert into t_task_member_pharmacy_comment (id_member, id_task, id_pharmacy, is_action, comment)
                 values (:id_member, :id_task, :id_pharmacy, :is_action, :comment)
         ');
 
-        $this->dbHelper->addQuery($this->getAction().'/update_info', '
+        $this->dbHelper->addQuery($this->getAction() . '/update_info', '
                 update t_task_member_pharmacy_comment
                 set
                 is_action = :is_action,
@@ -59,7 +62,7 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                 and id_pharmacy = :id_pharmacy
         ');
 
-        $this->dbHelper->addQuery($this->getAction().'/check_data_exist', '
+        $this->dbHelper->addQuery($this->getAction() . '/check_data_exist', '
                 select id_task_data
                 from t_task_data 
                 where id_member = :id_member
@@ -68,7 +71,7 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                 and id_sku = :id_sku
         ');
 
-        $this->dbHelper->addQuery($this->getAction().'/insert_data', '
+        $this->dbHelper->addQuery($this->getAction() . '/insert_data', '
                 insert into t_task_data (
                     id_task, 
                     task_name, 
@@ -153,7 +156,7 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                 )
         ');
 
-        $this->dbHelper->addQuery($this->getAction().'/update_data', '
+        $this->dbHelper->addQuery($this->getAction() . '/update_data', '
                 update t_task_data
                 set
                     id_task = :id_task::bigint, 
@@ -200,11 +203,12 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
 
     }
 
-    public function execute() {
+    public function execute()
+    {
         $member = $this->authByToken();
 
-        if (isset($member['id_member'])){
-            if ($this->dbHelper->selectRow($this->getAction().'/check_task_member_pharmacy_exist', array(
+        if (isset($member['id_member'])) {
+            if ($this->dbHelper->selectRow($this->getAction() . '/check_task_member_pharmacy_exist', array(
                 'id_member' => $member['id_member'],
                 'id_task' => $this->getValue('id_task'),
                 'id_pharmacy' => $this->getValue('id_pharmacy')
@@ -220,8 +224,7 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                             $has_info = true;
                             $is_action = @$val['is_action'] ? @$val['is_action'] : 0;
                             $comment = @$val['comment'] ? @$val['comment'] : '';
-                        }
-                        elseif ($key == 'sku_list'){
+                        } elseif ($key == 'sku_list') {
                             $sku_list = $val;
                         }
                     }
@@ -263,7 +266,7 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                 $stmt_check = $this->context->getDb()->prepare($sql);
 
                 if (is_array($sku_list) && !empty($sku_list))
-                foreach ($sku_list as $sku) {
+                    foreach ($sku_list as $sku) {
                         $stmt_check->bindValue('id_task', $this->getValue('id_task'));
                         $stmt_check->bindValue('id_pharmacy', $this->getValue('id_pharmacy'));
                         $stmt_check->bindValue('id_member', $member['id_member']);
@@ -276,33 +279,33 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                         if (isset($row['id_task_data']))
                             $id_task_data = $row['id_task_data'];
 
-                    if (!empty($id_task_data)){
-                        $this->dbHelper->execute($this->getAction() . '/update_data', array(
-                            'id_member' => $member['id_member'],
-                            'id_task' => $this->getValue('id_task'),
-                            'id_pharmacy' => $this->getValue('id_pharmacy'),
-                            'id_sku' => $sku['id_sku'],
-                            'value' => $sku['my_value'],
-                            'rest_cnt' => @$sku['rest_cnt'],
-                            'illiquid_cnt' => @$sku['illiquid_cnt'],
-                            'is_action' => @$sku['is_action'],
-                            'comment' => @$sku['comment'],
-                            'id_task_data' => $id_task_data
-                        ));
-                    } else {
-                        $this->dbHelper->execute($this->getAction() . '/insert_data', array(
-                            'id_member' => $member['id_member'],
-                            'id_task' => $this->getValue('id_task'),
-                            'id_pharmacy' => $this->getValue('id_pharmacy'),
-                            'id_sku' => $sku['id_sku'],
-                            'value' => $sku['my_value'],
-                            'rest_cnt' => @$sku['rest_cnt'],
-                            'illiquid_cnt' => @$sku['illiquid_cnt'],
-                            'is_action' => @$sku['is_action'],
-                            'comment' => @$sku['comment'],
-                        ));
+                        if (!empty($id_task_data)) {
+                            $this->dbHelper->execute($this->getAction() . '/update_data', array(
+                                'id_member' => $member['id_member'],
+                                'id_task' => $this->getValue('id_task'),
+                                'id_pharmacy' => $this->getValue('id_pharmacy'),
+                                'id_sku' => $sku['id_sku'],
+                                'value' => $sku['my_value'],
+                                'rest_cnt' => @$sku['rest_cnt'],
+                                'illiquid_cnt' => @$sku['illiquid_cnt'],
+                                'is_action' => @$sku['is_action'],
+                                'comment' => @$sku['comment'],
+                                'id_task_data' => $id_task_data
+                            ));
+                        } else {
+                            $this->dbHelper->execute($this->getAction() . '/insert_data', array(
+                                'id_member' => $member['id_member'],
+                                'id_task' => $this->getValue('id_task'),
+                                'id_pharmacy' => $this->getValue('id_pharmacy'),
+                                'id_sku' => $sku['id_sku'],
+                                'value' => $sku['my_value'],
+                                'rest_cnt' => @$sku['rest_cnt'],
+                                'illiquid_cnt' => @$sku['illiquid_cnt'],
+                                'is_action' => @$sku['is_action'],
+                                'comment' => @$sku['comment'],
+                            ));
+                        }
                     }
-                }
 
                 $this->dbHelper->selectRow($this->getAction() . '/update_status_sended', array(
                     'id_member' => $member['id_member'],
@@ -311,17 +314,16 @@ class SendTaskPharmacyInfoAction extends AbstractAction {
                 ));
 
                 return array('result' => Errors::SUCCESS);
-            }
-            else
+            } else
                 $this->throwActionException(Errors::NO_DATA_FOUND);
-        }
-        else
+        } else
             $this->throwActionException(Errors::MEMBER_NOT_FOUND);
 
         return array('result' => Errors::FAIL);
     }
 
-    public function getResponseExample() {
+    public function getResponseExample()
+    {
         return json_decode('{
   "response": {
     "result": 100

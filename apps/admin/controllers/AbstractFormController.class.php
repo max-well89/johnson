@@ -1,50 +1,133 @@
 <?php
 
-abstract class AbstractFormController extends nomvcBaseController {
+abstract class AbstractFormController extends nomvcBaseController
+{
 
     protected $formId = 'unknown-form';
     protected $action_object;
+    protected $path_upload;
+
+    public function run()
+    {
+        $request = $this->getCurrentUriPart();
+        switch ($request) {
+            case 'get':
+                return $this->processGetForm();    // получение формы
+            case 'post':
+                return $this->processSaveForm();   // сохранение формы
+            case 'delete-confirm':
+                return $this->processDeleteConfirmForm(); // подтверждение удаления формы
+            case 'delete':
+                return $this->processDeleteForm();   // удаление формы
+            default:
+                throw new nomvcPageNotFoundException('Page not found');
+        }
+    }
 
     abstract protected function processGetForm();
 
     abstract protected function processSaveForm();
 
-    protected $path_upload;
-    
-    protected function init() {
+    public function sendSms($msisdn, $message)
+    {
+        $u = 'http://cab.websms.ru/http_in6.asp';
+        $login = 'dealerbonus';
+        $pass = '1EoVQ75zFG';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $u);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, 'Http_username=' . urlencode($login) . '&Http_password=' . urlencode($pass) . '&Phone_list=' . $msisdn . '&Message=' . urlencode($message));
+        $u = trim(curl_exec($ch));
+
+        //var_dump($u); exit;
+
+        curl_close($ch);
+        preg_match("/message_id\s*=\s*[0-9]+/i", $u, $arr_id);
+        $id = preg_replace("/message_id\s*=\s*/i", "", @strval($arr_id[0]));
+
+        if ($id)
+            return true;
+        else
+            return false;
+    }
+
+    public function generateFileName($ext)
+    {
+        return sha3(rand(11111111111111, 99999999999999)) . $this->getExtensionFromType($ext);
+    }
+
+    public function getExtensionFromType($type, $default = '')
+    {
+        static $extensions = array(
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'video/mp4' => 'mp4',
+            'video/quicktime' => 'mov',
+            'application/pdf' => 'pdf',
+            'application/msword',
+            'application/vnd.oasis.opendocument.text',
+            'application/vnd.ms-excel',
+            'application/pdf',
+            'text/html',
+            'text/rtf',
+            'text/csv',
+            'image/vnd.adobe.photoshop',
+            'application/zip',
+            'application/vnd.ms-office',
+            'application/octet-stream'
+        );
+
+        return !$type ? $default : (isset($extensions[$type]) ? '.' . $extensions[$type] : $default);
+    }
+
+    public function generatePassword()
+    {
+        return rand(11111111, 99999999);
+    }
+
+    public function base64_to_image($base64_string, $output_file)
+    {
+        $ifp = fopen($output_file, "wb");
+        fwrite($ifp, base64_decode($base64_string));
+        fclose($ifp);
+        return ($output_file);
+    }
+
+    public function makeUrl()
+    {
+        return '';
+    }
+
+    protected function init()
+    {
         $this->url_file = '/files/';
-        $this->path_file = DIRNAME(__FILE__).'/../../../web/files/';
-        
+        $this->path_file = DIRNAME(__FILE__) . '/../../../web/files/';
+
         $this->path_upload = "/uploads/";
         $dbHelper = $this->context->getDbHelper();
     }
 
-    protected function setDBContextParameter($var, $val) {
+    protected function setDBContextParameter($var, $val)
+    {
         try {
             $query = "select set_parameter(:name, :val);";
             $stmt = $this->context->getDb()->prepare($query);
             $stmt->bindValue('name', $var);
             $stmt->bindValue('val', $val);
             $stmt->execute();
-        }
-        catch(exception $e){}
-    }
-
-    public function run() {
-        $request = $this->getCurrentUriPart();
-        switch ($request) {
-            case 'get': return $this->processGetForm();    // получение формы
-            case 'post': return $this->processSaveForm();   // сохранение формы
-            case 'delete-confirm': return $this->processDeleteConfirmForm(); // подтверждение удаления формы
-            case 'delete': return $this->processDeleteForm();   // удаление формы
-            default: throw new nomvcPageNotFoundException('Page not found');
+        } catch (exception $e) {
         }
     }
 
-    protected function getJoinRequestData($id_join_request){
+    protected function getJoinRequestData($id_join_request)
+    {
         $data = [];
 
-        try{
+        try {
             $stmt = $this->context->getDb()->prepare('
                   select
                   surname,
@@ -92,7 +175,7 @@ abstract class AbstractFormController extends nomvcBaseController {
             $stmt->bindValue('id_join_request', $id_join_request);
             $stmt->execute();
 
-            if ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 foreach ($row as $key => $val) {
                     if (!empty($val) && in_array($key, array(
                             'passport_1_path',
@@ -101,60 +184,35 @@ abstract class AbstractFormController extends nomvcBaseController {
                             'blank_1_path',
                             'blank_2_path',
                             'other_path'))
-                    ){
-                        $row[$key] = $this->url_file.$val;
+                    ) {
+                        $row[$key] = $this->url_file . $val;
                     }
                 }
 
                 $data = $row;
             }
 
+        } catch (exception $e) {
         }
-        catch(exception $e){}
 
         return $data;
     }
 
-    public function sendSms($msisdn, $message) {
-        $u = 'http://cab.websms.ru/http_in6.asp';
-        $login = 'dealerbonus';
-        $pass = '1EoVQ75zFG';
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $u);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, 'Http_username='.urlencode($login).'&Http_password='.urlencode($pass).'&Phone_list='.$msisdn.'&Message='.urlencode($message));
-        $u = trim(curl_exec($ch));
-
-        //var_dump($u); exit;
-
-        curl_close($ch);
-        preg_match("/message_id\s*=\s*[0-9]+/i", $u, $arr_id );
-        $id = preg_replace("/message_id\s*=\s*/i", "", @strval($arr_id[0]));
-
-        if ($id)
-            return true;
-        else
-            return  false;
-    }
-
-    
     /**
      * Функция рендерит кнопки
      *
-     * @param string	$button		тип кнопки, сейчас save, cancel, delete-confirm и delete
-     * @param string	$id		ID записи, удаление которой нужно подтвердить
+     * @param string $button тип кнопки, сейчас save, cancel, delete-confirm и delete
+     * @param string $id ID записи, удаление которой нужно подтвердить
      * @return mixed
      */
-    protected function getButton($button, $id = null) {
+    protected function getButton($button, $id = null)
+    {
         switch ($button) {
             case 'save':
                 $buttonObj = new nomvcButtonWidget(Context::getInstance()->translate('save'), 'save', array('type' => 'button', 'icon' => 'ok'), array('onclick' => "TableFormActions.postForm('{$this->formId}');"));
                 break;
-            case 'cancel': $buttonObj = new nomvcButtonWidget(Context::getInstance()->translate('cancel'), 'cancel', array('type' => 'button', 'icon' => 'cancel'), array('onclick' => "TableFormActions.closeForm('{$this->formId}');", 'class' => 'btn btn-warning'));
+            case 'cancel':
+                $buttonObj = new nomvcButtonWidget(Context::getInstance()->translate('cancel'), 'cancel', array('type' => 'button', 'icon' => 'cancel'), array('onclick' => "TableFormActions.closeForm('{$this->formId}');", 'class' => 'btn btn-warning'));
                 break;
             //подтверждение удаления
             case 'delete-confirm':
@@ -170,46 +228,9 @@ abstract class AbstractFormController extends nomvcBaseController {
             return $buttonObj->renderControl(null);
     }
 
-    public function generateFileName($ext){
-        return sha3(rand(11111111111111, 99999999999999)).$this->getExtensionFromType($ext);
-    }
-
-    public function generatePassword(){
-        return rand(11111111, 99999999);
-    }
-    
-    public function base64_to_image($base64_string, $output_file) {
-        $ifp = fopen($output_file, "wb");
-        fwrite($ifp, base64_decode($base64_string));
-        fclose($ifp);
-        return($output_file);
-    }
-
-    public function getExtensionFromType($type, $default = ''){
-        static $extensions = array(
-            'image/jpeg' => 'jpg',
-            'image/png' => 'png',
-            'video/mp4' => 'mp4',
-            'video/quicktime' => 'mov',
-            'application/pdf' => 'pdf',
-            'application/msword',
-            'application/vnd.oasis.opendocument.text',
-            'application/vnd.ms-excel',
-            'application/pdf',
-            'text/html',
-            'text/rtf',
-            'text/csv',
-            'image/vnd.adobe.photoshop',
-            'application/zip',
-            'application/vnd.ms-office',
-            'application/octet-stream'
-        );
-
-        return !$type ? $default : (isset($extensions[$type]) ? '.'.$extensions[$type] : $default);
-    }
-
     /** возвращает данные, переданные JS-ом */
-    protected function getFormData($formName = null) {
+    protected function getFormData($formName = null)
+    {
         parse_str($this->context->getRequest()->getParameter('formdata', ""), $data);
         if ($formName == null) {
             return $data;
@@ -218,18 +239,15 @@ abstract class AbstractFormController extends nomvcBaseController {
         }
     }
 
-    public function makeUrl() {
-        return '';
-    }
-
     /**
      * Получает фоты из базы и отдаёт их в массив
-     * @param int $id_object	ID объекта по которому получаем фоточки
-     * @param string $prefix	Модуль (уникальный кусочек в названии таблицы) по которому получаем фоточки
-     * @param dbHelper $dbHelper	Хелпер БД
+     * @param int $id_object ID объекта по которому получаем фоточки
+     * @param string $prefix Модуль (уникальный кусочек в названии таблицы) по которому получаем фоточки
+     * @param dbHelper $dbHelper Хелпер БД
      * @return mixed
      */
-    protected function getPhotos($id_object, $prefix, $dbHelper) {
+    protected function getPhotos($id_object, $prefix, $dbHelper)
+    {
         if (!in_array($prefix, array('about', 'member', 'parking', 'news')))
             return null;
 
@@ -259,10 +277,11 @@ abstract class AbstractFormController extends nomvcBaseController {
      * @param dbHelper $dbHelper description
      * @return mixed
      */
-    protected function setPhotos($values, $prefix, $dbHelper) {
+    protected function setPhotos($values, $prefix, $dbHelper)
+    {
         if (!in_array($prefix, array('about', 'member', 'parking', 'news')))
             return null;
-        
+
         // получаем фото из БД
         $dbHelper->addQuery(get_class($this) . '/select-photos', "select id_{$prefix}_photo from t_{$prefix}_photo where id_{$prefix} = :id_{$prefix}");
         $stmt = $dbHelper->select(get_class($this) . '/select-photos', array("id_{$prefix}" => $values["id_{$prefix}"]));
@@ -289,7 +308,7 @@ abstract class AbstractFormController extends nomvcBaseController {
                         ':mime_type' => $photo[1],
                         ':is_preview' => $photo[4],
                         ':is_logo' => isset($photo[5]) ? $photo[5] : 0
-                        ), array(), array("file_bin" => $blob_data));
+                    ), array(), array("file_bin" => $blob_data));
                 } else { //существующие фото исключить из поиска, обновить состояние флажка превью
                     if (in_array($photo[0], $photo_id_bd)) {
                         $dbHelper->execute(get_class($this) . '/update-photos-preview', array('id_photo' => $photo[0], 'is_preview' => $photo[4]));

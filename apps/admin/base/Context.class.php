@@ -54,6 +54,11 @@ class Context extends nomvcContext
         return $this->translateHelper;
     }
 
+    public function getUser()
+    {
+        return $this->user;
+    }
+
     public function translate($source)
     {
         return $this->translateHelper->translate($source);
@@ -66,11 +71,6 @@ class Context extends nomvcContext
             $this->modelFactory = new ModelFactory($this);
         }
         return $this->modelFactory;
-    }
-
-    public function getUser()
-    {
-        return $this->user;
     }
 
     public function getRequest()

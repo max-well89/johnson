@@ -1,12 +1,10 @@
 <?php
 
-class RootController extends nomvcBaseControllerTwo {
+class RootController extends nomvcBaseControllerTwo
+{
 
-    protected function init() {
-        parent::init();
-    }
-
-    public function __construct($context = null, $parentController = null) {
+    public function __construct($context = null, $parentController = null)
+    {
         if ($context) {
             $this->context = $context;
         } else {
@@ -21,13 +19,19 @@ class RootController extends nomvcBaseControllerTwo {
         } else {
             $this->uri = $this->parentController->getNextUri();
         }
-        
-        preg_match('|^'.$this->baseUrl.'/([^/]+)(/(.*))?$|imu', $this->uri, $match);
+
+        preg_match('|^' . $this->baseUrl . '/([^/]+)(/(.*))?$|imu', $this->uri, $match);
         $this->currUriPart = isset($match[1]) ? $match[1] : null;
         $this->nextUri = isset($match[2]) ? $match[2] : null;
     }
 
-    public function run() {
+    protected function init()
+    {
+        parent::init();
+    }
+
+    public function run()
+    {
         $user = $this->context->getUser();
         $module = $this->getCurrentUriPart();
 
@@ -35,7 +39,7 @@ class RootController extends nomvcBaseControllerTwo {
         if (isset($_POST['action']) &&
             isset($_POST['action']) == 'set_language' &&
             isset($_POST['lang'])
-        ){
+        ) {
             Context::getInstance()->getTranslateHelper()->setLocale($_POST['lang']);
             $this->redirect($this->baseUrl);
         }
@@ -47,7 +51,7 @@ class RootController extends nomvcBaseControllerTwo {
 
         //по-умолчанию
         if ($module == null) {
-            $this->redirect($this->baseUrl.'/stat');
+            $this->redirect($this->baseUrl . '/stat');
         }
 
         switch ($module) {
@@ -69,7 +73,8 @@ class RootController extends nomvcBaseControllerTwo {
         return $controller->run();
     }
 
-    protected function makeUrl() {
+    protected function makeUrl()
+    {
         return $this->baseUrl;
     }
 

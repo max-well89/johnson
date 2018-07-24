@@ -1,33 +1,34 @@
 <?php
 
-class TaskDetail {
-    public static function getTableName() {
+class TaskDetail
+{
+    public static function getTableName()
+    {
         return 'v_task_detail';
     }
 
-    public function getRowStatusClass() {
-        return '';
-    }
-
-    public function getRowTitle() {
-        return '';
-    }
-
-    public static function getTotal() {
+    public static function getTotal()
+    {
         return array();
     }
 
-    public function __get($name) { return $this->get($name); }
-
-    public function getRowId() {
-        return $this->id_task_mp;
+    public function getRowStatusClass()
+    {
+        return '';
     }
 
-    private function getDetail(){
-        return "<a target='_blank' href='/admin/stat/task-pharmacy-detail/?id_task={$this->id_task}&id_pharmacy={$this->id_pharmacy}&id_member={$this->id_member}'>".Context::getInstance()->translate('view')."</a>";
+    public function getRowTitle()
+    {
+        return '';
     }
 
-    public function get($name) {
+    public function __get($name)
+    {
+        return $this->get($name);
+    }
+
+    public function get($name)
+    {
         $name = strtolower($name);
 
         if ($name == 'detail')
@@ -38,5 +39,15 @@ class TaskDetail {
         } else {
             return null;
         }
+    }
+
+    private function getDetail()
+    {
+        return "<a target='_blank' href='/admin/stat/task-pharmacy-detail/?id_task={$this->id_task}&id_pharmacy={$this->id_pharmacy}&id_member={$this->id_member}'>" . Context::getInstance()->translate('view') . "</a>";
+    }
+
+    public function getRowId()
+    {
+        return $this->id_task_mp;
     }
 }

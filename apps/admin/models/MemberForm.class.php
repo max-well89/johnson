@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Форма Пользователи, здесь указываем поля и валидаторы
  */
-class MemberForm extends nomvcAbstractForm {
+class MemberForm extends nomvcAbstractForm
+{
 //    public $type_residents = [
 //        1 => 'Да',
 //        0 => 'Нет'
@@ -11,10 +13,11 @@ class MemberForm extends nomvcAbstractForm {
 //    public $type_cards = [];
 //
 //    public $type_docs = [];
-    
-    public function init() {
+
+    public function init()
+    {
         parent::init();
-        
+
 //        //init type_docs
 //        $stmt = $this->context->getDb()->prepare('select key, value from t_type_doc');
 //        $stmt->execute();
@@ -42,10 +45,10 @@ class MemberForm extends nomvcAbstractForm {
         $this->addValidator('id_member', new nomvcIntegerValidator(array('required' => false)));
 
         $this->addWidget(new nomvcInputTextWidget('member_surname', 'surname', array(), array_merge(array(), $attr_ext)));
-        $this->addValidator('surname', new nomvcStringValidator(array('required' => true,'min' => 2, 'max' => 200)));
+        $this->addValidator('surname', new nomvcStringValidator(array('required' => true, 'min' => 2, 'max' => 200)));
 
         $this->addWidget(new nomvcInputTextWidget('member_name', 'name', array(), array_merge(array(), $attr_ext)));
-        $this->addValidator('name', new nomvcStringValidator(array('required' => true,'min' => 2, 'max' => 200)));
+        $this->addValidator('name', new nomvcStringValidator(array('required' => true, 'min' => 2, 'max' => 200)));
 
 //        $this->addWidget(new nomvcInputTextWidget('Отчество', 'patronymic', array(), array_merge(array(), $attr_ext)));
 //        $this->addWidget(new nomvcInputTextWidget('Номер телефона', 'msisdn', array(), array_merge(array(), $attr_ext)));
@@ -95,8 +98,8 @@ class MemberForm extends nomvcAbstractForm {
         )));
 
         $this->addWidget(new nomvcInputTextWidget('login', 'login'));
-        $this->addValidator('login', new nomvcStringValidator(array('required' => true,'min' => 5, 'max' => 50)));
-        
+        $this->addValidator('login', new nomvcStringValidator(array('required' => true, 'min' => 5, 'max' => 50)));
+
         $this->addWidget(new nomvcInputPasswordWidget('password', 'passwd'));
         $this->addValidator('passwd', new nomvcStringValidator(array('required' => false, "min" => 6, "max" => 10)));
 
@@ -121,7 +124,7 @@ class MemberForm extends nomvcAbstractForm {
             'table' => 'v_member_status',
             'order' => 'name'
         )));
-        
+
         $this->addValidator('id_status', new nomvcValueInDbValidator(array(
             'required' => true,
             'helper' => $this->context->getDbHelper(),

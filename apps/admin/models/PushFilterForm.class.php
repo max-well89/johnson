@@ -1,11 +1,13 @@
 <?php
 
-class PushFilterForm extends nomvcAbstractFilterForm{
-    public function init() {
+class PushFilterForm extends nomvcAbstractFilterForm
+{
+    public function init()
+    {
         parent::init();
 
         $this->addWidget(new nomvcInputDatePeriodPickerWidget("dt", "dt"));
-		$this->addValidator("dt", new nomvcDatePeriodValidator());
+        $this->addValidator("dt", new nomvcDatePeriodValidator());
 
         $this->addWidget(new nomvcInputDatePeriodPickerWidget("dt_start_send", "dt_start"));
         $this->addValidator("dt_start", new nomvcDatePeriodValidator());

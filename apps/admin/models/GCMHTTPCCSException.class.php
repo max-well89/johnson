@@ -1,5 +1,6 @@
 <?php
 
-class GCMHTTPCCSException extends Exception {
+class GCMHTTPCCSException extends Exception
+{
 
 }

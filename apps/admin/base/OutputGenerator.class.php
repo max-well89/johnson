@@ -1,5 +1,6 @@
 <?php
 
-class OutputGenerator extends nomvcOutputGenerator {
-	
+class OutputGenerator extends nomvcOutputGenerator
+{
+
 }

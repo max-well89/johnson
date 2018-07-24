@@ -1,18 +1,21 @@
 <?php
 
-class GetTaskPharmacyListAction extends AbstractAction {
-    public function getTitle() {
+class GetTaskPharmacyListAction extends AbstractAction
+{
+    public function getTitle()
+    {
         return 'Получить задание/список аптек для пользователя';
     }
 
-    public function init() {
+    public function init()
+    {
         parent::init();
 
         $this->addParameter('token', new agStringValidator(array('required' => true)), 'Token');
 
         $this->addParameter('id_task', new agIntegerValidator(array('required' => false)), 'ID Задания');
 
-        $this->dbHelper->addQuery($this->getAction().'/get_last_task', '
+        $this->dbHelper->addQuery($this->getAction() . '/get_last_task', '
                 select t0.*
                 from (
                     select
@@ -29,11 +32,11 @@ class GetTaskPharmacyListAction extends AbstractAction {
                         :id_task is null
                     )
                     order by tt.dt_task desc
-				) t0
-				limit 1
+                ) t0
+                limit 1
         ');
 
-        $this->dbHelper->addQuery($this->getAction().'/get_pharmacy_list', '
+        $this->dbHelper->addQuery($this->getAction() . '/get_pharmacy_list', '
                 select
                 ttmp.id_pharmacy,
                 tp.name,
@@ -77,21 +80,21 @@ class GetTaskPharmacyListAction extends AbstractAction {
 
     }
 
-    public function execute() {
+    public function execute()
+    {
         $member = $this->authByToken();
 
-        if (isset($member['id_member'])){
-            if ($task = $this->dbHelper->selectRow($this->getAction().'/get_last_task', array('id_member' => $member['id_member'], 'id_task' => $this->getValue('id_task')))){
-                $stmt = $this->dbHelper->select($this->getAction().'/get_pharmacy_list', array('id_member' => $member['id_member'], 'id_task' => $task['id_task']));
+        if (isset($member['id_member'])) {
+            if ($task = $this->dbHelper->selectRow($this->getAction() . '/get_last_task', array('id_member' => $member['id_member'], 'id_task' => $this->getValue('id_task')))) {
+                $stmt = $this->dbHelper->select($this->getAction() . '/get_pharmacy_list', array('id_member' => $member['id_member'], 'id_task' => $task['id_task']));
 
                 $pharmacy_list = null;
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $row = $this->asStrictTypes($row, []);
 
-                    if ($row['is_sended1'] == 1 || $row['is_sended2'] == 1){
+                    if ($row['is_sended1'] == 1 || $row['is_sended2'] == 1) {
                         $row['is_sended'] = 1;
-                    }
-                    else{
+                    } else {
                         $row['is_sended'] = 0;
                     }
 
@@ -105,12 +108,10 @@ class GetTaskPharmacyListAction extends AbstractAction {
                     'task' => $task,
                     'pharmacy_list' => $pharmacy_list
                 ]);
-            }
-            else {
+            } else {
                 return array('result' => Errors::SUCCESS, 'data' => ['task' => null, 'pharmacy_list' => null]);
             }
-        }
-        else
+        } else
             $this->throwActionException(Errors::MEMBER_NOT_FOUND);
 
 //        var_dump($this->context->getDb()->errorInfo()); exit;
@@ -118,7 +119,8 @@ class GetTaskPharmacyListAction extends AbstractAction {
         return array('result' => Errors::FAIL);
     }
 
-    public function getResponseExample() {
+    public function getResponseExample()
+    {
         return json_decode('{
   "response": {
     "result": 100,

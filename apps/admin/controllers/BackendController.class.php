@@ -1,11 +1,9 @@
 <?php
 
-class BackendController extends nomvcBaseControllerTwo {
-    protected function init() {
-        parent::init();
-    }
-
-    public function run() {
+class BackendController extends nomvcBaseControllerTwo
+{
+    public function run()
+    {
         $request = $this->getCurrentUriPart();
 
         switch ($request) {
@@ -34,11 +32,11 @@ class BackendController extends nomvcBaseControllerTwo {
                     $stmt->bindValue('name', $name);
                     $stmt->execute();
 
-                    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         return json_encode(array('result' => 'success', 'id' => $row['id_sku_type'], 'element' => $name), true);
                     }
+                } catch (exception $e) {
                 }
-                catch (exception $e){}
                 return json_encode(array('result' => 'error'), true);
                 break;
             case 'add-sku-producer':
@@ -48,11 +46,11 @@ class BackendController extends nomvcBaseControllerTwo {
                     $stmt->bindValue('name', $name);
                     $stmt->execute();
 
-                    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         return json_encode(array('result' => 'success', 'id' => $row['id_sku_producer'], 'element' => $name), true);
                     }
+                } catch (exception $e) {
                 }
-                catch (exception $e){}
                 return json_encode(array('result' => 'error'), true);
                 break;
             case 'task-form':
@@ -79,34 +77,49 @@ class BackendController extends nomvcBaseControllerTwo {
             case 'push-table':
                 $controller = new PushTable($this->context, $this);
                 break;
-            default: return null;
+            default:
+                return null;
         }
 
         return $controller->run();
     }
 
+    public function makeUrl()
+    {
+        $request = $this->getCurrentUriPart();
+        switch ($request) {
+            case 'member-table':
+                return "{$this->baseUrl}/stat/member";
+            case 'pharmacy-table':
+                return "{$this->baseUrl}/stat/pharmacy";
+            case 'sku-table':
+                return "{$this->baseUrl}/stat/sku";
+            case 'task-table':
+                return "{$this->baseUrl}/stat/task";
+            case 'task-detail-table':
+                return "{$this->baseUrl}/stat/task-detail";
+            case 'task-pharmacy-detail-table':
+                return "{$this->baseUrl}/stat/task-pharmacy-detail";
+            case 'push-table':
+                return "{$this->baseUrl}/stat/push";
+            default:
+                return "{$this->baseUrl}";
+        }
+    }
+
+    protected function init()
+    {
+        parent::init();
+    }
 
     /** возвращает данные, переданные JS-ом */
-    protected function getFormData($formName = null) {
+    protected function getFormData($formName = null)
+    {
         parse_str($this->context->getRequest()->getParameter('formdata', array()), $data);
         if ($formName == null) {
             return $data;
         } else {
             return isset($data[$formName]) ? $data[$formName] : array();
-        }
-    }
-
-    public function makeUrl() {
-        $request = $this->getCurrentUriPart();
-        switch ($request) {
-            case 'member-table': return "{$this->baseUrl}/stat/member";
-            case 'pharmacy-table': return "{$this->baseUrl}/stat/pharmacy";
-            case 'sku-table': return "{$this->baseUrl}/stat/sku";
-            case 'task-table': return "{$this->baseUrl}/stat/task";
-            case 'task-detail-table': return "{$this->baseUrl}/stat/task-detail";
-            case 'task-pharmacy-detail-table': return "{$this->baseUrl}/stat/task-pharmacy-detail";
-            case 'push-table': return "{$this->baseUrl}/stat/push";
-            default: return "{$this->baseUrl}";
         }
     }
 }

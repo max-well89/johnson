@@ -1,9 +1,12 @@
 <?php
+
 /**
  * Форма Пользователи, здесь указываем поля и валидаторы
  */
-class PharmacyForm extends nomvcAbstractForm {
-    public function init() {
+class PharmacyForm extends nomvcAbstractForm
+{
+    public function init()
+    {
         parent::init();
 
         $this->addWidget(new nomvcInputHiddenWidget('id_pharmacy', 'id_pharmacy'));
@@ -13,10 +16,10 @@ class PharmacyForm extends nomvcAbstractForm {
         $this->addValidator('id_crm', new nomvcStringValidator(array('required' => false)));
 
         $this->addWidget(new nomvcInputTextWidget('name', 'name'));
-        $this->addValidator('name', new nomvcStringValidator(array('required' => true,'min' => 2, 'max' => 100)));
+        $this->addValidator('name', new nomvcStringValidator(array('required' => true, 'min' => 2, 'max' => 100)));
 
         $this->addWidget(new nomvcInputTextWidget('address', 'address'));
-        $this->addValidator('address', new nomvcStringValidator(array('required' => true,'min' => 2, 'max' => 100)));
+        $this->addValidator('address', new nomvcStringValidator(array('required' => true, 'min' => 2, 'max' => 100)));
 
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('category', 'id_category', array(
             'helper' => $this->context->getDbHelper(),

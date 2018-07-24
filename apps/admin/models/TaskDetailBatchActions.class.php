@@ -7,14 +7,16 @@ class TaskDetailBatchActions
 
     /**
      * Конструктор
-     * $context				Контекст выполнения
+     * $context                Контекст выполнения
      */
-    public function __construct($context) {
+    public function __construct($context)
+    {
         $this->context = $context;
         $this->init();
     }
 
-    public function init() {
+    public function init()
+    {
         $this->addButton(
             new nomvcButtonWidget(
                 Context::getInstance()->translate('finished_task'),
@@ -40,18 +42,20 @@ class TaskDetailBatchActions
         );
     }
 
-    public function addButton($button) {
+    public function addButton($button)
+    {
         $this->buttons[$button->getName()] = $button;
     }
 
-    public function render() {
+    public function render()
+    {
         $html = "";
         $form = new TaskDetailForm($this->context, array("id" => "nomenclature"));
         $html = '<div class="form-inline">';
         foreach ($this->buttons as $id => $button) {
-            $html.= '<div class="form-group">' . $button->renderControl(null, array('id' => 'batch_action_' . $id)) . '</div>';
+            $html .= '<div class="form-group">' . $button->renderControl(null, array('id' => 'batch_action_' . $id)) . '</div>';
         }
-        $html.= '</div>' . $this->renderJs();
+        $html .= '</div>' . $this->renderJs();
 
         return $html;
     }

@@ -1,17 +1,18 @@
 <?php
 
-class PushFormController extends AbstractFormController{
+class PushFormController extends AbstractFormController
+{
+    /** @var string название формы */
+    protected $formId = "push";
     /** @var int ID объекта */
     private $id_object = 0;
     /** @var array данные объекта */
     private $object;
     /** @var dbHelper экземпляр хелпера данных */
     private $dbHelper;
-    /** @var string название формы */
-    protected $formId = "push";
 
-
-    protected function init() {
+    protected function init()
+    {
         $this->dbHelper = $this->context->getDbHelper();
 
         $this->id_object = $this->context->getRequest()->getParameter('id');
@@ -22,7 +23,32 @@ class PushFormController extends AbstractFormController{
     /*
      * Открытие формы
      */
-    protected function processGetForm() {
+
+    /** Формируем объект для формы */
+    private function getObject()
+    {
+        if (empty($this->id_object)) {
+            $object["id_author"] = $this->context->getUser()->getUserID();
+            return $object;
+        }
+
+        $this->dbHelper = $this->context->getDbHelper();
+        $this->dbHelper->addQuery(get_class($this) . '/select-object', "
+            select *
+            from t_push
+            where id_push = :id_object");
+        $object = array_change_key_case($this->dbHelper->selectRow(get_class($this) . '/select-object', array('id_object' => $this->id_object)));
+
+
+        return $object;
+    }
+
+    /*
+     * Сохранение формы, здесь вставка и редактирование
+     */
+
+    protected function processGetForm()
+    {
         //вяжем данные
         $form = new PushForm($this->context, array('id' => $this->formId));
         $form->bind($this->object);
@@ -41,10 +67,8 @@ class PushFormController extends AbstractFormController{
         ));
     }
 
-    /*
-     * Сохранение формы, здесь вставка и редактирование
-     */
-    protected function processSaveForm() {
+    protected function processSaveForm()
+    {
         $form = new PushForm($this->context, array('id' => $this->formId));
 
         if ($form->validate($this->getFormData($this->formId))) {
@@ -52,7 +76,7 @@ class PushFormController extends AbstractFormController{
 
             $values_base = array();
             foreach ($values as $key => $object_value) {
-                if(!is_array($object_value))
+                if (!is_array($object_value))
                     $values_base[$key] = $object_value;
             }
 
@@ -62,41 +86,45 @@ class PushFormController extends AbstractFormController{
             if (!$values['dt_start'])
                 $values_base['dt_start'] = null;
 
+            $values_base['id_database'] = $this->context->getUser()->getAttribute('id_database');
+
             //вставляем данные, новый объект
-            if(empty($values["id_push"])){
+            if (empty($values["id_push"])) {
                 unset($values_base["id_push"]);
                 $this->id_object = null;
                 $this->dbHelper->addQuery(get_class($this) . '/insert-object', "
-					insert into t_push (
+                    insert into t_push (
                         dt,
                         message,
                         dt_start,
+                        id_database,
                         id_status,
                         id_os
-					)
-					values (
+                    )
+                    values (
                         :dt,
                         :message,
                         :dt_start,
+                        :id_database,
                         :id_status,
                         1
-					)
-					returning id_push");
+                    )
+                    returning id_push");
 
                 $values_base['dt'] = date('Y-m-d H:i:s', strtotime('now'));
                 $this->id_object = $this->dbHelper->selectValue(get_class($this) . '/insert-object', $values_base, array());
                 $values['id_push'] = $this->id_object;
-            }
-            //обновляем данные
-            else{
+            } //обновляем данные
+            else {
                 $this->dbHelper->addQuery(get_class($this) . '/update-object', "
-					update t_push
-					set 
-					message = :message,
-					dt_start = :dt_start,
-					id_status = :id_status,
-					id_os = 1
-					where id_push = :id_push");
+                    update t_push
+                    set 
+                    message = :message,
+                    dt_start = :dt_start,
+                    id_database = :id_database,
+                    id_status = :id_status,
+                    id_os = 1
+                    where id_push = :id_push");
                 $this->dbHelper->execute(get_class($this) . '/update-object', $values_base);
                 $this->id_object = $values["id_push"];
             }
@@ -114,24 +142,6 @@ class PushFormController extends AbstractFormController{
                 'message' => ''
             ));
         }
-    }
-
-    /** Формируем объект для формы */
-    private function getObject() {
-        if (empty($this->id_object)) {
-            $object["id_author"] = $this->context->getUser()->getUserID();
-            return $object;
-        }
-
-        $this->dbHelper = $this->context->getDbHelper();
-        $this->dbHelper->addQuery(get_class($this) . '/select-object', "
-			select *
-			from t_push
-			where id_push = :id_object");
-        $object = array_change_key_case($this->dbHelper->selectRow(get_class($this) . '/select-object', array('id_object' => $this->id_object)));
-
-
-        return $object;
     }
 
 

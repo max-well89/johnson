@@ -1,5 +1,6 @@
 <?php
 
-class Criteria extends nomvcCriteria {
+class Criteria extends nomvcCriteria
+{
 
 }

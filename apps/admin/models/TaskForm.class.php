@@ -1,16 +1,19 @@
 <?php
+
 /**
  * Форма Пользователи, здесь указываем поля и валидаторы
  */
-class TaskForm extends nomvcAbstractForm {
-    public function init() {
+class TaskForm extends nomvcAbstractForm
+{
+    public function init()
+    {
         parent::init();
 
         $this->addWidget(new nomvcInputHiddenWidget('id_task', 'id_task'));
         $this->addValidator('id_task', new nomvcIntegerValidator(array('required' => false)));
 
         $this->addWidget(new nomvcInputTextWidget('name', 'name'));
-        $this->addValidator('name', new nomvcStringValidator(array('required' => true,'min' => 2, 'max' => 100)));
+        $this->addValidator('name', new nomvcStringValidator(array('required' => true, 'min' => 2, 'max' => 100)));
 
         $this->addWidget(new nomvcInputDatePickerWidget('dt_task', 'dt_task', array(), array()));
         $this->addValidator('dt_task', new nomvcDateValidator(array('required' => true, 'in_format' => DateHelper::HTMLD_FORMAT)));

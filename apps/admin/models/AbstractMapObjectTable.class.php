@@ -1,29 +1,38 @@
 <?php
+
 /**
  * Description of NewsTable
  *
  * @author sefimov
  */
-class AbstractMapObjectTable extends nomvcAbstractTable {
+class AbstractMapObjectTable extends nomvcAbstractTable
+{
 
-    public function init($options = array()) {
+    public function init($options = array())
+    {
         parent::init($options);
         $user = $this->context->getUser();
         $this->setDBContextParameter('id_member', $user->getAttribute('id_member'));
+        if ($user->getAttribute('id_language'))
+            $this->setDBContextParameter('id_language', $user->getAttribute('id_language'));
+        if ($user->getAttribute('id_database'))
+            $this->setDBContextParameter('id_database', $user->getAttribute('id_database'));
     }
-    
-    protected function setDBContextParameter($var, $val) {
+
+    protected function setDBContextParameter($var, $val)
+    {
         try {
             $query = "select set_parameter(:name, :val);";
             $stmt = $this->context->getDb()->prepare($query);
             $stmt->bindValue('name', $var);
             $stmt->bindValue('val', $val);
             $stmt->execute();
+        } catch (exception $e) {
         }
-        catch(exception $e){}
     }
-    
-    public function doAction() {
+
+    public function doAction()
+    {
         // готовимся внимать тому, чего от нас хотят
         $uri = $this->controller->getNextUri();
         $action = explode('/', $uri);
@@ -36,8 +45,9 @@ class AbstractMapObjectTable extends nomvcAbstractTable {
             parent::doAction();
         }
     }
-    
-    protected function setFilters($filters) {
+
+    protected function setFilters($filters)
+    {
         if (!isset($filters['id_map'])) {
             $filters_old = $this->getFilters();
             if (isset($filters_old['id_map'])) {

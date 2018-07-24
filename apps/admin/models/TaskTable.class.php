@@ -1,8 +1,10 @@
 <?php
 
-class TaskTable extends AbstractMapObjectTable {
+class TaskTable extends AbstractMapObjectTable
+{
 
-    public function init($options = array()) {
+    public function init($options = array())
+    {
         $options = array(
             'sort_by' => 'id_task',
             'sort_order' => 'desc',

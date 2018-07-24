@@ -1,8 +1,10 @@
 <?php
 
-class SkuStatTable extends AbstractMapObjectTable {
+class SkuStatTable extends AbstractMapObjectTable
+{
 
-    public function init($options = array()) {
+    public function init($options = array())
+    {
         $options = array(
             'sort_by' => 'id_task_data',
             'sort_order' => 'desc',

@@ -1,7 +1,9 @@
 <?php
 
-class PharmacyFilterForm extends nomvcAbstractFilterForm{
-    public function init() {
+class PharmacyFilterForm extends nomvcAbstractFilterForm
+{
+    public function init()
+    {
         parent::init();
 
         //Период
@@ -15,10 +17,10 @@ class PharmacyFilterForm extends nomvcAbstractFilterForm{
         $this->addValidator('id_crm', new nomvcStringValidator(array('required' => false)));
 
         $this->addWidget(new nomvcInputTextWidget("name", "name"));
-        $this->addValidator('name', new nomvcStringValidator(array('required' => false,'min' => 2, 'max' => 200)));
+        $this->addValidator('name', new nomvcStringValidator(array('required' => false, 'min' => 2, 'max' => 200)));
 
         $this->addWidget(new nomvcInputTextWidget("address", "address"));
-        $this->addValidator('address', new nomvcStringValidator(array('required' => false,'min' => 2, 'max' => 200)));
+        $this->addValidator('address', new nomvcStringValidator(array('required' => false, 'min' => 2, 'max' => 200)));
 
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('category', 'id_category', array(
             'helper' => $this->context->getDbHelper(),

@@ -1,7 +1,9 @@
 <?php
 
-class TaskFilterForm extends nomvcAbstractFilterForm{
-    public function init() {
+class TaskFilterForm extends nomvcAbstractFilterForm
+{
+    public function init()
+    {
         parent::init();
 
         //Период

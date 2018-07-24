@@ -29,5 +29,3 @@
 		eval("class $class {}");
 		throw new agClassNotFoundException($class);
 	}
-	
-?>

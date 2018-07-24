@@ -1,8 +1,10 @@
 <?php
 
-class PharmacyTable extends AbstractMapObjectTable {
+class PharmacyTable extends AbstractMapObjectTable
+{
 
-    public function init($options = array()) {
+    public function init($options = array())
+    {
         $options = array(
             'sort_by' => 'id_pharmacy',
             'sort_order' => 'desc',

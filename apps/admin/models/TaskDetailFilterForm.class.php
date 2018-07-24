@@ -1,7 +1,9 @@
 <?php
 
-class TaskDetailFilterForm extends nomvcAbstractFilterForm{
-    public function init() {
+class TaskDetailFilterForm extends nomvcAbstractFilterForm
+{
+    public function init()
+    {
         parent::init();
 
         //Период
@@ -12,10 +14,10 @@ class TaskDetailFilterForm extends nomvcAbstractFilterForm{
         $this->addValidator('id_task', new nomvcIntegerValidator(array('required' => true)));
 
         $this->addWidget(new nomvcInputTextWidget("pharmacy", "pharmacy"));
-        $this->addValidator('pharmacy', new nomvcStringValidator(array('required' => false,'min' => 2, 'max' => 200)));
+        $this->addValidator('pharmacy', new nomvcStringValidator(array('required' => false, 'min' => 2, 'max' => 200)));
 
         $this->addWidget(new nomvcInputTextWidget("address", "address"));
-        $this->addValidator('address', new nomvcStringValidator(array('required' => false,'min' => 2, 'max' => 200)));
+        $this->addValidator('address', new nomvcStringValidator(array('required' => false, 'min' => 2, 'max' => 200)));
 
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('category', 'id_category', array(
             'helper' => $this->context->getDbHelper(),

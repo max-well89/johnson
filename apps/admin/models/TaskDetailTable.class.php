@@ -1,8 +1,10 @@
 <?php
 
-class TaskDetailTable extends AbstractMapObjectTable {
+class TaskDetailTable extends AbstractMapObjectTable
+{
 
-    public function init($options = array()) {
+    public function init($options = array())
+    {
         $options = array(
             'sort_by' => 'id_task_mp',
             'sort_order' => 'desc',
@@ -61,7 +63,7 @@ EOF
         $this->addColumn('status', 'status', 'string');
 
         if ($id_task = $this->context->getRequest()->getParameter('id_task')) {
-            $id_task = (int) $id_task;
+            $id_task = (int)$id_task;
             $filters = $this->getFilters();
             $filters['id_task'] = $id_task;
             $this->setFilters($filters);
@@ -73,53 +75,40 @@ EOF
         $this->setBatchActions(new TaskDetailBatchActions($this->context));
     }
 
-    protected  function setFilterForm($filterForm) {
+    protected function setFilterForm($filterForm)
+    {
         $this->filterForm = $filterForm;
         $this->filterForm->setAttribute('method', 'post');
-        $this->filterForm->setAttribute('action', $this->controller->makeUrl().'/filter/');
-        $this->filterForm->setAttribute('reset', $this->controller->makeUrl().'/filter/reset/');
-        $this->filterForm->setAttribute('export', $this->controller->makeUrl().'/export/xls');
+        $this->filterForm->setAttribute('action', $this->controller->makeUrl() . '/filter/');
+        $this->filterForm->setAttribute('reset', $this->controller->makeUrl() . '/filter/reset/');
+        $this->filterForm->setAttribute('export', $this->controller->makeUrl() . '/export/xls');
         $filters = $this->getFilters();
 
         if ($id_task = $this->context->getRequest()->getParameter('id_task')) {
-            $filters['id_task'] = (int) $id_task;
-            $this->filterForm->setAttribute('reset', $this->controller->makeUrl().'/filter/reset/?id_task='.$filters['id_task']);
+            $filters['id_task'] = (int)$id_task;
+            $this->filterForm->setAttribute('reset', $this->controller->makeUrl() . '/filter/reset/?id_task=' . $filters['id_task']);
         }
 
         $this->filterForm->bind($filters);
     }
 
-    /** применение фильтров */
-    public function applyFilters($values) {
-        $model = $this->rowModelClass;
-        $filters = $this->getFilters();
-
-        if ($this->filterForm->validate($values)) {
-            $filters = $this->filterForm->getValues();
-            $this->setFilters($filters);
-
-            if (isset($filters['id_task']))
-                $this->controller->redirect($this->controller->makeUrl().'/?id_task='.$filters['id_task']);
-            else
-                $this->controller->redirect($this->controller->makeUrl());
-        }
-    }
-
     /** выполняет различные действия, такие как сортировка/лимиты и проч. */
-    public function doAction() {
+    public function doAction()
+    {
         // готовимся внимать тому, чего от нас хотят
         $uri = $this->controller->getNextUri();
-        $action = explode('/', $uri); $action = isset($action[1]) ? $action[1] : '';
-        switch($action) {
-            case 'sort':	// смена сортировки
+        $action = explode('/', $uri);
+        $action = isset($action[1]) ? $action[1] : '';
+        switch ($action) {
+            case 'sort':    // смена сортировки
                 if (preg_match('/\/sort\/([^\/]*)\/(asc|desc)/imu', $uri, $match)) {
-                    if(isset($this->columns[$match[1]]) && !in_array($this->columns[$match[1]]['type'], array('custom'))) {
+                    if (isset($this->columns[$match[1]]) && !in_array($this->columns[$match[1]]['type'], array('custom'))) {
                         $this->setSortBy($match[1]);
                         $this->setSortOrder($match[2]);
                     }
                 }
                 break;
-            case 'page':	// пейджинг
+            case 'page':    // пейджинг
                 if (preg_match('/\/page\/(\d+)/imu', $uri, $match)) {
                     $page = $match[1];
                     if ($page > 0) {
@@ -127,7 +116,7 @@ EOF
                     }
                 }
                 break;
-            case 'limit':	// установка нового ограничения строк на страницу
+            case 'limit':    // установка нового ограничения строк на страницу
                 if (preg_match('/\/limit\/(\d+)/imu', $uri, $match)) {
                     $limit = $match[1];
                     if ($limit > 0) {
@@ -137,26 +126,25 @@ EOF
                     }
                 }
                 break;
-            case 'filter':	// фильтрация данных
+            case 'filter':    // фильтрация данных
                 $form_data = $this->context->getRequest()->getParameter('filters');
-                if (preg_match('/\/filter\/reset/imu', $uri, $match)) {	// сброс фильтров
+                if (preg_match('/\/filter\/reset/imu', $uri, $match)) {    // сброс фильтров
 
-                    if ($id_task = $this->context->getRequest()->getParameter('id_task')){
-                        $id_task = (int) $id_task;
+                    if ($id_task = $this->context->getRequest()->getParameter('id_task')) {
+                        $id_task = (int)$id_task;
                         $this->setFilters(array('id_task' => $id_task));
-                        $this->controller->redirect($this->controller->makeUrl().'/?id_task='.$id_task);
-                    }
-                    else {
+                        $this->controller->redirect($this->controller->makeUrl() . '/?id_task=' . $id_task);
+                    } else {
                         $this->setFilters(array());
                         $this->controller->redirect($this->controller->makeUrl());
                     }
-                } elseif ($form_data) {	// установка фильтров
+                } elseif ($form_data) {    // установка фильтров
                     $this->applyFilters($form_data);
-                } else {	// непонятно чего от нас хотят
+                } else {    // непонятно чего от нас хотят
                     $this->controller->redirect($this->controller->makeUrl());
                 }
                 break;
-            case 'export':	// экспорт данных
+            case 'export':    // экспорт данных
                 if (preg_match('/\/export\/(xls|csv)/imu', $uri, $match)) {
                     $this->export = $match[1];
                 } else {
@@ -164,11 +152,28 @@ EOF
                 }
                 break;
             default:
-                $action.= 'Action';
+                $action .= 'Action';
                 $classMethods = get_class_methods($this);
                 if (in_array($action, $classMethods)) {
                     $this->$action();
                 }
+        }
+    }
+
+    /** применение фильтров */
+    public function applyFilters($values)
+    {
+        $model = $this->rowModelClass;
+        $filters = $this->getFilters();
+
+        if ($this->filterForm->validate($values)) {
+            $filters = $this->filterForm->getValues();
+            $this->setFilters($filters);
+
+            if (isset($filters['id_task']))
+                $this->controller->redirect($this->controller->makeUrl() . '/?id_task=' . $filters['id_task']);
+            else
+                $this->controller->redirect($this->controller->makeUrl());
         }
     }
 }

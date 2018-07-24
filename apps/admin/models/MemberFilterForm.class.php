@@ -1,10 +1,13 @@
 <?php
+
 /**
  * Фильтры для таблицы Пользователи
  */
-class MemberFilterForm extends nomvcAbstractFilterForm{
+class MemberFilterForm extends nomvcAbstractFilterForm
+{
 
-    public function init() {
+    public function init()
+    {
         parent::init();
 
         //Период
@@ -12,10 +15,10 @@ class MemberFilterForm extends nomvcAbstractFilterForm{
         $this->addValidator("dt", new nomvcDatePeriodValidator());
 
         $this->addWidget(new nomvcInputTextWidget('member_surname', 'surname'));
-        $this->addValidator('surname', new nomvcStringValidator(array('required' => false,'min' => 2, 'max' => 200)));
+        $this->addValidator('surname', new nomvcStringValidator(array('required' => false, 'min' => 2, 'max' => 200)));
 
         $this->addWidget(new nomvcInputTextWidget('member_name', 'name'));
-        $this->addValidator('name', new nomvcStringValidator(array('required' => false,'min' => 2, 'max' => 200)));
+        $this->addValidator('name', new nomvcStringValidator(array('required' => false, 'min' => 2, 'max' => 200)));
 
 //        $this->addWidget(new nomvcInputTextWidget('Отчество', 'patronymic'));
 //        $this->addValidator('patronymic', new nomvcStringValidator(array('required' => false,'min' => 2, 'max' => 200)));
@@ -136,7 +139,7 @@ class MemberFilterForm extends nomvcAbstractFilterForm{
             'onclick' => "return TableFormActions.getForm('member');",
             'class' => 'btn btn-success'
         )));
-        
+
         /*
         if ($this->context->getUser()->getAttribute('id_restaurant') == null) {
             $this->addWidget(new nomvcButtonWidget('Подгрузить список пользователей', 'import', array(

@@ -1,5 +1,6 @@
 <?php
 
-class ModelFactory extends nomvcModelFactory {
+class ModelFactory extends nomvcModelFactory
+{
 
 }

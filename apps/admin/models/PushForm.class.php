@@ -1,7 +1,9 @@
 <?php
 
-class PushForm extends nomvcAbstractForm {
-    public function init() {
+class PushForm extends nomvcAbstractForm
+{
+    public function init()
+    {
         parent::init();
 
         $this->addWidget(new nomvcInputHiddenWidget('id_push', 'id_push'));

@@ -1,16 +1,19 @@
 <?php
+
 /**
  * Форма Пользователи, здесь указываем поля и валидаторы
  */
-class SkuForm extends nomvcAbstractForm {
-    public function init() {
+class SkuForm extends nomvcAbstractForm
+{
+    public function init()
+    {
         parent::init();
 
         $this->addWidget(new nomvcInputHiddenWidget('id_sku', 'id_sku'));
         $this->addValidator('id_sku', new nomvcIntegerValidator(array('required' => false)));
 
         $this->addWidget(new nomvcInputTextWidget('name', 'name'));
-        $this->addValidator('name', new nomvcStringValidator(array('required' => true,'min' => 2, 'max' => 100)));
+        $this->addValidator('name', new nomvcStringValidator(array('required' => true, 'min' => 2, 'max' => 100)));
 
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_type', 'id_sku_type', array(
             'helper' => $this->context->getDbHelper(),

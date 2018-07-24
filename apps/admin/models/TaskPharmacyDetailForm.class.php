@@ -1,7 +1,9 @@
 <?php
 
-class TaskPharmacyDetailForm extends nomvcAbstractForm {
-    public function init() {
+class TaskPharmacyDetailForm extends nomvcAbstractForm
+{
+    public function init()
+    {
         parent::init();
 
         $this->addWidget(new nomvcInputHiddenWidget('id_task_data', 'id_task_data'));

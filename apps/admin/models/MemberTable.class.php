@@ -1,10 +1,13 @@
 <?php
+
 /**
  * Description of NewsTable
  */
-class MemberTable extends AbstractMapObjectTable {
+class MemberTable extends AbstractMapObjectTable
+{
 
-    public function init($options = array()) {
+    public function init($options = array())
+    {
         $options = array(
             'sort_by' => 'ID_MEMBER',
             'sort_order' => 'desc',

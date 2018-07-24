@@ -1,7 +1,9 @@
 <?php
 
-class TaskPharmacyDetailFilterForm extends nomvcAbstractFilterForm{
-    public function init() {
+class TaskPharmacyDetailFilterForm extends nomvcAbstractFilterForm
+{
+    public function init()
+    {
         parent::init();
 
         //Период

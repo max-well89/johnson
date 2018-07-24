@@ -47,7 +47,11 @@ class GetTaskPharmacyInfoAction extends AbstractAction {
                 ttd.value as my_value,
                 ts.id_priority,
                 vpr.id_priority,
-                vpr.name as priority
+                vpr.name as priority,
+                ttd.rest_cnt as rest_cnt,
+                ttd.illiquid_cnt as illiquid_cnt,
+                ttd.is_action as is_action,
+                ttd.comment as comment
                 from t_sku ts
                 left join t_task_data ttd on ttd.id_member = :id_member and ttd.id_task = :id_task and ttd.id_pharmacy = :id_pharmacy and ts.id_sku = ttd.id_sku 
                 left join t_sku_type tst on ts.id_sku_type = tst.id_sku_type
