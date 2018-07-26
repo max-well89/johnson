@@ -5,4 +5,5 @@ apps/admin/config/
 config/
 log/
 old/
+lib/vendor/
 dump.sql
