@@ -7,7 +7,6 @@
  */
 class AbstractMapObjectTable extends nomvcAbstractTable
 {
-
     public function init($options = array())
     {
         parent::init($options);
