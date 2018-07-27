@@ -1,5 +1,6 @@
 <?php
 
-abstract class agBaseException extends Exception {
+abstract class agBaseException extends Exception
+{
 
 }

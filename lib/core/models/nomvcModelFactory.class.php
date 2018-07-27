@@ -1,33 +1,21 @@
 <?php
 
-class nomvcModelFactory {
+class nomvcModelFactory
+{
 
     // ссылка на контекст
     protected $context;
 
     /** Конструктор */
-    public function __construct($context) {
+    public function __construct($context)
+    {
         $this->context = $context;
     }
 
-//	protected function setContext($criteria = null) {
-    public function setContext($criteria = null) {
-        if ($criteria) {
-            $dbHelper = $this->context->getDbHelper();
-            foreach ($criteria->getContext() as $name => $value) {
-                if(is_array($value)){
-                    if(empty($value)){ $value = null; }
-                    else{ $value = "(^" . implode ("|", $value) . "$)"; }
-                }
-                $sql = "begin project_context.set_parameter('{$name}', :{$name}); end;";
-                $query_code = md5($sql);
-                $dbHelper->addQuery($query_code, $sql);
-                $dbHelper->execute($query_code, array($name => $value));
-            }
-        }
-    }
+//    protected function setContext($criteria = null) {
 
-    public function select($model, $criteria = null, $fetchByClass = false) {
+    public function select($model, $criteria = null, $fetchByClass = false)
+    {
         $this->setContext($criteria);
         $sql = $this->makeQuery($model, $criteria);
         $dbHelper = $this->context->getDbHelper();
@@ -44,19 +32,28 @@ class nomvcModelFactory {
         return $data;
     }
 
-    public function count($model, $criteria = null) {
-        $this->setContext($criteria);
-        $sql = $this->makeCountQuery($model, $criteria);
-        $dbHelper = $this->context->getDbHelper();
-        $query_code = md5($sql);
-        $dbHelper->addQuery($query_code, $sql);
-
-        $stmt = $dbHelper->select($query_code, $criteria->getValues());
-        $stmt->setFetchMode(PDO::FETCH_CLASS, $model);
-        return $stmt->fetch(PDO::FETCH_CLASS);
+    public function setContext($criteria = null)
+    {
+        if ($criteria) {
+            $dbHelper = $this->context->getDbHelper();
+            foreach ($criteria->getContext() as $name => $value) {
+                if (is_array($value)) {
+                    if (empty($value)) {
+                        $value = null;
+                    } else {
+                        $value = "(^" . implode("|", $value) . "$)";
+                    }
+                }
+                $sql = "begin project_context.set_parameter('{$name}', :{$name}); end;";
+                $query_code = md5($sql);
+                $dbHelper->addQuery($query_code, $sql);
+                $dbHelper->execute($query_code, array($name => $value));
+            }
+        }
     }
 
-    public function makeQuery($model, $criteria) {
+    public function makeQuery($model, $criteria)
+    {
         $orderBy = $criteria->getOrderBy();
 //        $ar1 = explode(' ', $orderBy);
 //
@@ -77,17 +74,31 @@ class nomvcModelFactory {
             return $sql;
         }
         if ($where = $criteria->getWhere()) {
-            $sql.= ' '.$where;
+            $sql .= ' ' . $where;
         }
         if ($limit = $criteria->getLimit()) {
-            $sql= "select * from ($sql) tbl0 where mf_rownumber between {$criteria->getOffset()} and {$criteria->getLimit()} + {$criteria->getOffset()}";
+            $sql = "select * from ($sql) tbl0 where mf_rownumber between {$criteria->getOffset()} and {$criteria->getLimit()} + {$criteria->getOffset()}";
         }
 
         //var_dump($sql); exit;
         return $sql;
     }
 
-    public function makeCountQuery($model, $criteria) {
+    public function count($model, $criteria = null)
+    {
+        $this->setContext($criteria);
+        $sql = $this->makeCountQuery($model, $criteria);
+        $dbHelper = $this->context->getDbHelper();
+        $query_code = md5($sql);
+        $dbHelper->addQuery($query_code, $sql);
+
+        $stmt = $dbHelper->select($query_code, $criteria->getValues());
+        $stmt->setFetchMode(PDO::FETCH_CLASS, $model);
+        return $stmt->fetch(PDO::FETCH_CLASS);
+    }
+
+    public function makeCountQuery($model, $criteria)
+    {
         $fields = array('count(*) as "count"');
         foreach ($model::getTotal() as $field => $function) {
             $fields[] = "{$function}($field) as {$field}";
@@ -98,7 +109,7 @@ class nomvcModelFactory {
             return $sql;
         }
         if ($where = $criteria->getWhere()) {
-            $sql.= ' '.$where;
+            $sql .= ' ' . $where;
         }
         return $sql;
     }

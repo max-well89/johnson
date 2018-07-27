@@ -1,50 +1,13 @@
 <?php
 
-class nomvcBaseControllerTwo extends nomvcBaseController{
+class nomvcBaseControllerTwo extends nomvcBaseController
+{
 
     protected $baseUrl;
 
-    protected function init()
+    public function run()
     {
-        $this->translateHelper = $this->context->getTranslateHelper();
-        $this->dbHelper = $this->context->getDbHelper();
-
-        $this->baseUrl = '/admin';
-
-        $this->url_file = '/files/';
-        $this->path_file = NOMVC_BASEDIR.'/web/files/';
-//        $this->dbHelper->addQuery(get_class($this).'/save_member', '
-//                    insert into t_member (surname, name, patronymic, msisdn, email)
-//                    values(:surname, :name, :patronymic, :msisdn, :email) returning id_member into :id_member');
-//
-//        $this->dbHelper->addQuery(get_class($this).'/save_member_role', '
-//                    insert into t_member_role (id_member, id_role) values(:id_member, :id_role)');
-//
-//        $this->dbHelper->addQuery(get_class($this).'/save_car', '
-//                    insert into t_member_car (id_member, car_number, car_code, car_brand, note)
-//                    values(:id_member, upper(:car_number), upper(:car_code), :car_brand, :note)');
-//
-//        $this->dbHelper->addQuery(get_class($this).'/update_car_note', '
-//                    update t_member_car
-//                    set note = :note
-//                    where id_member = :id_member
-//                    and id_member_car = :id_member_car
-//        ');
-//
-//        $this->dbHelper->addQuery(get_class($this).'/check_car_member_cnt', '
-//                    select count(*) as cnt
-//                    from t_member_car
-//                    where id_member = :id_member
-//                    and
-//                    (
-//                      id_member_car != :id_member_car
-//                      or :id_member_car is null
-//                    )
-//        ');
-//
-//        $this->dbHelper->addQuery(get_class($this).'/delete_car_member', '
-//                    delete from t_member_car where id_member = :id_member and id_member_car = :id_member_car
-//        ');
+        parent::run();
     }
 
 
@@ -178,8 +141,12 @@ class nomvcBaseControllerTwo extends nomvcBaseController{
 //        $dbHelper->execute(get_class($this) . '/set-context', array('var' => $var, 'val' => $val));
 //    }
 
-    public function run(){
-        parent::run();
+    public function base64_to_image($base64_string, $output_file)
+    {
+        $ifp = fopen($output_file, "wb");
+        fwrite($ifp, base64_decode($base64_string));
+        fclose($ifp);
+        return ($output_file);
     }
 
 //    public function generatePassword(){
@@ -292,14 +259,8 @@ class nomvcBaseControllerTwo extends nomvcBaseController{
 //        return sha3($this->crypto_rand_secure(11111111111111, 99999999999999)).$this->getExtensionFromType($ext);
 //    }
 
-    public function base64_to_image($base64_string, $output_file) {
-        $ifp = fopen($output_file, "wb");
-        fwrite($ifp, base64_decode($base64_string));
-        fclose($ifp);
-        return($output_file);
-    }
-
-    public function getExtensionFromType($type, $default = ''){
+    public function getExtensionFromType($type, $default = '')
+    {
         static $extensions = array(
             'image/jpeg' => 'jpg',
             'image/jpg' => 'jpg',
@@ -324,7 +285,17 @@ class nomvcBaseControllerTwo extends nomvcBaseController{
             'application/vnd.ms-office'
         );
 
-        return !$type ? $default : (isset($extensions[$type]) ? '.'.$extensions[$type] : $default);
+        return !$type ? $default : (isset($extensions[$type]) ? '.' . $extensions[$type] : $default);
+    }
+
+    function cut_paragraph($string, $your_desired_width = 100)
+    {
+        //$string = strip_tags($string);
+        $string = substr($string, 0, $your_desired_width);
+        $string = rtrim($string, "!,.-");
+        $string = substr($string, 0, strrpos($string, ' '));
+
+        return $string;
     }
 
 
@@ -345,7 +316,61 @@ class nomvcBaseControllerTwo extends nomvcBaseController{
 //        catch(exception $e){}
 //    }
 
-    protected function getData(){
+    protected function init()
+    {
+        $this->translateHelper = $this->context->getTranslateHelper();
+        $this->dbHelper = $this->context->getDbHelper();
+
+        $this->baseUrl = '/admin';
+
+        $this->url_file = '/files/';
+        $this->path_file = NOMVC_BASEDIR . '/web/files/';
+//        $this->dbHelper->addQuery(get_class($this).'/save_member', '
+//                    insert into t_member (surname, name, patronymic, msisdn, email)
+//                    values(:surname, :name, :patronymic, :msisdn, :email) returning id_member into :id_member');
+//
+//        $this->dbHelper->addQuery(get_class($this).'/save_member_role', '
+//                    insert into t_member_role (id_member, id_role) values(:id_member, :id_role)');
+//
+//        $this->dbHelper->addQuery(get_class($this).'/save_car', '
+//                    insert into t_member_car (id_member, car_number, car_code, car_brand, note)
+//                    values(:id_member, upper(:car_number), upper(:car_code), :car_brand, :note)');
+//
+//        $this->dbHelper->addQuery(get_class($this).'/update_car_note', '
+//                    update t_member_car
+//                    set note = :note
+//                    where id_member = :id_member
+//                    and id_member_car = :id_member_car
+//        ');
+//
+//        $this->dbHelper->addQuery(get_class($this).'/check_car_member_cnt', '
+//                    select count(*) as cnt
+//                    from t_member_car
+//                    where id_member = :id_member
+//                    and
+//                    (
+//                      id_member_car != :id_member_car
+//                      or :id_member_car is null
+//                    )
+//        ');
+//
+//        $this->dbHelper->addQuery(get_class($this).'/delete_car_member', '
+//                    delete from t_member_car where id_member = :id_member and id_member_car = :id_member_car
+//        ');
+    }
+
+//    protected function includeCarPopups($data){
+//        $data['add_car_form'] = new MemberCarForm($this->context, array('method' => 'post', 'action' => '/profile/car'));
+//        $data['edit_car_form'] = new MemberCarEditForm($this->context, array('method' => 'post', 'action' => '/profile/car'));
+//        $data['delete_car_form'] = new MemberCarDeleteForm($this->context, array('method' => 'post', 'action' => '/profile/car'));
+//
+//        $data['with_car_popups'] = true;
+//
+//        return $data;
+//    }
+
+    protected function getData()
+    {
         $data = [];
         $data['user'] = $this->context->getUser();
 
@@ -362,26 +387,6 @@ class nomvcBaseControllerTwo extends nomvcBaseController{
 //        $data['member_photo_default'] = $this->context->getUser()->getAttribute('member_photo_default');
 //
         //var_dump($data['member_photo_default']['file_bin']); exit;
-
-        return $data;
-    }
-
-//    protected function includeCarPopups($data){
-//        $data['add_car_form'] = new MemberCarForm($this->context, array('method' => 'post', 'action' => '/profile/car'));
-//        $data['edit_car_form'] = new MemberCarEditForm($this->context, array('method' => 'post', 'action' => '/profile/car'));
-//        $data['delete_car_form'] = new MemberCarDeleteForm($this->context, array('method' => 'post', 'action' => '/profile/car'));
-//
-//        $data['with_car_popups'] = true;
-//
-//        return $data;
-//    }
-
-    protected function getFormData($formId){
-        $data = [];
-
-        if (isset($_POST[$formId])) {
-            $data = $_POST[$formId];
-        }
 
         return $data;
     }
@@ -551,13 +556,14 @@ class nomvcBaseControllerTwo extends nomvcBaseController{
 //        return $data;
 //    }
 
-    function cut_paragraph($string, $your_desired_width = 100)
+    protected function getFormData($formId)
     {
-        //$string = strip_tags($string);
-        $string = substr($string, 0, $your_desired_width);
-        $string = rtrim($string, "!,.-");
-        $string = substr($string, 0, strrpos($string, ' '));
+        $data = [];
 
-        return $string;
+        if (isset($_POST[$formId])) {
+            $data = $_POST[$formId];
+        }
+
+        return $data;
     }
 }

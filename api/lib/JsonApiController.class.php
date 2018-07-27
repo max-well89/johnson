@@ -1,94 +1,96 @@
 <?php
 
-class JsonApiController extends agJsonApiController {
+class JsonApiController extends agJsonApiController
+{
 
-	private $filter_request_actions = array(
-	);
+    private $filter_request_actions = array();
 
-	private $filter_response_actions = array(
-	);	
+    private $filter_response_actions = array();
 
-	private $forbidden_fields = array(
-	);
+    private $forbidden_fields = array();
 
-	private $filter_response = false;
-	private $action_name = '';
+    private $filter_response = false;
+    private $action_name = '';
 
-	private function filterRequestLog($request){
-		$request = @json_encode($request);
-		$this->context->getLogger()->setInput($request);
-	}
+    public function exec()
+    {
+        try {
+            $this->user = $this->context->getUser();
+            $this->user->auth();
+            $this->getRequest();
 
-	private function filterResponseLog($response){
-		$response = @json_encode($response);
-		$this->context->getLogger()->setOutput($response);
-	}
+            //глобальная проверка запроса
+            //$this->context->getSecurity()->checkRequest($this->request);
 
-	public function exec() {
-		try {
-			$this->user = $this->context->getUser();
-			$this->user->auth();
-			$this->getRequest();
+            $this->prepareAction();
 
-			//глобальная проверка запроса
-			//$this->context->getSecurity()->checkRequest($this->request);			
+            $response = $this->action->execute();
+            $this->filterResponseLog($response);
 
-			$this->prepareAction();
+            header('Content-Type: application/json');
+            return json_encode(array(
+                'response' => $response
+            ));
+        } catch (agActionException $ex) {
+            header('Content-Type: application/json');
 
-			$response = $this->action->execute();
-			$this->filterResponseLog($response);
+            $response = $this->makeErrorResponse($ex->getCode(), $ex->getMessage(), null, $ex->getFieldName());
+            $this->filterResponseLog($response);
 
-			header('Content-Type: application/json');
-			return json_encode(array(
-				'response' => $response
-			));
-		} catch (agActionException $ex) {
-			header('Content-Type: application/json');
-            
-			$response = $this->makeErrorResponse($ex->getCode(), $ex->getMessage(), null, $ex->getFieldName());
-			$this->filterResponseLog($response);
+            return $response;
+        } catch (agGlobalException $ex) {
+            header('Content-Type: application/json');
 
-			return $response;
-		} catch (agGlobalException $ex) {
-			header('Content-Type: application/json');
-	
-			$response = $this->makeErrorResponse($ex->getCode(), $ex->getMessage());
-			$this->filterResponseLog($response);
+            $response = $this->makeErrorResponse($ex->getCode(), $ex->getMessage());
+            $this->filterResponseLog($response);
 
-			return $response;
-		} catch (Exception $ex) {
-			header('Content-Type: application/json');
+            return $response;
+        } catch (Exception $ex) {
+            header('Content-Type: application/json');
 
-			$response = $this->makeErrorResponse(self::FATAL_ERROR, $ex->getMessage());
-			$this->filterResponseLog($response);
+            $response = $this->makeErrorResponse(self::FATAL_ERROR, $ex->getMessage());
+            $this->filterResponseLog($response);
 
-			return $response;
-		}
-	}
+            return $response;
+        }
+    }
 
-	/**
-	 * Получение и предварительная обработка запроса
-	 */
-	protected function getRequest() {
-		$request = $this->getRawPostData();
+    /**
+     * Получение и предварительная обработка запроса
+     */
+    protected function getRequest()
+    {
+        $request = $this->getRawPostData();
 
-		$this->filterRequestLog($request);
+        $this->filterRequestLog($request);
 
-		if ($request == null) {
-			throw new agGlobalException('Не найдены POST данные', self::BAD_FORMAT);
-		}
-		$request = json_decode($request);
+        if ($request == null) {
+            throw new agGlobalException('Не найдены POST данные', self::BAD_FORMAT);
+        }
+        $request = json_decode($request);
 
-		if ($request == null) {
-			throw new agGlobalException('POST данные не соответствуют спецификации JSON', self::BAD_FORMAT);
-		}
-		if (!isset($request->request)) {
-			throw new agGlobalException('JSON не содержит обязательный параметр request', self::BAD_FORMAT);
-		}
-		$this->request = $request->request;
+        if ($request == null) {
+            throw new agGlobalException('POST данные не соответствуют спецификации JSON', self::BAD_FORMAT);
+        }
+        if (!isset($request->request)) {
+            throw new agGlobalException('JSON не содержит обязательный параметр request', self::BAD_FORMAT);
+        }
+        $this->request = $request->request;
 
-		if (!isset($this->request->action)) {
-			throw new agGlobalException('Не указана команда', self::BAD_ACTION);
-		}
-	}
+        if (!isset($this->request->action)) {
+            throw new agGlobalException('Не указана команда', self::BAD_ACTION);
+        }
+    }
+
+    private function filterRequestLog($request)
+    {
+        $request = @json_encode($request);
+        $this->context->getLogger()->setInput($request);
+    }
+
+    private function filterResponseLog($response)
+    {
+        $response = @json_encode($response);
+        $this->context->getLogger()->setOutput($response);
+    }
 }

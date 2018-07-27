@@ -1,13 +1,15 @@
 <?php
 
-class nomvcWidgetFactory {
-	
-	// ссылка на контекст
-	protected $context;
+class nomvcWidgetFactory
+{
 
-	/** Конструктор */
-	public function __construct($context) {
-		$this->context = $context;
-	}
+    // ссылка на контекст
+    protected $context;
+
+    /** Конструктор */
+    public function __construct($context)
+    {
+        $this->context = $context;
+    }
 
 }

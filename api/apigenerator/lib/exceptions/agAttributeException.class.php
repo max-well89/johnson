@@ -1,5 +1,6 @@
 <?php
 
-class agAttributeException extends agBaseException {
+class agAttributeException extends agBaseException
+{
 
 }

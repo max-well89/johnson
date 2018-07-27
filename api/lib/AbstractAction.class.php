@@ -16,11 +16,6 @@ abstract class AbstractAction extends agAbstractAction
     protected $emails_super_admin = ['max-well98@mail.ru'];
     protected $email_from = 'info@ias.su';
 
-    public function getAction()
-    {
-        return preg_replace('/_action$/imu', '', agAbstractController::fromCamelCase(get_class($this)));
-    }
-
     public function getAccessRoles()
     {
         return array('client');
@@ -59,7 +54,7 @@ abstract class AbstractAction extends agAbstractAction
 //
 //        $this->path_file = DIRNAME(__FILE__).'/../../files/';
 //        $this->path_file_preview = DIRNAME(__FILE__).'/../../files/preview/';
-//        
+//
 
 
 //        $this->code_lifetime = $this->context->getConfigVal('code_lifetime');
@@ -116,58 +111,14 @@ abstract class AbstractAction extends agAbstractAction
         $this->registerActionException(Errors::TOKEN_EXPIRED, 'Истекло время жизни токена');
     }
 
-    protected function generateToken($id_member, $login = false)
+    public function getAction()
     {
-        $token = hash('sha512', $this->crypto_rand_secure(1111111111, 9999999999) . strtotime('now'));
-
-        if ($id = $this->dbHelper->selectValue($this->getAction() . '/insert_exist', array(
-            'id_member' => $id_member,
-            'login' => $login,
-            'net' => (int)$this->getIp(),
-            'token' => $token
-        ))) {
-            return $token;
-        }
-
-        return false;
-    }
-
-    protected function authByToken()
-    {
-        if ($member = $this->dbHelper->selectRow($this->getAction() . '/check_token_exist', array(
-            'token' => $this->getValue('token'),
-            'login' => $this->getValue('login')
-        ))) {
-            if ($member['has_expired'] == 1) {
-                $this->throwActionException(Errors::TOKEN_EXPIRED);
-            }
-
-            return $this->dbHelper->selectRow($this->getAction() . '/auth_by_id', array(
-                'id_member' => $member['id_member']
-            ));
-        }
-
-        return false;
+        return preg_replace('/_action$/imu', '', agAbstractController::fromCamelCase(get_class($this)));
     }
 
     public function generatePassword()
     {
         return substr(sha3($this->crypto_rand_secure(1111111111, 9999999999)), 0, 6);
-    }
-
-    public static function crypto_rand_secure($min = 0, $max = 9)
-    {
-        $range = $max - $min;
-        if ($range == 0) return $min; // not so random...
-        $log = log($range, 2);
-        $bytes = (int)($log / 8) + 1; // length in bytes
-        $bits = (int)$log + 1; // length in bits
-        $filter = (int)(1 << $bits) - 1; // set all lower bits to 1
-        do {
-            $rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes, $s)));
-            $rnd = $rnd & $filter; // discard irrelevant bits
-        } while ($rnd >= $range);
-        return $min + $rnd;
     }
 
     public function auth()
@@ -184,20 +135,17 @@ abstract class AbstractAction extends agAbstractAction
         return $member;
     }
 
-
-    protected function getMember()
-    {
-        $user = $this->dbHelper->selectRow($this->getAction() . '/get_member', array('msisdn' => $this->getValue('msisdn')));
-        return $user;
-    }
-
-
     public final function getGroupsDescription()
     {
         return array(
             'service' => 'Для сервисного приложения',
             'client' => 'Для клиентского приложения'
         );
+    }
+
+    public function generateFileName($ext)
+    {
+        return sha3($this->RandomString() . sfMoreSecure::crypto_rand_secure(111111111111, 999999999999999)) . $this->getExtensionFromType($ext);
     }
 
     private function RandomString()
@@ -208,19 +156,6 @@ abstract class AbstractAction extends agAbstractAction
             $randstring = $characters[sfMoreSecure::crypto_rand_secure(0, strlen($characters) - 1)];
         }
         return $randstring;
-    }
-
-    public function generateFileName($ext)
-    {
-        return sha3($this->RandomString() . sfMoreSecure::crypto_rand_secure(111111111111, 999999999999999)) . $this->getExtensionFromType($ext);
-    }
-
-    public function base64_to_image($base64_string, $output_file)
-    {
-        $ifp = fopen($output_file, "wb");
-        fwrite($ifp, base64_decode($base64_string));
-        fclose($ifp);
-        return ($output_file);
     }
 
     public function getExtensionFromType($type, $default = '')
@@ -270,6 +205,14 @@ abstract class AbstractAction extends agAbstractAction
         return !$type ? $default : (isset($extensions[$type]) ? '.' . $extensions[$type] : $default);
     }
 
+    public function base64_to_image($base64_string, $output_file)
+    {
+        $ifp = fopen($output_file, "wb");
+        fwrite($ifp, base64_decode($base64_string));
+        fclose($ifp);
+        return ($output_file);
+    }
+
     public function getTransferredParams()
     {
         return $this->transferredParams;
@@ -299,5 +242,60 @@ abstract class AbstractAction extends agAbstractAction
             }
         }
         $this->values = $values;
+    }
+
+    protected function generateToken($id_member, $login = false)
+    {
+        $token = hash('sha512', $this->crypto_rand_secure(1111111111, 9999999999) . strtotime('now'));
+
+        if ($id = $this->dbHelper->selectValue($this->getAction() . '/insert_exist', array(
+            'id_member' => $id_member,
+            'login' => $login,
+            'net' => (int)$this->getIp(),
+            'token' => $token
+        ))) {
+            return $token;
+        }
+
+        return false;
+    }
+
+    public static function crypto_rand_secure($min = 0, $max = 9)
+    {
+        $range = $max - $min;
+        if ($range == 0) return $min; // not so random...
+        $log = log($range, 2);
+        $bytes = (int)($log / 8) + 1; // length in bytes
+        $bits = (int)$log + 1; // length in bits
+        $filter = (int)(1 << $bits) - 1; // set all lower bits to 1
+        do {
+            $rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes, $s)));
+            $rnd = $rnd & $filter; // discard irrelevant bits
+        } while ($rnd >= $range);
+        return $min + $rnd;
+    }
+
+    protected function authByToken()
+    {
+        if ($member = $this->dbHelper->selectRow($this->getAction() . '/check_token_exist', array(
+            'token' => $this->getValue('token'),
+            'login' => $this->getValue('login')
+        ))) {
+            if ($member['has_expired'] == 1) {
+                $this->throwActionException(Errors::TOKEN_EXPIRED);
+            }
+
+            return $this->dbHelper->selectRow($this->getAction() . '/auth_by_id', array(
+                'id_member' => $member['id_member']
+            ));
+        }
+
+        return false;
+    }
+
+    protected function getMember()
+    {
+        $user = $this->dbHelper->selectRow($this->getAction() . '/get_member', array('msisdn' => $this->getValue('msisdn')));
+        return $user;
     }
 }

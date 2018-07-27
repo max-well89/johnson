@@ -334,9 +334,9 @@ class RESTHttpClient
            curl_setopt($s, CURLOPT_USERPWD, $this->_user.':'.$this->_pass);
         }
 
-		curl_setopt($s, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($s, CURLOPT_SSL_VERIFYHOST, false);
-			
+        curl_setopt($s, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($s, CURLOPT_SSL_VERIFYHOST, false);
+
         switch ($type) {
             case self::DELETE:
                 curl_setopt($s, CURLOPT_URL, $url . '?' . http_build_query($params));
@@ -423,9 +423,9 @@ class RESTHttpClient
                curl_setopt($curly[$id], CURLOPT_USERPWD, $this->_user.':'.$this->_pass);
             }
 
-			curl_setopt($curly[$id], CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($curly[$id], CURLOPT_SSL_VERIFYHOST, false);
-			
+            curl_setopt($curly[$id], CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curly[$id], CURLOPT_SSL_VERIFYHOST, false);
+
             switch ($type) {
                 case self::DELETE:
                     curl_setopt($curly[$id], CURLOPT_URL, $url . '?' . http_build_query($params));

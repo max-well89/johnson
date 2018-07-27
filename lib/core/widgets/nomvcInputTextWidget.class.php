@@ -1,10 +1,12 @@
 <?php
 
-class nomvcInputTextWidget extends nomvcInputWidget {
+class nomvcInputTextWidget extends nomvcInputWidget
+{
 
-	protected function init() {
-		parent::init();
-		$this->setAttribute('type', 'text');
-	}
+    protected function init()
+    {
+        parent::init();
+        $this->setAttribute('type', 'text');
+    }
 
 }

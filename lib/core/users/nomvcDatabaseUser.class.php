@@ -3,8 +3,11 @@
 /**
  * Абстрактный пользователь, данные для авторизации которого можно найти в БД
  */
-abstract class nomvcDatabaseUser extends nomvcSessionUser {
+abstract class nomvcDatabaseUser extends nomvcSessionUser
+{
 
+    /** @const уровень пользователя, с которого начинается доступ в Админку */
+    const USER_LEVEL_AVAILABLE = 3;
     /** @var string таблица, в которой живут пользователи */
     protected $dbTable = null;
     /** @var string поле с логином пользователя */
@@ -14,15 +17,14 @@ abstract class nomvcDatabaseUser extends nomvcSessionUser {
     /** @var dbHelper поле с паролем пользователя */
     private $dbHelper;
 
-    /** @const уровень пользователя, с которого начинается доступ в Админку */
-    const USER_LEVEL_AVAILABLE = 3;
-
-    public function init(){
+    public function init()
+    {
         parent::init();
         $this->dbHelper = $this->context->getDbHelper();
     }
-    
-    public function hasBlock($login, $password){
+
+    public function hasBlock($login, $password)
+    {
         $sql = sprintf('select * from %s where lower(%s) = lower(:%s) and %s=:%s and id_status != 1',
             $this->dbTable,
             $this->dbLogin,
@@ -30,14 +32,14 @@ abstract class nomvcDatabaseUser extends nomvcSessionUser {
             $this->dbPassword,
             $this->dbPassword
         );
-        
-        
+
+
         $this->dbHelper->addQuery('check_user_block', $sql);
-        if ($this->dbHelper->selectRow('check_user_block', array($this->dbLogin => $login, $this->dbPassword => $password))){
+        if ($this->dbHelper->selectRow('check_user_block', array($this->dbLogin => $login, $this->dbPassword => $password))) {
             return true;
         }
-        
-        
+
+
         /**/
         /*
         $sql = sprintf('
@@ -62,22 +64,23 @@ abstract class nomvcDatabaseUser extends nomvcSessionUser {
 
     /**
      * Авторизация
-     * @param string $login		логин
-     * @param string $password	пароль
+     * @param string $login логин
+     * @param string $password пароль
      * @return mixed
      */
-    public function signin($login, $password) {
+    public function signin($login, $password)
+    {
         //var_dump($this->dbLogin); exit;
         $sql = sprintf('select * from %s where lower(%s) = lower(:%s) and %s =:%s',
-            $this->dbTable, 
-            $this->dbLogin, 
-            $this->dbLogin, 
-            $this->dbPassword, 
+            $this->dbTable,
+            $this->dbLogin,
+            $this->dbLogin,
+            $this->dbPassword,
             $this->dbPassword
         );
         $this->dbHelper->addQuery('check_user', $sql);
         $user = $this->dbHelper->selectRow('check_user', array($this->dbLogin => $login, $this->dbPassword => $password));
-        
+
         if ($user === false) return false;
         foreach ($user as $key => $val) {
             $this->setAttribute(strtolower($key), $val);
@@ -90,16 +93,17 @@ abstract class nomvcDatabaseUser extends nomvcSessionUser {
     }
 
     /**
-     * Проверка доступа к модулю, может вернуть 4 результата: 
-     * 0 - нет доступа, 
-     * 1 - чтение, 
-     * 3 - запись, 
+     * Проверка доступа к модулю, может вернуть 4 результата:
+     * 0 - нет доступа,
+     * 1 - чтение,
+     * 3 - запись,
      * 7 - удаление
-     * @param string $module	имя модуля, из адресной строки
+     * @param string $module имя модуля, из адресной строки
      * @return mixed
      */
-    public function checkAccess($module) {
-        if(empty($module)) return 0;
+    public function checkAccess($module)
+    {
+        if (empty($module)) return 0;
         $this->dbHelper->addQuery('check_access', '
             select id_access_type
             from t_module_role mdlrl
@@ -109,11 +113,20 @@ abstract class nomvcDatabaseUser extends nomvcSessionUser {
             and lower(mdl.module) = lower(:module)
         ');
         $id_access_type = $this->dbHelper->selectValue('check_access', array(":module" => $module, ":id_member" => $this->getUserID()));
-        
+
         return empty($id_access_type) ? 0 : $id_access_type;
     }
 
-    public function getModuleDefault(){
+    /**
+     * ID авторизованного пользователя или 0
+     */
+    public function getUserID()
+    {
+        return $this->getAttribute("id_member", 0);
+    }
+
+    public function getModuleDefault()
+    {
         $this->dbHelper->addQuery('get_module_default', '
             select path
             FROM t_module_role mdlrl
@@ -123,27 +136,21 @@ abstract class nomvcDatabaseUser extends nomvcSessionUser {
             order by mdl.order_by_module asc
         ');
         $row = $this->dbHelper->selectValue('get_module_default', array(":id_member" => $this->getUserID()));
-        
-        return $row;
-    }
 
-    /**
-     * ID авторизованного пользователя или 0
-     */
-    public function getUserID() {
-        return $this->getAttribute("id_member", 0);
+        return $row;
     }
 
     /**
      * Возвращает максимальный уровень пользователя по всем ролям, которые у него есть
      */
-    public function getUserLevel() {
-        if(empty($this->getAttribute('role_level'))){
+    public function getUserLevel()
+    {
+        if (empty($this->getAttribute('role_level'))) {
             //$this->dbHelper->addQuery('select_user_level', "select roles_level from v_member_role where id_member = :id_member");
             //$role_level = $this->dbHelper->selectValue('select_user_level', array(":id_member" => $this->getUserID()));
-            
+
             $role_level = 7;
-            
+
             $this->setAttribute("role_level", $role_level);
         }
 
@@ -154,8 +161,9 @@ abstract class nomvcDatabaseUser extends nomvcSessionUser {
     /**
      * Возвращает массив ролей пользователя
      */
-    public function getUserRoles() {
-        if(empty($this->getAttribute('roles'))){
+    public function getUserRoles()
+    {
+        if (empty($this->getAttribute('roles'))) {
             $this->dbHelper->addQuery('select_roles', '
                 select rl.id_role, rl.description, rl.order_by_roles
                 from t_module_role mbrl 
@@ -174,5 +182,5 @@ abstract class nomvcDatabaseUser extends nomvcSessionUser {
 
         return $this->getAttribute('roles');
     }
-    
+
 }

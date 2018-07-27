@@ -1,6 +1,6 @@
 <?php
-define('API_GENERATOR_DIR', dirname(__DIR__).'/../api/apigenerator');
-require_once(dirname(__FILE__).'/../../api/lib/autoload.php');
+define('API_GENERATOR_DIR', dirname(__DIR__) . '/../api/apigenerator');
+require_once(dirname(__FILE__) . '/../../api/lib/autoload.php');
 
 try {
     $context = new ApiContext(agContext::ENV_DEBUG);

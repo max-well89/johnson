@@ -1,6 +1,7 @@
 <?php
 
-abstract class AbstractCsvReader {
+abstract class AbstractCsvReader
+{
 
     const MAX_ROW_LENGTH = 3000;
 
@@ -8,11 +9,22 @@ abstract class AbstractCsvReader {
     protected $csv_delimeter;
     protected $csv_enclosure;
 
-    public function getRow() {
+    public static function compareFields($v1, $v2)
+    {
+        $v1 = trim(mb_strtolower($v1, 'UTF-8'));
+        $v2 = trim(mb_strtolower($v2, 'UTF-8'));
+        if ($v1 == $v2) return 0;
+        if ($v1 > $v2) return 1;
+        return -1;
+    }
+
+    public function getRow()
+    {
         return fgetcsv($this->file, self::MAX_ROW_LENGTH, $this->csv_delimeter, $this->csv_enclosure);
     }
 
-    public function close() {
+    public function close()
+    {
         fclose($this->file);
     }
 
@@ -22,7 +34,8 @@ abstract class AbstractCsvReader {
      * $requiredFields - список обязательных полей
      * $isAll - определять все поля
      */
-    public function getColumns($row, $fields) {
+    public function getColumns($row, $fields)
+    {
         $columns = array();
         // ищем определенные столбцы
         foreach ($fields as $name => $field) {
@@ -35,14 +48,6 @@ abstract class AbstractCsvReader {
         }
 
         return $columns;
-    }
-
-    public static function compareFields($v1, $v2) {
-        $v1 = trim(mb_strtolower($v1, 'UTF-8'));
-        $v2 = trim(mb_strtolower($v2, 'UTF-8'));
-        if ($v1 == $v2) return 0;
-        if ($v1 > $v2) return 1;
-        return -1;
     }
 
 }

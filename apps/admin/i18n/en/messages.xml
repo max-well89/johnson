@@ -28,19 +28,19 @@
             </trans-unit>
             <trans-unit id="7">
                 <source>add_task</source>
-                <target> Add task</target>
+                <target>Add task</target>
             </trans-unit>
             <trans-unit id="8">
                 <source>export</source>
-                <target> Export</target>
+                <target>Export</target>
             </trans-unit>
             <trans-unit id="9">
                 <source>reset</source>
-                <target> Reset</target>
+                <target>Reset</target>
             </trans-unit>
             <trans-unit id="10">
                 <source>search</source>
-                <target> Search</target>
+                <target>Search</target>
             </trans-unit>
             <trans-unit id="11">
                 <source>id</source>
@@ -88,15 +88,15 @@
             </trans-unit>
             <trans-unit id="23">
                 <source>save</source>
-                <target> Save</target>
+                <target>Save</target>
             </trans-unit>
             <trans-unit id="24">
                 <source>cancel</source>
-                <target> Cancel</target>
+                <target>Cancel</target>
             </trans-unit>
             <trans-unit id="25">
                 <source>delete</source>
-                <target> Delete</target>
+                <target>Delete</target>
             </trans-unit>
             <trans-unit id="26">
                 <source>finished_for_all</source>
@@ -140,7 +140,7 @@
             </trans-unit>
             <trans-unit id="36">
                 <source>add_member</source>
-                <target> Add user</target>
+                <target>Add user</target>
             </trans-unit>
             <trans-unit id="37">
                 <source>member</source>
@@ -172,7 +172,7 @@
             </trans-unit>
             <trans-unit id="44">
                 <source>add_pharmacy</source>
-                <target> Add pharmacy</target>
+                <target>Add pharmacy</target>
             </trans-unit>
             <trans-unit id="45">
                 <source>pharmacy</source>
@@ -192,7 +192,7 @@
             </trans-unit>
             <trans-unit id="49">
                 <source>add_sku</source>
-                <target> Add SKU</target>
+                <target>Add SKU</target>
             </trans-unit>
             <trans-unit id="50">
                 <source>sku</source>
@@ -244,7 +244,7 @@
             </trans-unit>
             <trans-unit id="62">
                 <source>create</source>
-                <target> Create</target>
+                <target>Create</target>
             </trans-unit>
             <trans-unit id="63">
                 <source>push</source>
@@ -272,11 +272,11 @@
             </trans-unit>
             <trans-unit id="69">
                 <source>finished_task</source>
-                <target> Finished</target>
+                <target>Finished</target>
             </trans-unit>
             <trans-unit id="70">
                 <source>continue_task</source>
-                <target> Continue</target>
+                <target>Continue</target>
             </trans-unit>
             <trans-unit id="71">
                 <source>task-pharmacy-detail</source>

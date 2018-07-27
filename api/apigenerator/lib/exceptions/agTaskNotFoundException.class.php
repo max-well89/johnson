@@ -1,5 +1,6 @@
 <?php
 
-class agTaskNotFoundException extends agClassNotFoundException {
+class agTaskNotFoundException extends agClassNotFoundException
+{
 
 }

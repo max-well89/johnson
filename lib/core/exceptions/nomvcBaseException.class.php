@@ -3,6 +3,7 @@
 /**
  * Базовый эксепшен
  */
-abstract class nomvcBaseException extends Exception {
+abstract class nomvcBaseException extends Exception
+{
 
 }

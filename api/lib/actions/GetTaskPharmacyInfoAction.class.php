@@ -1,11 +1,14 @@
 <?php
 
-class GetTaskPharmacyInfoAction extends AbstractAction {
-    public function getTitle() {
+class GetTaskPharmacyInfoAction extends AbstractAction
+{
+    public function getTitle()
+    {
         return 'Получить информацию по аптеке/список лекарств для задания пользователя';
     }
 
-    public function init() {
+    public function init()
+    {
         parent::init();
 
         $this->addParameter('token', new agStringValidator(array('required' => true)), 'Token');
@@ -13,7 +16,7 @@ class GetTaskPharmacyInfoAction extends AbstractAction {
         $this->addParameter('id_task', new agIntegerValidator(array('required' => true)), 'ID Задания');
         $this->addParameter('id_pharmacy', new agIntegerValidator(array('required' => true)), 'ID Аптеки');
 
-        $this->dbHelper->addQuery($this->getAction().'/check_task_member_pharmacy_exist', '
+        $this->dbHelper->addQuery($this->getAction() . '/check_task_member_pharmacy_exist', '
                 select *
                 from t_task tt
                 inner join t_task_member_pharmacy ttmp on tt.id_task = ttmp.id_task
@@ -24,7 +27,7 @@ class GetTaskPharmacyInfoAction extends AbstractAction {
                 and tp.id_status = 1
         ');
 
-        $this->dbHelper->addQuery($this->getAction().'/get_info', '
+        $this->dbHelper->addQuery($this->getAction() . '/get_info', '
                 select
                 ttmpc.is_action,
                 ttmpc.comment, 
@@ -35,7 +38,7 @@ class GetTaskPharmacyInfoAction extends AbstractAction {
                 and ttmpc.id_pharmacy = :id_pharmacy
         ');
 
-        $this->dbHelper->addQuery($this->getAction().'/get_sku_list', '
+        $this->dbHelper->addQuery($this->getAction() . '/get_sku_list', '
                 select
                 ts.id_sku,
                 ts.name,
@@ -63,16 +66,17 @@ class GetTaskPharmacyInfoAction extends AbstractAction {
 
     }
 
-    public function execute() {
+    public function execute()
+    {
         $member = $this->authByToken();
 
-        if (isset($member['id_member'])){
-            if ($this->dbHelper->selectRow($this->getAction().'/check_task_member_pharmacy_exist', array(
+        if (isset($member['id_member'])) {
+            if ($this->dbHelper->selectRow($this->getAction() . '/check_task_member_pharmacy_exist', array(
                 'id_member' => $member['id_member'],
                 'id_task' => $this->getValue('id_task'),
                 'id_pharmacy' => $this->getValue('id_pharmacy')
-            ))){
-                $info = $this->dbHelper->selectRow($this->getAction().'/get_info', array(
+            ))) {
+                $info = $this->dbHelper->selectRow($this->getAction() . '/get_info', array(
                     'id_member' => $member['id_member'],
                     'id_task' => $this->getValue('id_task'),
                     'id_pharmacy' => $this->getValue('id_pharmacy')
@@ -80,14 +84,14 @@ class GetTaskPharmacyInfoAction extends AbstractAction {
 
                 /********/
 
-                $stmt = $this->dbHelper->select($this->getAction().'/get_sku_list', array(
+                $stmt = $this->dbHelper->select($this->getAction() . '/get_sku_list', array(
                     'id_member' => $member['id_member'],
                     'id_task' => $this->getValue('id_task'),
                     'id_pharmacy' => $this->getValue('id_pharmacy')
                 ));
 
                 $sku_list = null;
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $row = $this->asStrictTypes($row, ['my_value' => 'float']);
                     $sku_list[] = $row;
                 }
@@ -96,17 +100,16 @@ class GetTaskPharmacyInfoAction extends AbstractAction {
                     'info' => $info,
                     'sku_list' => $sku_list
                 ]);
-            }
-            else
+            } else
                 $this->throwActionException(Errors::NO_DATA_FOUND);
-        }
-        else
+        } else
             $this->throwActionException(Errors::MEMBER_NOT_FOUND);
 
         return array('result' => Errors::FAIL);
     }
 
-    public function getResponseExample() {
+    public function getResponseExample()
+    {
         return json_decode('{
   "response": {
     "result": 100,

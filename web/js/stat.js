@@ -71,7 +71,7 @@ var TableFormActions = {
              is_logo = 0;
              $(element).children("div").children("label").children("input[type=checkbox]").each(function(indx_c, element_c){
              if($(element_c).attr("name").indexOf("is_preview")+1){
-             if ($(element_c).prop("checked")) is_preview = 1;				
+             if ($(element_c).prop("checked")) is_preview = 1;
              }
              else if($(element_c).attr("name").indexOf("is_logo")+1){
              if ($(element_c).prop("checked")) is_logo = 1;
@@ -251,7 +251,7 @@ var TableFormActions = {
         $('#mainModal').modal('hide');
         $.get(baseUrl + '/backend/' + formClass + '-table/', function (data) {
             $('.info-content').html(data);
-        });					
+        });
     },
     
     deleteConfirmObject: function(formClass, id, afterPostParam){

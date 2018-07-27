@@ -1,6 +1,7 @@
 <?php
 
-class JsonApiController extends agJsonApiController {
+class JsonApiController extends agJsonApiController
+{
 
 }
 

@@ -3,47 +3,50 @@
 /**
  * Абстрактный юзверь, здесь описано всё то, что он должен уметь
  */
-abstract class nomvcAbstractUser {
+abstract class nomvcAbstractUser
+{
 
-	// ссылка на контекст
-	protected $context;
+    // ссылка на контекст
+    protected $context;
 
-	/** Конструктор */
-	public function __construct($context) {
-		$this->context = $context;
-		$this->init();
-	}
+    /** Конструктор */
+    public function __construct($context)
+    {
+        $this->context = $context;
+        $this->init();
+    }
 
-	/**
-	 * Выполняет проверку на авторизованность пользователя
-	 */
-	public function hasAuth() {
-		return $this->getAttribute('has_auth', false);
-	}
+    /**
+     * Инициализация пользователя
+     */
+    public abstract function init();
 
-	/**
-	 * Инициализация пользователя
-	 */
-	public abstract function init();
+    /**
+     * Выполняет проверку на авторизованность пользователя
+     */
+    public function hasAuth()
+    {
+        return $this->getAttribute('has_auth', false);
+    }
 
-	/**
-	 * авторизует пользователя
-	 */
-	public abstract function signin($login, $password);
+    /**
+     * Возвращает атрибут пользователя
+     */
+    public abstract function getAttribute($name, $default = null);
 
-	/**
-	 * выполняет разлогинивание пользователя
-	 */
-	public abstract function signout();
+    /**
+     * авторизует пользователя
+     */
+    public abstract function signin($login, $password);
 
-	/**
-	 * Возвращает атрибут пользователя
-	 */
-	public abstract function getAttribute($name, $default = null);
+    /**
+     * выполняет разлогинивание пользователя
+     */
+    public abstract function signout();
 
-	/**
-	 * Выполняет установку атрибута пользователя
-	 */
-	public abstract function setAttribute($name, $value);
+    /**
+     * Выполняет установку атрибута пользователя
+     */
+    public abstract function setAttribute($name, $value);
 
 }

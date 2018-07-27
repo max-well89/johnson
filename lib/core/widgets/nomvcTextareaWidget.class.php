@@ -1,18 +1,14 @@
 <?php
 
-class nomvcTextareaWidget extends nomvcBaseWidget {
+class nomvcTextareaWidget extends nomvcBaseWidget
+{
     private $classes = [];
-    
-    protected function init() {
-        parent::init();
-        $this->setAttribute('class', 'form-control');
-        $this->setAttribute('placeholder', $this->getLabel());
-    }
-    
-    public function renderForForm($formName, $value = null) {
+
+    public function renderForForm($formName, $value = null)
+    {
         $id = sprintf('%s_%s', $formName, $this->getName());
         $name = sprintf('%s[%s]', $formName, $this->getName());
-        
+
         return sprintf('<div id="form_group_%s" class="form-group%s">%s<div class="%s">%s</div></div>%s',
             $this->getName(),
             $this->getOption('has-error', false) ? ' has-error' : '',
@@ -25,8 +21,30 @@ class nomvcTextareaWidget extends nomvcBaseWidget {
             $this->getJSHandler($formName));
     }
 
+    public function renderLabel($id, $with_class = true)
+    {
+        $attributes = array('for' => $id);
+        if ($with_class) $attributes['class'] = $this->genColumnClass($this->getOption('label-width')) . ' control-label';
+        $attributesCompiled = $this->compileAttribute($attributes);
+        return sprintf('<label %s>%s</label>', implode(' ', $attributesCompiled), $this->getLabel());
+    }
+
     //for site render
-    public function renderForFormSimple($formName, $value = null) {
+
+    protected function genColumnClass($width)
+    {
+        return sprintf('col-%s-%s', $this->getOption('size'), $width);
+    }
+
+    public function renderControl($value, $attributes = array())
+    {
+        $attributes = array_merge($this->getAttributes(), $attributes);
+        $attributesCompiled = $this->compileAttribute($attributes);
+        return sprintf('<textarea %s>%s</textarea>', implode(' ', $attributesCompiled), $value);
+    }
+
+    public function renderForFormSimple($formName, $value = null)
+    {
         $id = sprintf('%s_%s', $formName, $this->getName());
         $name = sprintf('%s[%s]', $formName, $this->getName());
 
@@ -34,7 +52,7 @@ class nomvcTextareaWidget extends nomvcBaseWidget {
         $classUnion = $this->getOption('has-error', false) ? ' error' : '';
 
         foreach ($this->classes as $nameClass => $valClass)
-            $classUnion .= ' '.$nameClass;
+            $classUnion .= ' ' . $nameClass;
 
         $attr['class'] = $classUnion;
 
@@ -47,19 +65,22 @@ class nomvcTextareaWidget extends nomvcBaseWidget {
         );
     }
 
-    public function addCssClass($class){
+    public function addCssClass($class)
+    {
         $this->classes[$class] = $class;
     }
 
-    public function removerCssClass($class){
+    public function removerCssClass($class)
+    {
         if (isset($this->classes[$class]))
             unset($this->classes[$class]);
     }
-    
-    public function renderForFilter($formName, $value = null) {
+
+    public function renderForFilter($formName, $value = null)
+    {
         $id = sprintf('%s_%s', $formName, $this->getName());
         $name = sprintf('%s[%s]', $formName, $this->getName());
-        
+
         return sprintf('<div id="form_group_%s" class="form-group%s">%s%s</div>',
             $this->getName(),
             $this->getOption('has-error', false) ? ' has-error' : '',
@@ -69,25 +90,16 @@ class nomvcTextareaWidget extends nomvcBaseWidget {
                 'name' => $name
             ), $this->getAttributes())));
     }
-    
-    public function renderControl($value, $attributes = array()) {
-        $attributes = array_merge($this->getAttributes(), $attributes);
-        $attributesCompiled = $this->compileAttribute($attributes);
-        return sprintf('<textarea %s>%s</textarea>', implode(' ', 	$attributesCompiled), $value);
+
+    protected function init()
+    {
+        parent::init();
+        $this->setAttribute('class', 'form-control');
+        $this->setAttribute('placeholder', $this->getLabel());
     }
-    
-    public function renderLabel($id, $with_class = true) {
-        $attributes = array('for'	=> $id);
-        if ($with_class) $attributes['class'] = $this->genColumnClass($this->getOption('label-width')).' control-label';
-        $attributesCompiled = $this->compileAttribute($attributes);
-        return sprintf('<label %s>%s</label>', implode(' ', $attributesCompiled), $this->getLabel());
-    }
-    
-    protected function genColumnClass($width) {
-        return sprintf('col-%s-%s', $this->getOption('size'), $width);
-    }
-    
-    protected function genColumnOffsetClass($width) {
+
+    protected function genColumnOffsetClass($width)
+    {
         return sprintf('col-%s-offset-%s', $this->getOption('size'), $width);
     }
 

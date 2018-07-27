@@ -80,37 +80,37 @@ html, body {
 .menu-icon-map { background-image: url('/img/icons/menu/map.png'); }
 .menu-icon-map:hover { background-image: url('/img/icons/menu/map_mouseover.png'); }
 .menu-icon-map.active { background-image: url('/img/icons/menu/map_selected.png'); }
-.menu-icon-map.active:hover {	background-image: url('/img/icons/menu/map_selected_mouseover.png'); }
+.menu-icon-map.active:hover {    background-image: url('/img/icons/menu/map_selected_mouseover.png'); }
 
 .menu-icon-push { background-image: url('/img/icons/menu/notifications.png'); }
 .menu-icon-push:hover { background-image: url('/img/icons/menu/notifications_mouseover.png'); }
 .menu-icon-push.active { background-image: url('/img/icons/menu/notifications_selected.png'); }
-.menu-icon-push.active:hover {	background-image: url('/img/icons/menu/notifications_selected_mouseover.png'); }
+.menu-icon-push.active:hover {    background-image: url('/img/icons/menu/notifications_selected_mouseover.png'); }
 
 .menu-icon-action { background-image: url('/img/icons/menu/discounts.png'); }
 .menu-icon-action:hover { background-image: url('/img/icons/menu/discounts_mouseover.png'); }
 .menu-icon-action.active { background-image: url('/img/icons/menu/discounts_selected.png'); }
-.menu-icon-action.active:hover {	background-image: url('/img/icons/menu/discounts_selected_mouseover.png'); }
+.menu-icon-action.active:hover {    background-image: url('/img/icons/menu/discounts_selected_mouseover.png'); }
 
 .menu-icon-news { background-image: url('/img/icons/menu/news.png'); }
 .menu-icon-news:hover { background-image: url('/img/icons/menu/news_mouseover.png'); }
 .menu-icon-news.active { background-image: url('/img/icons/menu/news_selected.png'); }
-.menu-icon-news.active:hover {	background-image: url('/img/icons/menu/news_selected_mouseover.png'); }
+.menu-icon-news.active:hover {    background-image: url('/img/icons/menu/news_selected_mouseover.png'); }
 
 .menu-icon-loc { background-image: url('/img/icons/menu/objects.png'); }
 .menu-icon-loc:hover { background-image: url('/img/icons/menu/objects_mouseover.png'); }
 .menu-icon-loc.active { background-image: url('/img/icons/menu/objects_selected.png'); }
-.menu-icon-loc.active:hover {	background-image: url('/img/icons/menu/objects_selected_mouseover.png'); }
+.menu-icon-loc.active:hover {    background-image: url('/img/icons/menu/objects_selected_mouseover.png'); }
 
 .menu-icon-users { background-image: url('/img/icons/menu/users.png'); }
 .menu-icon-users:hover { background-image: url('/img/icons/menu/users_mouseover.png'); }
 .menu-icon-users.active { background-image: url('/img/icons/menu/users_selected.png'); }
-.menu-icon-users.active:hover {	background-image: url('/img/icons/menu/users_selected_mouseover.png'); }
+.menu-icon-users.active:hover {    background-image: url('/img/icons/menu/users_selected_mouseover.png'); }
 
 .menu-icon-analytics { background-image: url('/img/icons/menu/analytics.png'); }
 .menu-icon-analytics:hover { background-image: url('/img/icons/menu/analytics_mouseover.png'); }
 .menu-icon-analytics.active { background-image: url('/img/icons/menu/analytics_selected.png'); }
-.menu-icon-analytics.active:hover {	background-image: url('/img/icons/menu/analytics_selected_mouseover.png'); }
+.menu-icon-analytics.active:hover {    background-image: url('/img/icons/menu/analytics_selected_mouseover.png'); }
 
 
 @media screen and (max-width: 1200px) {

@@ -1,15 +1,18 @@
 <?php
 
-class agClassNotFoundException extends agBaseException {
+class agClassNotFoundException extends agBaseException
+{
 
-	protected $className;
+    protected $className;
 
-	public function __construct($className) {
-		parent::__construct("Class $className not found");
-		$this->className = $className;
-	}
-	
-	public function getClassName() {
-		return $this->className;
-	}
+    public function __construct($className)
+    {
+        parent::__construct("Class $className not found");
+        $this->className = $className;
+    }
+
+    public function getClassName()
+    {
+        return $this->className;
+    }
 }

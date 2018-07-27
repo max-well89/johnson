@@ -1,11 +1,13 @@
 <?php
 
-class DbHelper extends agAbstractDbHelper {
+class DbHelper extends agAbstractDbHelper
+{
 
-	protected function init() {
-		
-	}
-	
+    protected function init()
+    {
+
+    }
+
 }
 
 ?>

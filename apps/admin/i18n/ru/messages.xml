@@ -28,19 +28,19 @@
             </trans-unit>
             <trans-unit id="7">
                 <source>add_task</source>
-                <target> Добавить задание</target>
+                <target>Добавить задание</target>
             </trans-unit>
             <trans-unit id="8">
                 <source>export</source>
-                <target> Выгрузить</target>
+                <target>Выгрузить</target>
             </trans-unit>
             <trans-unit id="9">
                 <source>reset</source>
-                <target> Сброс</target>
+                <target>Сброс</target>
             </trans-unit>
             <trans-unit id="10">
                 <source>search</source>
-                <target> Поиск</target>
+                <target>Поиск</target>
             </trans-unit>
             <trans-unit id="11">
                 <source>id</source>
@@ -92,15 +92,15 @@
             </trans-unit>
             <trans-unit id="23">
                 <source>save</source>
-                <target> Сохранить</target>
+                <target>Сохранить</target>
             </trans-unit>
             <trans-unit id="24">
                 <source>cancel</source>
-                <target> Отменить</target>
+                <target>Отменить</target>
             </trans-unit>
             <trans-unit id="25">
                 <source>delete</source>
-                <target> Удалить</target>
+                <target>Удалить</target>
             </trans-unit>
             <trans-unit id="26">
                 <source>finished_for_all</source>
@@ -144,7 +144,7 @@
             </trans-unit>
             <trans-unit id="36">
                 <source>add_member</source>
-                <target> Добавить пользователя</target>
+                <target>Добавить пользователя</target>
             </trans-unit>
             <trans-unit id="37">
                 <source>member</source>
@@ -176,7 +176,7 @@
             </trans-unit>
             <trans-unit id="44">
                 <source>add_pharmacy</source>
-                <target> Добавить аптеку</target>
+                <target>Добавить аптеку</target>
             </trans-unit>
             <trans-unit id="45">
                 <source>pharmacy</source>
@@ -196,7 +196,7 @@
             </trans-unit>
             <trans-unit id="49">
                 <source>add_sku</source>
-                <target> Добавить SKU</target>
+                <target>Добавить SKU</target>
             </trans-unit>
             <trans-unit id="50">
                 <source>sku</source>
@@ -248,7 +248,7 @@
             </trans-unit>
             <trans-unit id="62">
                 <source>create</source>
-                <target> Создать</target>
+                <target>Создать</target>
             </trans-unit>
             <trans-unit id="63">
                 <source>push</source>
@@ -276,11 +276,11 @@
             </trans-unit>
             <trans-unit id="69">
                 <source>finished_task</source>
-                <target> Завершить</target>
+                <target>Завершить</target>
             </trans-unit>
             <trans-unit id="70">
                 <source>continue_task</source>
-                <target> Продолжить выполнение</target>
+                <target>Продолжить выполнение</target>
             </trans-unit>
             <trans-unit id="71">
                 <source>task-pharmacy-detail</source>

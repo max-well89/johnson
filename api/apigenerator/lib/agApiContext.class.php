@@ -1,11 +1,12 @@
 <?php
 
-/** 
- * Контекст API 
+/**
+ * Контекст API
  */
-abstract class agApiContext extends agContext {
+abstract class agApiContext extends agContext
+{
 
-    // ссылка на активный контроллер	
+    // ссылка на активный контроллер    
     private $controller;
     // текущее подключение к БД и хелпер
     private $dbconn = null;
@@ -14,9 +15,10 @@ abstract class agApiContext extends agContext {
     private $logger = null;
     // ссылка на активного пользователя
     private $user;
-            
+
     /** Получение коннекта к БД */
-    public function getDb() {
+    public function getDb()
+    {
         if (is_null($this->dbconn)) {
             $dbconf = $this->getConfigVal('db', null);
 
@@ -29,57 +31,65 @@ abstract class agApiContext extends agContext {
         }
         return $this->dbconn;
     }
-    
+
     /** Получение инстанса хелпера */
-    public function getDbHelper() {
+    public function getDbHelper()
+    {
         if (is_null($this->dbhelper)) {
             $this->dbhelper = new DbHelper($this);
         }
         return $this->dbhelper;
     }
 
+    /** возвращает активный контроллер */
+    public function getController()
+    {
+        return $this->controller;
+    }
+
     /** устанавливает активный контроллер */
-    public function setController($controller) {
+    public function setController($controller)
+    {
         $this->controller = $controller;
         $logger = $this->getLogger();
         $logger->setController(get_class($controller));
     }
-    
-    /** возвращает активный контроллер */
-    public function getController() {
-        return $this->controller;
-    }
-    
+
     /** возвращает логгер **/
-    public function getLogger() {
+    public function getLogger()
+    {
         if ($this->logger == null) {
             $this->logger = new Logger($this);
         }
         return $this->logger;
     }
-    
-    /** устанавливает активного пользователя */
-    public function setUser($user) {
-        $this->user = $user;
-    }
-    
+
     /** возвращает активного пользователя */
-    public function getUser() {
+    public function getUser()
+    {
         return $this->user;
     }
-    
+
+    /** устанавливает активного пользователя */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
     /** возвращает URL api */
-    public function getApiUrl() {
+    public function getApiUrl()
+    {
         $url = 'http';
         if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
-            $url.= 's';
+            $url .= 's';
         }
-        $url.= '://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']).'/json.php';
+        $url .= '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . '/json.php';
         return $url;
     }
-    
+
     /** возвращает название проекта */
-    public function getProjectName() {
+    public function getProjectName()
+    {
         return $this->getConfigVal('project_name', 'unnamed');
     }
 

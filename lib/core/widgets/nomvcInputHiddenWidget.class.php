@@ -1,20 +1,18 @@
 <?php
 
-class nomvcInputHiddenWidget extends nomvcInputWidget {
+class nomvcInputHiddenWidget extends nomvcInputWidget
+{
 
-	protected function init() {
-		parent::init();
-		$this->setAttribute('type', 'hidden');
-	}
-	
-	public function renderForForm($formName, $value = null) {
-		$id = sprintf('%s_%s', $formName, $this->getName());
-		$name = sprintf('%s[%s]', $formName, $this->getName());
-		
-		return $this->renderControl($value, array_merge(array('id' => $id, 'name' => $name), $this->getAttributes()));
-	}
+    public function renderForForm($formName, $value = null)
+    {
+        $id = sprintf('%s_%s', $formName, $this->getName());
+        $name = sprintf('%s[%s]', $formName, $this->getName());
 
-    public function renderForFilter($formName, $value = null) {
+        return $this->renderControl($value, array_merge(array('id' => $id, 'name' => $name), $this->getAttributes()));
+    }
+
+    public function renderForFilter($formName, $value = null)
+    {
         $id = sprintf('%s_%s', $formName, $this->getName());
         $name = sprintf('%s[%s]', $formName, $this->getName());
 
@@ -27,6 +25,12 @@ class nomvcInputHiddenWidget extends nomvcInputWidget {
                 'name' => $name,
                 'form-id' => $formName
             ), $this->getAttributes())));
+    }
+
+    protected function init()
+    {
+        parent::init();
+        $this->setAttribute('type', 'hidden');
     }
 
 }

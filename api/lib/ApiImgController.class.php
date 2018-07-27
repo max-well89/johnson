@@ -5,7 +5,8 @@
  *
  */
 
-class ApiImgController extends agAbstractWebController {
+class ApiImgController extends agAbstractWebController
+{
 
     // мэппинг "какбыпапок" в таблицы в БД
     private $objTableMap = array(
@@ -16,7 +17,8 @@ class ApiImgController extends agAbstractWebController {
         "member" => "member"
     );
 
-    public function exec() {
+    public function exec()
+    {
         // проверяем "какбыпапку" изображения
         if (!isset($_GET['obj']) || !isset($this->objTableMap[$_GET['obj']])) {
             header("HTTP/1.1 404 Not Found");
@@ -36,14 +38,14 @@ class ApiImgController extends agAbstractWebController {
 
             $mime_type = $row['mime_type'];
             $file_res = $row['file_bin'];
-        
+
             //var_dump($file_res); exit;
             header("Content-Type: $mime_type");
             //header("Content-Length: $file_res");
             fpassthru($file_res);
+        } catch (exception $e) {
         }
-        catch(exception $e){}
-        
+
         return '';
     }
 }
