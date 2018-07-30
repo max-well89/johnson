@@ -25,6 +25,7 @@ class GetTaskPharmacyListAction extends AbstractAction
                     to_char(tt.dt_task, \'DD-MM-YYYY HH24:MI:SS\') as dt_task
                     from t_task tt
                     inner join t_task_member_pharmacy ttmp on tt.id_task = ttmp.id_task
+                    inner join t_member tm on ttmp.id_member = tm.id_member and tt.id_database = tm.id_database
                     where ttmp.id_member = :id_member
                     and (
                         ttmp.id_task = :id_task
@@ -54,6 +55,7 @@ class GetTaskPharmacyListAction extends AbstractAction
                 (case when td2.cnt > 0 then 1 else 0 end) AS is_sended2
                 from t_task tt
                 inner join t_task_member_pharmacy ttmp on tt.id_task = ttmp.id_task
+                inner join t_member tm on ttmp.id_member = tm.id_member and tt.id_database = tm.id_database
                 inner join t_pharmacy tp on ttmp.id_pharmacy = tp.id_pharmacy
                 left join t_category tc on tc.id_category = tp.id_category
                 left join t_region tr on tr.id_region = tp.id_region
@@ -113,8 +115,6 @@ class GetTaskPharmacyListAction extends AbstractAction
             }
         } else
             $this->throwActionException(Errors::MEMBER_NOT_FOUND);
-
-//        var_dump($this->context->getDb()->errorInfo()); exit;
 
         return array('result' => Errors::FAIL);
     }

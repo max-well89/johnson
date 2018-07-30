@@ -22,6 +22,7 @@ class SendTaskPharmacyInfoAction extends AbstractAction
                 select *
                 from t_task tt
                 inner join t_task_member_pharmacy ttmp on tt.id_task = ttmp.id_task
+                inner join t_member tm on ttmp.id_member = tm.id_member and tt.id_database = tm.id_database
                 inner join t_pharmacy tp on ttmp.id_pharmacy = tp.id_pharmacy
                 where ttmp.id_member = :id_member
                 and ttmp.id_task = :id_task
@@ -64,7 +65,7 @@ class SendTaskPharmacyInfoAction extends AbstractAction
 
         $this->dbHelper->addQuery($this->getAction() . '/check_data_exist', '
                 select id_task_data
-                from t_task_data 
+                from t_task_data
                 where id_member = :id_member
                 and id_task = :id_task
                 and id_pharmacy = :id_pharmacy

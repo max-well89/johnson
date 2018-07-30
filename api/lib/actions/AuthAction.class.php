@@ -25,7 +25,6 @@ class AuthAction extends AbstractAction
         $member = $this->auth();
 
         if (isset($member['id_member'])) {
-            // save member device
             try {
                 $this->dbHelper->execute($this->getAction() . '/save_device', array(
                     'id_member' => $member['id_member'],

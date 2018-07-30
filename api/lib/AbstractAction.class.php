@@ -121,6 +121,21 @@ abstract class AbstractAction extends agAbstractAction
         return substr(sha3($this->crypto_rand_secure(1111111111, 9999999999)), 0, 6);
     }
 
+    public static function crypto_rand_secure($min = 0, $max = 9)
+    {
+        $range = $max - $min;
+        if ($range == 0) return $min; // not so random...
+        $log = log($range, 2);
+        $bytes = (int)($log / 8) + 1; // length in bytes
+        $bits = (int)$log + 1; // length in bits
+        $filter = (int)(1 << $bits) - 1; // set all lower bits to 1
+        do {
+            $rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes, $s)));
+            $rnd = $rnd & $filter; // discard irrelevant bits
+        } while ($rnd >= $range);
+        return $min + $rnd;
+    }
+
     public function auth()
     {
         $member = $this->dbHelper->selectRow($this->getAction() . '/auth', array(
@@ -244,6 +259,18 @@ abstract class AbstractAction extends agAbstractAction
         $this->values = $values;
     }
 
+    protected function setDBContextParameter($var, $val)
+    {
+        try {
+            $query = "select set_parameter(:name, :val);";
+            $stmt = $this->context->getDb()->prepare($query);
+            $stmt->bindValue('name', $var);
+            $stmt->bindValue('val', $val);
+            $stmt->execute();
+        } catch (exception $e) {
+        }
+    }
+
     protected function generateToken($id_member, $login = false)
     {
         $token = hash('sha512', $this->crypto_rand_secure(1111111111, 9999999999) . strtotime('now'));
@@ -258,21 +285,6 @@ abstract class AbstractAction extends agAbstractAction
         }
 
         return false;
-    }
-
-    public static function crypto_rand_secure($min = 0, $max = 9)
-    {
-        $range = $max - $min;
-        if ($range == 0) return $min; // not so random...
-        $log = log($range, 2);
-        $bytes = (int)($log / 8) + 1; // length in bytes
-        $bits = (int)$log + 1; // length in bits
-        $filter = (int)(1 << $bits) - 1; // set all lower bits to 1
-        do {
-            $rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes, $s)));
-            $rnd = $rnd & $filter; // discard irrelevant bits
-        } while ($rnd >= $range);
-        return $min + $rnd;
     }
 
     protected function authByToken()

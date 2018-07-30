@@ -40,7 +40,6 @@ class UpdatePushStatusAction extends AbstractAction
                     'id_member' => $member['id_member'],
                     'push_token' => $this->getValue('push_token')
                 ));
-                //var_dump($this->context->getDb()->getError()); exit;
             }
 
             return array('result' => Errors::SUCCESS);

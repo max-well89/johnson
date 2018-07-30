@@ -20,6 +20,7 @@ class GetTaskPharmacyInfoAction extends AbstractAction
                 select *
                 from t_task tt
                 inner join t_task_member_pharmacy ttmp on tt.id_task = ttmp.id_task
+                inner join t_member tm on ttmp.id_member = tm.id_member and tt.id_database = tm.id_database
                 inner join t_pharmacy tp on ttmp.id_pharmacy = tp.id_pharmacy
                 where ttmp.id_member = :id_member
                 and ttmp.id_task = :id_task
@@ -56,6 +57,7 @@ class GetTaskPharmacyInfoAction extends AbstractAction
                 ttd.is_action as is_action,
                 ttd.comment as comment
                 from t_sku ts
+                inner join t_member tm on tm.id_member = :id_member and ts.id_database = tm.id_database
                 left join t_task_data ttd on ttd.id_member = :id_member and ttd.id_task = :id_task and ttd.id_pharmacy = :id_pharmacy and ts.id_sku = ttd.id_sku 
                 left join t_sku_type tst on ts.id_sku_type = tst.id_sku_type
                 left join t_sku_producer tsp on ts.id_sku_producer = tsp.id_sku_producer
@@ -81,8 +83,6 @@ class GetTaskPharmacyInfoAction extends AbstractAction
                     'id_task' => $this->getValue('id_task'),
                     'id_pharmacy' => $this->getValue('id_pharmacy')
                 ));
-
-                /********/
 
                 $stmt = $this->dbHelper->select($this->getAction() . '/get_sku_list', array(
                     'id_member' => $member['id_member'],
