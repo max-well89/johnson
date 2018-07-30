@@ -490,3 +490,12 @@ a{
 .inline-block {
     display: inline-block;
 }
+
+.navbar-right a {
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.btn span.glyphicon {
+    margin-right: 5px;
+}
