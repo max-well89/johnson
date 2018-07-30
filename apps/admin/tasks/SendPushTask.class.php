@@ -99,7 +99,7 @@ class SendPushTask extends nomvcBaseTask
             t_member_device.push_token,
             t_member_device.id_os
             from t_push
-            inner join t_member on 1 = 1
+            inner join t_member on 1 = 1 and t_push.id_database = t_member.id_database
             inner join t_member_device on t_member.id_member = t_member_device.id_member and t_member_device.push_token is not null and t_member_device.id_os = 1
             where t_push.dt_send is null 
             and t_member.id_status = 1
