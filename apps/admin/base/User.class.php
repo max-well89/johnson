@@ -15,6 +15,20 @@ class User extends nomvcDatabaseUser
         $this->dbHelper = $this->context->getDbHelper();
     }
 
+    public function getLanguage(){
+        switch($this->getAttribute('id_language')){
+            case 2:
+                $lang = 'ru';
+                break;
+            case 1:
+            default:
+                $lang = 'en';
+                break;
+        }
+
+        return $lang;
+    }
+
     public function signin($login, $password)
     {
         $sql = sprintf('select * from %s where lower(%s) = lower(:%s) and %s =:%s',

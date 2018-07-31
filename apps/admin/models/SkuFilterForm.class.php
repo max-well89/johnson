@@ -44,7 +44,7 @@ class SkuFilterForm extends nomvcAbstractFilterForm
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('priority', 'id_priority', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 't_priority',
-            'order' => 'name',
+            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => false,
             'multiple' => true
         ), array()));
@@ -55,11 +55,10 @@ class SkuFilterForm extends nomvcAbstractFilterForm
             'key' => 'id_priority'
         )));
 
-
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_sku_status',
-            'order' => 'name',
+            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => false,
             'multiple' => true
         ), array()));
@@ -81,7 +80,5 @@ class SkuFilterForm extends nomvcAbstractFilterForm
             'onclick' => "return TableFormActions.getForm('sku');",
             'class' => 'btn btn-success'
         )));
-
     }
-
 }

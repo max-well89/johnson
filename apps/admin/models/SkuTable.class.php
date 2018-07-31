@@ -2,7 +2,6 @@
 
 class SkuTable extends AbstractMapObjectTable
 {
-
     public function init($options = array())
     {
         $options = array(
@@ -27,10 +26,9 @@ EOF
         $this->addColumn('sku_producer', 'sku_producer', 'string');
         $this->addColumn('name', 'name', 'string');
         $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('priority', 'priority', 'string');
-        $this->addColumn('status', 'status', 'string');
+        $this->addColumn('priority_'.Context::getInstance()->getUser()->getLanguage(), 'priority', 'string');
+        $this->addColumn('status_'.Context::getInstance()->getUser()->getLanguage(), 'status', 'string');
 
         $this->setFilterForm(new SkuFilterForm($this->context));
     }
-
 }

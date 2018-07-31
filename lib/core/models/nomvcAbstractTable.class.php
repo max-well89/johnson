@@ -256,7 +256,7 @@ abstract class nomvcAbstractTable
             if (!isset($this->columns[$column]['options']['value_formatter'])) {
                 $this->columns[$column]['options']['value_formatter'] = array($this, $this->columns[$column]['type'] . 'Formatter');
             }
-            $sheet->setCellValueByColumnAndRow($colNum++, $rowNum, $column_conf['label']);
+            $sheet->setCellValueByColumnAndRow($colNum++, $rowNum, Context::getInstance()->translate($column_conf['label']));
         }
         $sheet->getStyle('A' . $rowNum . ':' . PHPExcel_Cell::stringFromColumnIndex($colNum - 1) . $rowNum)->applyFromArray($styleArray);
 
