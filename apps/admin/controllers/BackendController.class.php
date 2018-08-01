@@ -40,6 +40,36 @@ class BackendController extends nomvcBaseControllerTwo
                 }
                 return json_encode(array('result' => 'error'), true);
                 break;
+            case 'add-region':
+                try {
+                    $name = $this->context->getRequest()->getParameter('element');
+                    $stmt = $this->context->getDb()->prepare('insert into t_region(name, id_database) values(:name, :id_database) returning id_region');
+                    $stmt->bindValue('name', $name);
+                    $stmt->bindValue('id_database', $this->context->getUser()->getAttribute('id_database'));
+                    $stmt->execute();
+
+                    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        return json_encode(array('result' => 'success', 'id' => $row['id_region'], 'element' => $name), true);
+                    }
+                } catch (exception $e) {
+                }
+                return json_encode(array('result' => 'error'), true);
+                break;
+            case 'add-category':
+                try {
+                    $name = $this->context->getRequest()->getParameter('element');
+                    $stmt = $this->context->getDb()->prepare('insert into t_category(name, id_database) values(:name, :id_database) returning id_category');
+                    $stmt->bindValue('name', $name);
+                    $stmt->bindValue('id_database', $this->context->getUser()->getAttribute('id_database'));
+                    $stmt->execute();
+
+                    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        return json_encode(array('result' => 'success', 'id' => $row['id_category'], 'element' => $name), true);
+                    }
+                } catch (exception $e) {
+                }
+                return json_encode(array('result' => 'error'), true);
+                break;
             case 'add-sku-producer':
                 try {
                     $name = $this->context->getRequest()->getParameter('element');

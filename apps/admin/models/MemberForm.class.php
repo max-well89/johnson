@@ -59,7 +59,9 @@ class MemberForm extends nomvcAbstractForm
             'required' => false,
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_region',
-            'order' => 'name'
+            'order' => 'name',
+            'with-add' => '+ добавить',
+            'with-add-url' => "/admin/backend/add-region/"
         )));
 
         $this->addValidator('id_region', new nomvcValueInDbValidator(array(

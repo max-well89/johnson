@@ -25,7 +25,9 @@ class PharmacyForm extends nomvcAbstractForm
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_category',
             'order' => 'name',
-            'required' => true
+            'required' => true,
+            'with-add' => '+ добавить',
+            'with-add-url' => "/admin/backend/add-category/"
         )));
 
         $this->addValidator('id_category', new nomvcValueInDbValidator(array(
@@ -39,7 +41,9 @@ class PharmacyForm extends nomvcAbstractForm
             'required' => false,
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_region',
-            'order' => 'name'
+            'order' => 'name',
+            'with-add' => '+ добавить',
+            'with-add-url' => "/admin/backend/add-region/"
         )));
 
         $this->addValidator('id_region', new nomvcValueInDbValidator(array(
