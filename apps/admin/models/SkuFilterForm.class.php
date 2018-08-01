@@ -15,7 +15,7 @@ class SkuFilterForm extends nomvcAbstractFilterForm
 
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_type', 'id_sku_type', array(
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_sku_type',
+            'table' => 'v_sku_type',
             'order' => 'name',
             'required' => false,
             'multiple' => true
@@ -23,13 +23,13 @@ class SkuFilterForm extends nomvcAbstractFilterForm
         $this->addValidator('id_sku_type', new nomvcValueInDbMultipleValidator(array(
             'required' => false,
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_sku_type',
+            'table' => 'v_sku_type',
             'key' => 'id_sku_type'
         )));
 
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_producer', 'id_sku_producer', array(
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_sku_producer',
+            'table' => 'v_sku_producer',
             'order' => 'name',
             'required' => false,
             'multiple' => true
@@ -37,13 +37,13 @@ class SkuFilterForm extends nomvcAbstractFilterForm
         $this->addValidator('id_sku_producer', new nomvcValueInDbMultipleValidator(array(
             'required' => false,
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_sku_producer',
+            'table' => 'v_sku_producer',
             'key' => 'id_sku_producer'
         )));
 
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('priority', 'id_priority', array(
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_priority',
+            'table' => 'v_priority',
             'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => false,
             'multiple' => true
@@ -51,7 +51,7 @@ class SkuFilterForm extends nomvcAbstractFilterForm
         $this->addValidator('id_priority', new nomvcValueInDbMultipleValidator(array(
             'required' => false,
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_priority',
+            'table' => 'v_priority',
             'key' => 'id_priority'
         )));
 

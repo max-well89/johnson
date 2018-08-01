@@ -33,7 +33,7 @@ EOF
         $this->addColumn('fio', 'merchandiser', 'string');
         $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
         $this->addColumn('dt_updated', 'dt_updated', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('status', 'status', 'string');
+        $this->addColumn('status_'.Context::getInstance()->getUser()->getLanguage(), 'status', 'string');
 
         $this->setFilterForm(new PharmacyFilterForm($this->context));
     }

@@ -22,7 +22,7 @@ class TaskPharmacyDetailForm extends nomvcAbstractForm
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_action_status',
             "key" => "id_status",
-            'order' => 'name'
+            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage()
         )));
 
         $this->addValidator('is_action', new nomvcValueInDbValidator(array(

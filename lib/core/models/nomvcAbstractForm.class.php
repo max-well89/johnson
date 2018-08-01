@@ -41,6 +41,24 @@ public $widgets = array();
     {
         $this->setAttribute('class', 'form-horizontal');
         $this->setAttribute('role', 'form');
+        $user = $this->context->getUser();
+        $this->setDBContextParameter('id_member', $user->getAttribute('id_member'));
+        if ($user->getAttribute('id_language'))
+            $this->setDBContextParameter('id_language', $user->getAttribute('id_language'));
+        if ($user->getAttribute('id_database'))
+            $this->setDBContextParameter('id_database', $user->getAttribute('id_database'));
+    }
+
+    protected function setDBContextParameter($var, $val)
+    {
+        try {
+            $query = "select set_parameter(:name, :val);";
+            $stmt = $this->context->getDb()->prepare($query);
+            $stmt->bindValue('name', $var);
+            $stmt->bindValue('val', $val);
+            $stmt->execute();
+        } catch (exception $e) {
+        }
     }
 
     public function setAttribute($name, $value)

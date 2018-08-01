@@ -37,7 +37,7 @@ EOF
         $this->addColumn('passwd', 'password', 'string');
         $this->addColumn('language', 'language', 'string');
         $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('status', 'status', 'string');
+        $this->addColumn('status_'.Context::getInstance()->getUser()->getLanguage(), 'status', 'string');
 
         $this->setFilterForm(new MemberFilterForm($this->context));
     }

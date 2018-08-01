@@ -40,7 +40,7 @@ EOF
         $this->addColumn('my_value', 'my_value', 'string');
         $this->addColumn('rest_cnt', 'rest_cnt', 'string');
         $this->addColumn('illiquid_cnt', 'illiquid_cnt', 'string');
-        $this->addColumn('action_status', 'action_status', 'string');
+        $this->addColumn('action_status_'.Context::getInstance()->getUser()->getLanguage(), 'action_status', 'string');
         $this->addColumn('comment', 'comment', 'string');
         $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
 

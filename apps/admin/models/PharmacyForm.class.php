@@ -23,7 +23,7 @@ class PharmacyForm extends nomvcAbstractForm
 
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('category', 'id_category', array(
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_category',
+            'table' => 'v_category',
             'order' => 'name',
             'required' => true
         )));
@@ -31,7 +31,7 @@ class PharmacyForm extends nomvcAbstractForm
         $this->addValidator('id_category', new nomvcValueInDbValidator(array(
             'required' => true,
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_category',
+            'table' => 'v_category',
             'key' => 'id_category'
         )));
 
@@ -95,7 +95,7 @@ class PharmacyForm extends nomvcAbstractForm
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_pharmacy_status',
-            'order' => 'name',
+            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => true
         )));
 

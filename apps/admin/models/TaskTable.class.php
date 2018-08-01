@@ -29,7 +29,7 @@ EOF
         $this->addColumn('cnt_member', 'cnt_member', 'string');
         $this->addColumn('detail', 'detail', 'string', array(), array('class' => 'rowlink-skip'));
         $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('status', 'status', 'string');
+        $this->addColumn('status_'.Context::getInstance()->getUser()->getLanguage(), 'status', 'string');
 
         $this->setFilterForm(new TaskFilterForm($this->context));
     }

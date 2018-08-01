@@ -26,7 +26,7 @@ EOF
         $this->addColumn('dt_start', 'dt_start_send', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
         $this->addColumn('cnt_member', 'cnt_member', 'string');
         $this->addColumn('cnt_device', 'cnt_device', 'string');
-        $this->addColumn('status', 'status', 'string');
+        $this->addColumn('status_'.Context::getInstance()->getUser()->getLanguage(), 'status', 'string');
 
         $this->setFilterForm(new PushFilterForm($this->context));
     }

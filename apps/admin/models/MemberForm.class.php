@@ -122,7 +122,7 @@ class MemberForm extends nomvcAbstractForm
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_member_status',
-            'order' => 'name'
+            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage()
         )));
 
         $this->addValidator('id_status', new nomvcValueInDbValidator(array(
@@ -132,5 +132,4 @@ class MemberForm extends nomvcAbstractForm
             'key' => 'id_status'
         )));
     }
-
 }

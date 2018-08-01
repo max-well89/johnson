@@ -21,7 +21,7 @@ class TaskDetailFilterForm extends nomvcAbstractFilterForm
 
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('category', 'id_category', array(
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_category',
+            'table' => 'v_category',
             'order' => 'name',
             'required' => false,
             'multiple' => true
@@ -29,7 +29,7 @@ class TaskDetailFilterForm extends nomvcAbstractFilterForm
         $this->addValidator('id_category', new nomvcValueInDbMultipleValidator(array(
             'required' => false,
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_category',
+            'table' => 'v_category',
             'key' => 'id_category'
         )));
 
@@ -93,7 +93,7 @@ class TaskDetailFilterForm extends nomvcAbstractFilterForm
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_tmp_status',
-            'order' => 'name',
+            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => false,
             'multiple' => true
         ), array()));

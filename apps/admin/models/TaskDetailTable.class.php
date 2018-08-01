@@ -60,7 +60,7 @@ EOF
         $this->addColumn('detail', 'detail', 'string', array(), array('class' => 'rowlink-skip'));
         $this->addColumn('dt', 'dt', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
         $this->addColumn('dt_status', 'dt_status', 'date', array('format' => DateHelper::HTMLDTS_FORMAT));
-        $this->addColumn('status', 'status', 'string');
+        $this->addColumn('status_'.Context::getInstance()->getUser()->getLanguage(), 'status', 'string');
 
         if ($id_task = $this->context->getRequest()->getParameter('id_task')) {
             $id_task = (int)$id_task;

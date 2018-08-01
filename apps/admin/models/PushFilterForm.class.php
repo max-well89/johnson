@@ -18,7 +18,7 @@ class PushFilterForm extends nomvcAbstractFilterForm
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'V_PUSH_STATUS',
-            'order' => 'name',
+            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'multiple' => true,
             'required' => false
         ), array()));

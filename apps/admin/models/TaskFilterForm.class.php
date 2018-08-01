@@ -44,7 +44,7 @@ class TaskFilterForm extends nomvcAbstractFilterForm
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_task_status',
-            'order' => 'name',
+            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => false,
             'multiple' => true
         ), array()));

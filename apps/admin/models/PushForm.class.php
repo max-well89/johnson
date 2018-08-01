@@ -19,6 +19,7 @@ class PushForm extends nomvcAbstractForm
             'helper' => $this->context->getDbHelper(),
             'table' => 'V_PUSH_STATUS',
             'required' => true,
+            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'order' => 'id_status'
         ), array()));
         $this->addValidator('id_status', new nomvcValueInDbValidator(array(

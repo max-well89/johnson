@@ -17,7 +17,7 @@ class SkuForm extends nomvcAbstractForm
 
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_type', 'id_sku_type', array(
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_sku_type',
+            'table' => 'v_sku_type',
             'order' => 'name',
             'required' => true,
             'with-add' => '+ добавить',
@@ -27,13 +27,13 @@ class SkuForm extends nomvcAbstractForm
         $this->addValidator('id_sku_type', new nomvcValueInDbValidator(array(
             'required' => true,
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_sku_type',
+            'table' => 'v_sku_type',
             'key' => 'id_sku_type'
         )));
 
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('sku_producer', 'id_sku_producer', array(
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_sku_producer',
+            'table' => 'v_sku_producer',
             'order' => 'name',
             'required' => true,
             'with-add' => '+ добавить',
@@ -43,7 +43,7 @@ class SkuForm extends nomvcAbstractForm
         $this->addValidator('id_sku_producer', new nomvcValueInDbValidator(array(
             'required' => true,
             'helper' => $this->context->getDbHelper(),
-            'table' => 't_sku_producer',
+            'table' => 'v_sku_producer',
             'key' => 'id_sku_producer'
         )));
 
