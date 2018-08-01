@@ -52,7 +52,8 @@ class SkuForm extends nomvcAbstractForm
             'table' => 'v_priority',
             'order' => 'id_priority',
             'required' => false,
-            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage()
+            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
+            'order' => 'name_'.Context::getInstance()->getUser()->getLanguage()
             //'with-add' => '+ добавить',
             //'with-add-url' => "/admin/backend/add-sku-producer/"
         )));
@@ -68,6 +69,7 @@ class SkuForm extends nomvcAbstractForm
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_sku_status',
             'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
+            'order' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => true
         )));
 

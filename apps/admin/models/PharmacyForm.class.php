@@ -100,6 +100,7 @@ class PharmacyForm extends nomvcAbstractForm
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_pharmacy_status',
             'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
+            'order' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => true
         )));
 

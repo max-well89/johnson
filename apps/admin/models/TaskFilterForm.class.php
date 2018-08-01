@@ -45,6 +45,7 @@ class TaskFilterForm extends nomvcAbstractFilterForm
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_task_status',
             'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
+            'order' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => false,
             'multiple' => true
         ), array()));

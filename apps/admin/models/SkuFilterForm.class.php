@@ -45,6 +45,7 @@ class SkuFilterForm extends nomvcAbstractFilterForm
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_priority',
             'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
+            'order' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => false,
             'multiple' => true
         ), array()));
@@ -59,6 +60,7 @@ class SkuFilterForm extends nomvcAbstractFilterForm
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_sku_status',
             'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
+            'order' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => false,
             'multiple' => true
         ), array()));

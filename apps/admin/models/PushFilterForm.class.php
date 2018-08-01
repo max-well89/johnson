@@ -19,6 +19,7 @@ class PushFilterForm extends nomvcAbstractFilterForm
             'helper' => $this->context->getDbHelper(),
             'table' => 'V_PUSH_STATUS',
             'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
+            'order' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'multiple' => true,
             'required' => false
         ), array()));

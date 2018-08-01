@@ -143,6 +143,7 @@ class TaskPharmacyDetailFilterForm extends nomvcAbstractFilterForm
             'table' => 'v_action_status',
             "key" => "id_status",
             'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
+            'order' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => false,
             'multiple' => true
         )));

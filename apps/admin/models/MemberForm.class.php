@@ -124,7 +124,8 @@ class MemberForm extends nomvcAbstractForm
         $this->addWidget(new nomvcSelectFromMultipleDbWidget('status', 'id_status', array(
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_member_status',
-            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage()
+            'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
+            'order' => 'name_'.Context::getInstance()->getUser()->getLanguage()
         )));
 
         $this->addValidator('id_status', new nomvcValueInDbValidator(array(

@@ -13,6 +13,7 @@ class TaskDetailForm extends nomvcAbstractForm
             'helper' => $this->context->getDbHelper(),
             'table' => 'v_tmp_status',
             'val' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
+            'order' => 'name_'.Context::getInstance()->getUser()->getLanguage(),
             'required' => true
         )));
 
