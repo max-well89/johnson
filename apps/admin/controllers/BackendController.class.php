@@ -28,8 +28,9 @@ class BackendController extends nomvcBaseControllerTwo
             case 'add-sku-type':
                 try {
                     $name = $this->context->getRequest()->getParameter('element');
-                    $stmt = $this->context->getDb()->prepare('insert into t_sku_type(name) values(:name) returning id_sku_type');
+                    $stmt = $this->context->getDb()->prepare('insert into t_sku_type(name, id_database) values(:name, :id_database) returning id_sku_type');
                     $stmt->bindValue('name', $name);
+                    $stmt->bindValue('id_database', $this->context->getUser()->getAttribute('id_database'));
                     $stmt->execute();
 
                     if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -42,8 +43,9 @@ class BackendController extends nomvcBaseControllerTwo
             case 'add-sku-producer':
                 try {
                     $name = $this->context->getRequest()->getParameter('element');
-                    $stmt = $this->context->getDb()->prepare('insert into t_sku_producer(name) values(:name) returning id_sku_producer');
+                    $stmt = $this->context->getDb()->prepare('insert into t_sku_producer(name, id_database) values(:name, :id_database) returning id_sku_producer');
                     $stmt->bindValue('name', $name);
+                    $stmt->bindValue('id_database', $this->context->getUser()->getAttribute('id_database'));
                     $stmt->execute();
 
                     if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
