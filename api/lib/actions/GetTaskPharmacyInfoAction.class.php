@@ -51,7 +51,7 @@ class GetTaskPharmacyInfoAction extends AbstractAction
                 ttd.value as my_value,
                 ts.id_priority,
                 vpr.id_priority,
-                vpr.name as priority,
+                vpr.name_ru as priority,
                 ttd.rest_cnt as rest_cnt,
                 ttd.illiquid_cnt as illiquid_cnt,
                 ttd.is_action as is_action,
