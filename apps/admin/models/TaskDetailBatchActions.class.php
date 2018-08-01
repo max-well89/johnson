@@ -62,13 +62,13 @@ class TaskDetailBatchActions
 
     public function renderJs()
     {
-        return <<<EOF
+        return "
 <script>
     $('.batch_select_all').change(BatchActions.clickSelectAll);
     $('.batch_select_row').change(BatchActions.checkStatus);
 
     $('#batch_action_finished').click(function () {
-        if (confirm('Вы действительно хотите завершить выбранные задачи?')) {
+        if (confirm('".Context::getInstance()->translate('you really want to finish the chosen tasks?')."')) {
             $.ajax({
                 url: '/admin/backend/task-detail-form/finished/',
                 type: 'POST',
@@ -83,7 +83,7 @@ class TaskDetailBatchActions
     });
     
     $('#batch_action_continue').click(function () {
-        if (confirm('Вы действительно хотите продолжить выполнение, выбранных задач?')) {
+        if (confirm('".Context::getInstance()->translate('do you really want to continue performance, the chosen tasks?')."')) {
             $.ajax({
                 url: '/admin/backend/task-detail-form/continue/',
                 type: 'POST',
@@ -97,6 +97,6 @@ class TaskDetailBatchActions
         return false;
     });
 </script>
-EOF;
+";
     }
 }

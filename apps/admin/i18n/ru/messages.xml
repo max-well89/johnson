@@ -286,6 +286,14 @@
                 <source>task-pharmacy-detail</source>
                 <target>Изменить</target>
             </trans-unit>
+            <trans-unit id="72">
+                <source>you really want to finish the chosen tasks?</source>
+                <target>Вы действительно хотите завершить выбранные задачи?</target>
+            </trans-unit>
+            <trans-unit id="73">
+                <source>do you really want to continue performance, the chosen tasks?</source>
+                <target>Вы действительно хотите продолжить выполнение, выбранных задач?</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
