@@ -20,11 +20,11 @@ require_once('lib/CsvFileREader.php');
 require_once('lib/Database.class.php');
 
 
-function deactivate_pharmacy($conn, $ids_crm)
+function deactivate_pharmacy($conn, $id_database, $ids_crm)
 {
     // try {
-    $sql_upd_pharmacy = 'update t_pharmacy set id_status = 0 bind_str';
-    $bind_str = ' where id_crm not in (str)';
+    $sql_upd_pharmacy = 'update t_pharmacy set id_status = 0, dt_updated = now() bind_str';
+    $bind_str = ' where id_database = :id_database and id_crm not in (str)';
     $str = '';
 
     if (is_array($ids_crm) && !empty($ids_crm)) {
@@ -37,6 +37,8 @@ function deactivate_pharmacy($conn, $ids_crm)
     }
 
     $stmt = $conn->prepare($sql_upd_pharmacy);
+    $stmt->bindValue('id_database', $id_database);
+
     foreach ($ids_crm as $key => $id_crm) {
         $stmt->bindValue("id_crm_$key", $id_crm);
     }
@@ -540,7 +542,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             }
 
-            deactivate_pharmacy($conn, $ids_crm);
+            deactivate_pharmacy($conn, $id_database, $ids_crm);
         }
     }
 
