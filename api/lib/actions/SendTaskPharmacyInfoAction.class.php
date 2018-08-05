@@ -289,7 +289,7 @@ class SendTaskPharmacyInfoAction extends AbstractAction
                                 'value' => $sku['my_value'],
                                 'rest_cnt' => @$sku['rest_cnt'],
                                 'illiquid_cnt' => @$sku['illiquid_cnt'],
-                                'is_action' => @$sku['is_action'],
+                                'is_action' => (int) @$sku['is_action'],
                                 'comment' => @$sku['comment'],
                                 'id_task_data' => $id_task_data
                             ));
@@ -302,8 +302,8 @@ class SendTaskPharmacyInfoAction extends AbstractAction
                                 'value' => $sku['my_value'],
                                 'rest_cnt' => @$sku['rest_cnt'],
                                 'illiquid_cnt' => @$sku['illiquid_cnt'],
-                                'is_action' => @$sku['is_action'],
-                                'comment' => @$sku['comment'],
+                                'is_action' => (int) @$sku['is_action'],
+                                'comment' => @$sku['comment']
                             ));
                         }
                     }
