@@ -223,7 +223,7 @@ class SendTaskPharmacyInfoAction extends AbstractAction
                     foreach ($data as $key => $val) {
                         if ($key == 'info') {
                             $has_info = true;
-                            $is_action = @$val['is_action'] ? @$val['is_action'] : 0;
+                            $is_action = (int) (@$val['is_action'] ? @$val['is_action'] : 0);
                             $comment = @$val['comment'] ? @$val['comment'] : '';
                         } elseif ($key == 'sku_list') {
                             $sku_list = $val;
