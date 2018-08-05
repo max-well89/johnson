@@ -238,6 +238,7 @@ function insertMember($conn, $values)
     $sql_ins_member = '
             insert into t_member(
                 id_database,
+                id_language,
                 name,
                 surname,
                 id_region,
@@ -250,6 +251,7 @@ function insertMember($conn, $values)
             ) 
             values(
                 :id_database,
+                :id_language,
                 trim(:name),
                 trim(:surname),
                 :id_region,
@@ -267,6 +269,7 @@ function insertMember($conn, $values)
     try {
         $stmt = $conn->prepare($sql_ins_member);
         $stmt->bindValue('id_database', $values['id_database']);
+        $stmt->bindValue('id_language', $values['id_database']);
         $stmt->bindValue('name', $values['name']);
         $stmt->bindValue('surname', $values['surname']);
         $stmt->bindValue('id_region', $values['id_region'], PDO::PARAM_INT);
