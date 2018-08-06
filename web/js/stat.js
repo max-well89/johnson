@@ -116,14 +116,25 @@ var TableFormActions = {
             data: data,
             success: function(answer) {
                 answer = JSON.parse(answer);
-                
+
                 $('#mainModal .btn').removeAttr('disabled');
+                $('.special_error_text').remove();
+
                 if (answer.result == 'error') {
                     $('form#' + formClass + ' .has-error').removeClass('has-error');
                     $('form#' + formClass + ' .panel-danger').removeClass('panel-danger');
                     for (k in answer.fields) {
                         $('form#' + formClass + ' #form_group_' + k).addClass('has-error');
                         $('form#' + formClass + ' #form_group_' + k + ' .panel').addClass('panel-danger');
+
+                        try {
+                            //console.log(k, answer.fields[k].text);
+                            if (typeof(answer.fields[k].text) != 'undefined'){
+                                $('form#' + formClass + ' #form_group_' + k + ' div:first').append('<div style="padding: 2px;" class="special_error_text">' + answer.fields[k].text + '</div>');
+                            }
+                        }
+                        catch (e){}
+
                     }
                 }
                 else {
@@ -211,12 +222,23 @@ var TableFormActions = {
             },
             success: function(answer) {
                 $('#mainModal .btn').removeAttr('disabled');
+                $('.special_error_text').remove();
+
                 if (answer.result == 'error') {
                     $('form#' + formClass + ' .has-error').removeClass('has-error');
                     $('form#' + formClass + ' .panel-danger').removeClass('panel-danger');
                     for (k in answer.fields) {
                         $('form#' + formClass + ' #form_group_' + k).addClass('has-error');
                         $('form#' + formClass + ' #form_group_' + k + ' .panel').addClass('panel-danger');
+
+                        try {
+                            //console.log(k, answer.fields[k].text);
+                            if (typeof(answer.fields[k].text) != 'undefined'){
+                                $('form#' + formClass + ' #form_group_' + k + ' div:first').append('<div style="padding: 2px;" class="special_error_text">' + answer.fields[k].text + '</div>');
+                            }
+                        }
+                        catch (e){}
+
                     }
                 } 
                 else {

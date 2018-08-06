@@ -294,6 +294,14 @@
                 <source>do you really want to continue performance, the chosen tasks?</source>
                 <target>Вы действительно хотите продолжить выполнение, выбранных задач?</target>
             </trans-unit>
+            <trans-unit id="74">
+                <source>field_required</source>
+                <target>Required</target>
+            </trans-unit>
+            <trans-unit id="75">
+                <source>field_incorrect</source>
+                <target>Incorrect</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

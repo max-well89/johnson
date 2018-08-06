@@ -6,9 +6,9 @@
 abstract class nomvcAbstractForm
 {
 
-public $widgets = array();
+    public $widgets = array();
     public $valueErrors = array();        // виджеты формы
-        protected $context = null;    // валидаторы формы
+    protected $context = null;    // валидаторы формы
     protected $validators = array();    // ошибки в полях формы
     protected $errorValues = array();    // значения ошибочных полей
     protected $values = array();        // проверенные значения
@@ -22,6 +22,8 @@ public $widgets = array();
 
     protected $isBined = false;
     protected $isSend = false;
+
+    protected $textErrors = array();
 
     /**
      * Конструктор
@@ -49,6 +51,11 @@ public $widgets = array();
             $this->setDBContextParameter('id_database', $user->getAttribute('id_database'));
     }
 
+    public function setAttribute($name, $value)
+    {
+        $this->attributes[$name] = $value;
+    }
+
     protected function setDBContextParameter($var, $val)
     {
         try {
@@ -61,9 +68,9 @@ public $widgets = array();
         }
     }
 
-    public function setAttribute($name, $value)
+    public function setTextError($name, $error)
     {
-        $this->attributes[$name] = $value;
+        $this->textErrors[$name] = $error;
     }
 
     public function getIsSend()
@@ -139,9 +146,26 @@ public $widgets = array();
     /**
      * Возвращает список ошибок в полях
      */
-    public function getValueErrors()
-    {
-        return $this->valueErrors;
+    public function getValueErrors() {
+        $errors = array();
+
+        foreach ($this->valueErrors as $key => $value){
+            $reason = $value;
+
+            switch ($value){
+                case 'required':
+                    $text = 'field_required';
+                    break;
+                case 'invalid':
+                default:
+                    $text = 'field_incorrect';
+                    break;
+            }
+
+            $errors[$key] = array('error' => $reason, 'text' => Context::getInstance()->translate($text));
+        }
+
+        return $errors;
     }
 
     public function setValueError($name)
@@ -210,7 +234,7 @@ public $widgets = array();
             }
             if (isset($this->valueErrors[$name])) {
                 $widget->setOption('has-error', true);
-
+                $widget->setOption('text-error', $this->textErrors[$name]);
 
                 return $widget->renderForFormSimple($formName, $this->errorValues[$name]);
             } else {
@@ -316,6 +340,7 @@ public $widgets = array();
             } catch (nomvcInvalidValueException $ex) {
                 $this->errorValues[$name] = $data[$name];
                 $this->valueErrors[$name] = $ex->getReason();
+                $this->textErrors[$name] = $ex->getErrorMessageText();
             }
         }
         $this->values = $values;

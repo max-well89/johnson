@@ -17,12 +17,12 @@ class User extends nomvcDatabaseUser
 
     public function getLanguage(){
         switch($this->getAttribute('id_language')){
-            case 2:
-                $lang = 'ru';
-                break;
             case 1:
-            default:
                 $lang = 'en';
+                break;
+            case 2:
+            default:
+                $lang = 'ru';
                 break;
         }
 
@@ -46,8 +46,8 @@ class User extends nomvcDatabaseUser
             $this->setAttribute(strtolower($key), $val);
         }
 
+        Context::getInstance()->getTranslateHelper()->setLocale($this->getLanguage());
         $this->setAttribute('has_auth', true);
         return true;
     }
-
 }
