@@ -292,11 +292,11 @@
             </trans-unit>
             <trans-unit id="74">
                 <source>field_required</source>
-                <target>Обязательно для заполнения</target>
+                <target>Required</target>
             </trans-unit>
             <trans-unit id="75">
                 <source>field_incorrect</source>
-                <target>Некорректное значение</target>
+                <target>Incorrect</target>
             </trans-unit>
         </body>
     </file>
