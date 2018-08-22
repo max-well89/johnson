@@ -6,5 +6,5 @@ config/
 log/
 old/
 lib/vendor/
-web/admin.php
+web/parser/log.log
 dump.sql

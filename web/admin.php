@@ -1,5 +1,6 @@
 <?php
     session_name('admin-panel');
+    set_time_limit(0);
 
     /** @const Название проекта */
     define('NOMVC_APPNAME', 'admin');
@@ -14,7 +15,7 @@
     require_once(dirname(__DIR__).'/lib/autoload.php');
 
     try {
-        $context = new Context(Context::ENV_DEBUG);
+        $context = new Context(Context::ENV_PROD);
         echo $context->getRootController()->run();
     } catch (Exception $ex) {
         echo $ex->getMessage();
