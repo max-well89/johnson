@@ -2,9 +2,7 @@
     session_name('admin-panel');
     set_time_limit(0);
 
-    /** @const Название проекта */
     define('NOMVC_APPNAME', 'admin');
-    /** @const Базовая папка проекта */
     define('NOMVC_BASEDIR', dirname(dirname(__FILE__)));
     
     ini_set('session.cookie_lifetime', 86400);
