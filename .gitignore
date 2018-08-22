@@ -7,5 +7,6 @@ log/
 old/
 lib/vendor/
 web/parser/log.log
+web/log
 lib/composer.lock
 dump.sql
